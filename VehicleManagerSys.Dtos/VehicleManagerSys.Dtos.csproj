@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83A50BEF-0583-40F7-AD95-A9543ABAD05B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VehicleManagerSys.Dtos</RootNamespace>
+    <AssemblyName>VehicleManagerSys.Dtos</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CheckItem.cs" />
+    <Compile Include="ComprehensiveDtos\AccessTokenEntity.cs" />
+    <Compile Include="ComprehensiveDtos\brake.cs" />
+    <Compile Include="ComprehensiveDtos\brakeSeq.cs" />
+    <Compile Include="ComprehensiveDtos\brakeSeqTime.cs" />
+    <Compile Include="ComprehensiveDtos\CarEntity.cs" />
+    <Compile Include="ComprehensiveDtos\Class1.cs" />
+    <Compile Include="ComprehensiveDtos\DataReceiveEntity.cs" />
+    <Compile Include="ComprehensiveDtos\DataSendEntity.cs" />
+    <Compile Include="ComprehensiveDtos\detectReport.cs" />
+    <Compile Include="ComprehensiveDtos\dieselVehicle.cs" />
+    <Compile Include="ComprehensiveDtos\driveBrake.cs" />
+    <Compile Include="ComprehensiveDtos\emission.cs" />
+    <Compile Include="ComprehensiveDtos\EntityDescription.cs" />
+    <Compile Include="ComprehensiveDtos\fuelEconomy.cs" />
+    <Compile Include="ComprehensiveDtos\gasolineVehicle.cs" />
+    <Compile Include="ComprehensiveDtos\GetVehicleInfoAndSn.cs" />
+    <Compile Include="ComprehensiveDtos\GetVehicleInfoAndSnResult.cs" />
+    <Compile Include="ComprehensiveDtos\image.cs" />
+    <Compile Include="ComprehensiveDtos\ImageInfo.cs" />
+    <Compile Include="ComprehensiveDtos\ImgTypeEntity.cs" />
+    <Compile Include="ComprehensiveDtos\initData.cs" />
+    <Compile Include="ComprehensiveDtos\mainLamp.cs" />
+    <Compile Include="ComprehensiveDtos\manualTestResult.cs" />
+    <Compile Include="ComprehensiveDtos\parkBrake.cs" />
+    <Compile Include="ComprehensiveDtos\performanceItem.cs" />
+    <Compile Include="ComprehensiveDtos\power.cs" />
+    <Compile Include="ComprehensiveDtos\printImage.cs" />
+    <Compile Include="ComprehensiveDtos\reportImage.cs" />
+    <Compile Include="ComprehensiveDtos\ResultEntity.cs" />
+    <Compile Include="ComprehensiveDtos\roadTest.cs" />
+    <Compile Include="ComprehensiveDtos\SettingEntity.cs" />
+    <Compile Include="ComprehensiveDtos\ShareDetectImage.cs" />
+    <Compile Include="ComprehensiveDtos\ShareDetectInfo.cs" />
+    <Compile Include="ComprehensiveDtos\ShareVehicleInfo.cs" />
+    <Compile Include="ComprehensiveDtos\ShareVehiclInfoResult.cs" />
+    <Compile Include="ComprehensiveDtos\SignatureImage.cs" />
+    <Compile Include="ComprehensiveDtos\singleAxle.cs" />
+    <Compile Include="ComprehensiveDtos\singleItem.cs" />
+    <Compile Include="ComprehensiveDtos\singleVehicle.cs" />
+    <Compile Include="ComprehensiveDtos\suspension.cs" />
+    <Compile Include="ComprehensiveDtos\tractorInfo.cs" />
+    <Compile Include="ComprehensiveDtos\trailerInfo.cs" />
+    <Compile Include="ComprehensiveDtos\upload_vehicle_info_para.cs" />
+    <Compile Include="ComprehensiveDtos\vehicleSerial1.cs" />
+    <Compile Include="ComprehensiveDtos\vehicleSerial2.cs" />
+    <Compile Include="ComprehensiveDtos\video.cs" />
+    <Compile Include="ComprehensiveDtos\wholeVehicle.cs" />
+    <Compile Include="Emuns\FuelEnum.cs" />
+    <Compile Include="Emuns\YesOrNo.cs" />
+    <Compile Include="IVS\Class1.cs" />
+    <Compile Include="IVS\EMPLOYEE_USER.cs" />
+    <Compile Include="IVS\LOGIN_VEHICLE_INFO.cs" />
+    <Compile Include="IVS\RESULT_ASM.cs" />
+    <Compile Include="IVS\RESULT_BRAKE.cs" />
+    <Compile Include="IVS\RESULT_BRAKE_ZJ.cs" />
+    <Compile Include="IVS\RESULT_CHASISS_MANUAL.cs" />
+    <Compile Include="IVS\RESULT_CHASISS_MANUAL_ZJ.cs" />
+    <Compile Include="IVS\RESULT_DPCG.cs" />
+    <Compile Include="IVS\RESULT_HB_OBD.cs" />
+    <Compile Include="IVS\RESULT_IMAGE.cs" />
+    <Compile Include="IVS\RESULT_IMAGE_ZJ.cs" />
+    <Compile Include="IVS\RESULT_KERBMASS.cs" />
+    <Compile Include="IVS\RESULT_LAMP.cs" />
+    <Compile Include="IVS\RESULT_LAMP_ZJ.cs" />
+    <Compile Include="IVS\RESULT_LD.cs" />
+    <Compile Include="IVS\RESULT_NOSIZE.cs" />
+    <Compile Include="IVS\RESULT_OVERALLSIZE.cs" />
+    <Compile Include="IVS\RESULT_OVERALLSIZE_ZJ.cs" />
+    <Compile Include="IVS\RESULT_ROAD.cs" />
+    <Compile Include="IVS\RESULT_SDS.cs" />
+    <Compile Include="IVS\RESULT_SIDESLIP.cs" />
+    <Compile Include="IVS\RESULT_SIDESLIP_ZJ.cs" />
+    <Compile Include="IVS\RESULT_SPEAKER.cs" />
+    <Compile Include="IVS\RESULT_SPEED.cs" />
+    <Compile Include="IVS\RESULT_SPEED_ZJ.cs" />
+    <Compile Include="IVS\RESULT_SUSPENSION.cs" />
+    <Compile Include="IVS\RESULT_VEHICLE_INFO.cs" />
+    <Compile Include="IVS\RESULT_VMAS.cs" />
+    <Compile Include="IVS\RESULT_ZYJS.cs" />
+    <Compile Include="IVS\VEHICLE_DISPATCH.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
