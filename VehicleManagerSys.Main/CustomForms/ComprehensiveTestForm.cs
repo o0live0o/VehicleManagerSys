@@ -35,6 +35,7 @@ namespace VehicleManagerSys.Main.CustomForms
                 {
                     Hashtable hashtable = null;
                     string sql = "SELECT TOP 20 * FROM RESULT_VEHICLE_INFO WHERE 1 =1  AND CHARINDEX('Z',JYZL) > 0  ";
+                     sql = "SELECT TOP 20 * FROM RESULT_VEHICLE_INFO WHERE 1 =1  AND CHARINDEX('12',JYLBDH) > 0  ";
                     if (!string.IsNullOrEmpty(txtSeachPlateNo.Text.Trim()))
                     {
                         hashtable = new Hashtable();

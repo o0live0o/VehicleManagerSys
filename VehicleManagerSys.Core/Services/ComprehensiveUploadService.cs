@@ -87,7 +87,7 @@ namespace VehicleManagerSys.Core.Services
 
                 if (m_RESULT_VEHICLE_INFO.JCLSH.Contains("-"))
                 {
-                    List<string> jclshs = GetAllJCLSH();
+                    List<string> jclshs = GetAllTestNo();
                     string sql = "SELECT * FROM {0} WHERE JCLSH IN ({1}) ORDER BY ID ASC";
 
                     StringBuilder sb = new StringBuilder();
@@ -1538,7 +1538,7 @@ namespace VehicleManagerSys.Core.Services
                         manualTest6.unqualifiedItem = m_RESULT_CHASISS_MANUAL_ZJ.HCPD_MS.ManualMsg();
                         listManualTest.Add(manualTest6);
 
-                        listManualTest.RemoveAll(x => x.evaluate.Equals("N") || x.evaluate.Equals("4"));
+                        //istManualTest.RemoveAll(x => x.evaluate.Equals("N") || x.evaluate.Equals("4"));
 
                         detectRpt.manualTestResult = listManualTest;
                     }
@@ -2177,7 +2177,7 @@ namespace VehicleManagerSys.Core.Services
                         perforItem56.itemCode = "load_deceleration_condition_100";
                         perforItem56.detectData = m_RESULT_LD.GXSXS100;
                         perforItem56.standardValue = elt + m_RESULT_LD.GXSXSXZ.To_Double(2);
-                        perforItem56.evaluate = "";
+                        perforItem56.evaluate = m_RESULT_LD.LD_PD.To_Net_ZJPD();
                         listPerforItem.Add(perforItem56);
 
 
@@ -2186,7 +2186,7 @@ namespace VehicleManagerSys.Core.Services
                         perforItem57.itemCode = "load_deceleration_condition_90";
                         perforItem57.detectData = m_RESULT_LD.GXSXS90;
                         perforItem57.standardValue = elt + m_RESULT_LD.GXSXSXZ.To_Double(2);
-                        perforItem57.evaluate = "";
+                        perforItem57.evaluate = m_RESULT_LD.LD_PD.To_Net_ZJPD();
                         listPerforItem.Add(perforItem57);
 
 
@@ -2195,7 +2195,7 @@ namespace VehicleManagerSys.Core.Services
                         perforItem58.itemCode = "load_deceleration_condition_80";
                         perforItem58.detectData = m_RESULT_LD.GXSXS80;
                         perforItem58.standardValue = elt + m_RESULT_LD.GXSXSXZ.To_Double(2);
-                        perforItem58.evaluate = "";
+                        perforItem58.evaluate = m_RESULT_LD.LD_PD.To_Net_ZJPD();
                         listPerforItem.Add(perforItem58);
 
 
@@ -2211,7 +2211,7 @@ namespace VehicleManagerSys.Core.Services
                         perforItem80.itemCode = "nox_80";
                         perforItem80.detectData = m_RESULT_LD.NO80;
                         perforItem80.standardValue = elt + m_RESULT_LD.NOXZ.To_Double(0);
-                        perforItem80.evaluate = "";
+                        perforItem80.evaluate = m_RESULT_LD.NO_PD.To_Net_ZJPD();
                         listPerforItem.Add(perforItem80);
                     }
 
@@ -2368,9 +2368,6 @@ namespace VehicleManagerSys.Core.Services
                         listPerforItem.Add(perforItem75);
 
                     }
-
-
-
                 }
 
                 if (DetectItem.Contains("S1") && m_RESULT_SPEED_ZJ != null)
@@ -2420,6 +2417,12 @@ namespace VehicleManagerSys.Core.Services
                         listPerforItem.Add(perforItem79);
                     }
                 }
+
+                if (DetectItem.Contains("U") && m_RESULT_SUSPENSION != null)
+                {
+                    performanceItem perforItem80 = new performanceItem();
+                    //perforItem79.itemCode = "slip_second_wheel";
+                }
                 //}
                 listPerforItem.RemoveAll(x =>x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals(""));
 
@@ -2441,7 +2444,6 @@ namespace VehicleManagerSys.Core.Services
                 {
                     str = "一级";
                 }
-                str = "一级";
                 KeyItemList.Clear();
                 NormalItemList.Clear();
                 LvItemList.Clear();
@@ -2486,8 +2488,9 @@ namespace VehicleManagerSys.Core.Services
                 throw new Exception(result);
             }
         }
-
-        private List<string> GetAllJCLSH()
+        
+        //获取所有检测流水号
+        private List<string> GetAllTestNo()
         {
             List<string> list = new List<string>();
             if (m_RESULT_VEHICLE_INFO.JCLSH.Contains("-"))
@@ -2540,6 +2543,7 @@ namespace VehicleManagerSys.Core.Services
                 {
                     stream.Write(buf, 0, buf.Length);
                     stream.Close();
+                  
                     HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                     StreamReader reader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.UTF8);
                     strReqResult = reader.ReadToEnd();
@@ -2554,7 +2558,7 @@ namespace VehicleManagerSys.Core.Services
             }
         }
 
-        public void ShareVehicleInfo(LogDelegate logDelegate)
+        public  void ShareVehicleInfo(LogDelegate logDelegate)
         {
             ShareVehicleInfo para = new ShareVehicleInfo();
             para.dsId = AppHelper.ComprehensiveSetting.CompanyId;
@@ -2792,7 +2796,7 @@ namespace VehicleManagerSys.Core.Services
                     signature.vinNo = m_RESULT_VEHICLE_INFO.VIN;
                     signature.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
                     signature.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
-                    signature.base64Image = m_Base64 + Convert.ToBase64String(GetImageByPath(authorSignatureImgPath, 0, 0, false));
+                    signature.base64Image = m_Base64 + Convert.ToBase64String(Tools.GetImageByPath(authorSignatureImgPath, 0, 0, false));
                     signatureImages.Add(signature);
                 }
                 else
@@ -2809,7 +2813,7 @@ namespace VehicleManagerSys.Core.Services
                     signature.vinNo = m_RESULT_VEHICLE_INFO.VIN;
                     signature.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
                     signature.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
-                    signature.base64Image = m_Base64 + Convert.ToBase64String(GetImageByPath(maImgPath, 0, 0, false));
+                    signature.base64Image = m_Base64 + Convert.ToBase64String(Tools.GetImageByPath(maImgPath, 0, 0, false));
                     signatureImages.Add(signature);
                 }
                 else
@@ -2827,7 +2831,7 @@ namespace VehicleManagerSys.Core.Services
                     signature.vinNo = m_RESULT_VEHICLE_INFO.VIN;
                     signature.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
                     signature.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
-                    signature.base64Image = m_Base64 + Convert.ToBase64String(GetImageByPath(officialSealPath, 0, 0, false));
+                    signature.base64Image = m_Base64 + Convert.ToBase64String(Tools.GetImageByPath(officialSealPath, 0, 0, false));
                     signatureImages.Add(signature);
                 }
                 else
@@ -2889,7 +2893,7 @@ namespace VehicleManagerSys.Core.Services
                         info.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
                         info.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
                         info.vinNo = m_RESULT_VEHICLE_INFO.VIN;
-                        info.base64Image = m_Base64 + Convert.ToBase64String(GetImageByPath(files[i], x, y, bChange));
+                        info.base64Image = m_Base64 + Convert.ToBase64String(Tools.GetImageByPath(files[i], x, y, bChange));
                         list.Add(info);
                     }
                 }
@@ -2897,28 +2901,6 @@ namespace VehicleManagerSys.Core.Services
             return list;
         }
 
-        private byte[] GetImageByPath(string strPath, int x, int y, bool bChange = false)
-        {
-            if (File.Exists(strPath))
-            {
-                FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                byte[] imgBytesIn = br.ReadBytes((int)fs.Length);
-                br.Close();
-                br.Dispose();
-                fs.Close();
-                fs.Dispose();
-                if (bChange)
-                {
-                    return Tools.ChageImage(imgBytesIn, x, y);
-                }
-                else
-                {
-                    return imgBytesIn;
-                }
 
-            }
-            return null;
-        }
     }
 }

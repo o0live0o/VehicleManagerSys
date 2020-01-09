@@ -22,6 +22,7 @@ namespace VehicleManagerSys.LoginIvs
             }
             catch (Exception ex)
             {
+                
                 result.Msg = ex.Message;
             }
             return result;

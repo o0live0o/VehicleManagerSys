@@ -45,6 +45,8 @@ namespace VehicleManagerSys.Main.CustomForms
         private ConstSelector hasObdSelector = null;
         private ConstSelector hasSrcSelector = null;
 
+        private ConstSelector _stanadrdTypeSelector = null;
+
         public VehicleLoginForm()
         {
             InitializeComponent();
@@ -68,7 +70,7 @@ namespace VehicleManagerSys.Main.CustomForms
             _rllbSelector.EntityFiller = selectorFiller;
             //_rllbSelector.SubjectChanged += _rllbSelector_SubjectChanged;
 
-            _hpysSelector = new ConstSelector(txtHPYS, false, false, "PQHPZL", txtGYFS.Width);
+            _hpysSelector = new ConstSelector(txtHPYS, false, false, "HPYS", txtGYFS.Width);
             _hpysSelector.EntityFiller = selectorFiller;
 
             _syxzSelector = new ConstSelector(txtSYXZ, false, false, "SYXZ", txtGYFS.Width);
@@ -99,6 +101,9 @@ namespace VehicleManagerSys.Main.CustomForms
 
             _jylbSelector = new ConstSelector(txtJylb, false, false, "JYLB", txtHasScr.Width);
             _jylbSelector.EntityFiller = selectorFiller;
+
+            _stanadrdTypeSelector = new ConstSelector(txtStandardType, false, false, "StandardType", txtHasScr.Width);
+            _stanadrdTypeSelector.EntityFiller = selectorFiller;
 
             txtHPHM.Text = "晋";
 
@@ -146,9 +151,7 @@ namespace VehicleManagerSys.Main.CustomForms
                 {
                     if (result.Succ && result.Entity != null)
                     {
-                        result.Entity.IsSCR = string.IsNullOrEmpty(result.Entity.IsSCR) ? "" : EnumHelper.GetDescription<YesOrNo>(GetYesOrNoEnum(result.Entity.IsSCR));
-                        result.Entity.IsDPF = string.IsNullOrEmpty(result.Entity.IsDPF) ? "" : EnumHelper.GetDescription<YesOrNo>(GetYesOrNoEnum(result.Entity.IsDPF));
-                        result.Entity.IsOBD = string.IsNullOrEmpty(result.Entity.IsOBD) ? "" : EnumHelper.GetDescription<YesOrNo>(GetYesOrNoEnum(result.Entity.IsOBD));
+                        result.Entity.StandardText = AppHelper.GetDefineName("StandardType", result.Entity.StandardType);
                         vehicleFiller.DisplayEntity(result.Entity);
                         CheckItem(result.Entity.JYXM);
                     }
@@ -171,6 +174,9 @@ namespace VehicleManagerSys.Main.CustomForms
         {
             try
             {
+                string lambad_up = "1.05";
+                string lambad_down = "0.95";
+
                 if (!validator1.Validate()) return;
 
                 List<CheckItem> list = CGridHelper.GetFilledRowsData<CheckItem>(dgvCheckItem).ToList();
@@ -181,22 +187,36 @@ namespace VehicleManagerSys.Main.CustomForms
                     return;
                 }
 
+                if (checkItem.ItemCode.Equals("X1"))
+                {
+                    InputLambdaForm inputLambdaForm = new InputLambdaForm();
+                    inputLambdaForm.ShowDialog(this);
+                    lambad_up = inputLambdaForm.GetLambad_Up;
+                    lambad_down = inputLambdaForm.GetLambad_Down;
+                }
+
 
                 LOGIN_VEHICLE_INFO info = new LOGIN_VEHICLE_INFO();
                 vehicleFiller.FillEntity(info);
-                info.IsSCR = Convert.ToInt32(EnumHelper.GetValue<YesOrNo>(info.IsSCR)).ToString();
-                info.IsDPF = Convert.ToInt32(EnumHelper.GetValue<YesOrNo>(info.IsDPF)).ToString();
-                info.IsOBD = Convert.ToInt32(EnumHelper.GetValue<YesOrNo>(info.IsOBD)).ToString();
                 info.JYXM = checkItem.ItemCode;
                 info.DLY = AppHelper.UserInfo.UserName;
+                info.VEHICLEID = info.HPZLDH + info.HPHM;
+                info.PPXH = info.PP + info.XH;
+
+                //根据限值ab获取标准
+                SetStanadardByType(info,checkItem.ItemCode); 
+                info.GLKQXSSX = lambad_up;
+                info.GLKQXSXX = lambad_down;
+              
                 ILoginVehicle loginVehicle = SimpleFactory.GetObjcet<ILoginVehicle>();
-                if (loginVehicle.Login<LOGIN_VEHICLE_INFO>(info).Succ)
+                Result<string> result = loginVehicle.Login<LOGIN_VEHICLE_INFO>(info);
+                if (result.Succ)
                 {
                     FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存成功！", ContentAlignment.MiddleCenter, 1000);
                     ResetLogin();
                 }
                 else
-                    FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！", ContentAlignment.MiddleCenter, 1000);
+                    FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！"+ result.Msg, ContentAlignment.MiddleCenter, 1000);
             }
             catch (Exception ex)
             {
@@ -208,6 +228,7 @@ namespace VehicleManagerSys.Main.CustomForms
         {
             vehicleFiller.DisplayEntity(null);
             txtHPHM.Text = "晋";
+            txtStandardType.Text = "";
             ClearCheckItem();
         }
 
@@ -250,8 +271,50 @@ namespace VehicleManagerSys.Main.CustomForms
             }
             return yesOrNo;
         }
+
+        private void SetStanadardByType(LOGIN_VEHICLE_INFO info,string checkItem)
+        {
+            if ("2".Equals(info.StandardType))
+            {
+                //限值b
+                info.ZYJSXZ = "1.2";
+                info.COXZ = "5.0";
+                info.HCXZ = "1.0";
+                info.HC_NOXZ = "1.7";
+                info.GDSCOXZ = "0.3";
+                info.GDSHCXZ = "30";
+                info.GLKQXSSX = "1.05";
+                info.GLKQXSXX = "0.95";
+                info.DSHCXZ = "40";
+                info.DSCOXZ = "0.4";
+                info.GXSXSXZ = "0.7";
+                info.GLXZ = "0.4";
+                info.ZSXZ = "0.7";
+                info.LGMXZ = "1";
+                info.HSUXZ = "26";
+                info.HC5025XZ = "40";
+                info.CO5025XZ = "0.3";
+                info.NO5025XZ = "420";
+                info.HC2540XZ = "44";
+                info.CO2540XZ = "0.3";
+                info.NO2540XZ = "390";
+                if(checkItem.Contains("X3"))
+                    info.NOXZ = "0.7";
+                else
+                    info.NOXZ = "1200";
+            }
+            else
+            {
+                //限值a
+                if (checkItem.Contains("X3"))
+                    info.NOXZ = "1.3";
+                else
+                    info.NOXZ = "1500";
+            }
+        }
     }
-
-
-
 }
+
+
+
+

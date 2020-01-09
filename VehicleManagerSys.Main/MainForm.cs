@@ -22,6 +22,9 @@ namespace VehicleManagerSys.Main
             AppHelper.MainForm = this;
             InitMenu();
             labUser.Text = AppHelper.UserInfo.UserName;
+            LogHelper.Trace("测试Trace");
+            LogHelper.Debug("测试Debug");
+            LogHelper.Error("测试Error");
         }
 
         /// <summary>
@@ -83,5 +86,19 @@ namespace VehicleManagerSys.Main
         {
             Environment.Exit(0);
         }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            FullScreen();
+        }
+
+        //窗体最大化
+        private void FullScreen()
+        {
+            this.Width = SystemInformation.WorkingArea.Width;
+            this.Height = SystemInformation.WorkingArea.Height;
+            this.Location = new Point(0,0);
+        }
+
     }
 }

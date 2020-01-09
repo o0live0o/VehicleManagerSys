@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Live0xUtils">
+      <HintPath>..\..\src\Live0xUtils.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -93,6 +96,7 @@
     <Compile Include="Emuns\YesOrNo.cs" />
     <Compile Include="IVS\Class1.cs" />
     <Compile Include="IVS\EMPLOYEE_USER.cs" />
+    <Compile Include="IVS\IgFieldAttribute.cs" />
     <Compile Include="IVS\LOGIN_VEHICLE_INFO.cs" />
     <Compile Include="IVS\RESULT_ASM.cs" />
     <Compile Include="IVS\RESULT_BRAKE.cs" />

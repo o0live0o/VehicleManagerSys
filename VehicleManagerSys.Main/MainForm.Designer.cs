@@ -122,7 +122,7 @@
             this.ami_HeaderLabel1.ForeColor = System.Drawing.Color.White;
             this.ami_HeaderLabel1.Location = new System.Drawing.Point(12, 34);
             this.ami_HeaderLabel1.Name = "ami_HeaderLabel1";
-            this.ami_HeaderLabel1.Size = new System.Drawing.Size(73, 20);
+            this.ami_HeaderLabel1.Size = new System.Drawing.Size(77, 20);
             this.ami_HeaderLabel1.TabIndex = 4;
             this.ami_HeaderLabel1.Text = "操作员：";
             // 
@@ -150,8 +150,10 @@
             this.Controls.Add(this.emi_Separator1);
             this.Controls.Add(this.tvMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

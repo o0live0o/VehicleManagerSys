@@ -27,6 +27,8 @@ namespace VehicleManagerSys.Main.CustomForms
         {
             InitializeComponent();
             m_RESULT_VEHICLE_INFO = CloneHelper.Clone(info) as RESULT_VEHICLE_INFO;
+            if (!AppHelper.ComprehensiveSetting.UploadSign)
+                labOperator.Visible = false;
         }
 
         private void InitData()
@@ -34,10 +36,8 @@ namespace VehicleManagerSys.Main.CustomForms
             _comprehensiveUploadService = new ComprehensiveUploadService(m_RESULT_VEHICLE_INFO);
             _comprehensiveUploadService.InitData(new ComprehensiveUploadService.LogDelegate(AddLog));
 
-            if (AppHelper.ComprehensiveSetting.Operators.Length > 0)
-            {
+            if (AppHelper.ComprehensiveSetting.Operators != null && AppHelper.ComprehensiveSetting.Operators.Length > 0)            
                 combAuthor.DataSource = AppHelper.ComprehensiveSetting.Operators;
-            }
         }
 
         private void UploadReport()
@@ -66,7 +66,11 @@ namespace VehicleManagerSys.Main.CustomForms
         }
 
         private void ComprehensiveUploadForm_Shown(object sender, EventArgs e)
-        {         
+        {
+            if (!AppHelper.ComprehensiveSetting.UploadSign)
+            {
+                combAuthor.Visible = false;
+            }
             LoadingForm frmLoading = new LoadingForm();
             frmLoading.BackgroundWorkAction = delegate ()
             {
@@ -80,8 +84,8 @@ namespace VehicleManagerSys.Main.CustomForms
                         this.Title = m_RESULT_VEHICLE_INFO.HPHM;
                         this.labTestNo.Text = m_RESULT_VEHICLE_INFO.JCLSH;
                         this.labTestNoNet.Text = m_RESULT_VEHICLE_INFO.ZJLSH;
-                        captureEloam1.InitImgType(AppHelper.ComprehensiveSetting.ImgList);
-                        captureEloam1.InitCapturePath(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM));
+                        captureElo1.InitImgType(AppHelper.ComprehensiveSetting.ImgList);
+                        captureElo1.InitCapturePath(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM));
                     }));
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(20, "加载数据...");
                     this.Invoke(new MethodInvoker(() => {
@@ -100,11 +104,10 @@ namespace VehicleManagerSys.Main.CustomForms
         private void btnUpload_Click(object sender, EventArgs e)
         {
             string author = combAuthor.Text;
-
-            AddLog($"签字人：【{author}】");
-
-            if (string.IsNullOrEmpty(author))
+            if (AppHelper.ComprehensiveSetting.UploadSign && string.IsNullOrEmpty(author))
             {
+
+                AddLog($"签字人：【{author}】");
                 FrmTips.ShowTips(AppHelper.MainForm, "请选择签字人名字", 2000, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Medium, new Size(300, 50), TipsState.Error);
                 return;
             }
@@ -125,8 +128,11 @@ namespace VehicleManagerSys.Main.CustomForms
                     _comprehensiveUploadService.SharePrintImage(new ComprehensiveUploadService.LogDelegate(AddLog),chkTrust.Checked);
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(60, "上传安检结论照片...");
                     _comprehensiveUploadService.ShareReportImage(new ComprehensiveUploadService.LogDelegate(AddLog));
-                    frmLoading.CurrentMsg = new KeyValuePair<int, string>(80, "上传签字人信息...");
-                    _comprehensiveUploadService.ShareSignatureImage(new ComprehensiveUploadService.LogDelegate(AddLog),author);
+                    if (AppHelper.ComprehensiveSetting.UploadSign)
+                    {
+                        frmLoading.CurrentMsg = new KeyValuePair<int, string>(80, "上传签字人信息...");
+                        _comprehensiveUploadService.ShareSignatureImage(new ComprehensiveUploadService.LogDelegate(AddLog), author);
+                    }
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(1000, "上传完成...");
                 }
                 catch (Exception ex)
@@ -141,7 +147,7 @@ namespace VehicleManagerSys.Main.CustomForms
         {
             try
             {
-                captureEloam1.DisposeContorl();
+                captureElo1.DisposeContorl();
             }
             catch
             {

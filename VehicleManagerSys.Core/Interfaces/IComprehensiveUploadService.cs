@@ -8,6 +8,8 @@ namespace VehicleManagerSys.Core.Interfaces
 {
     interface IComprehensiveUploadService
     {
-        void UploadReport();
+        bool UploadReport();
+
+        bool VehicleLogin(string testNo);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace VehicleManagerSys.Main.Controls
 {
-    partial class CaptureEloam
+    partial class CaptureElo
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptureEloam));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptureElo));
             this.exchangeUpDown = new System.Windows.Forms.Button();
             this.turnRight = new System.Windows.Forms.Button();
             this.exchangeLeftRight = new System.Windows.Forms.Button();
@@ -222,7 +222,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(124, 439);
+            this.panel1.Size = new System.Drawing.Size(124, 537);
             this.panel1.TabIndex = 79;
             // 
             // eloamThumbnail
@@ -232,15 +232,16 @@
             this.eloamThumbnail.Location = new System.Drawing.Point(0, 0);
             this.eloamThumbnail.Name = "eloamThumbnail";
             this.eloamThumbnail.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("eloamThumbnail.OcxState")));
-            this.eloamThumbnail.Size = new System.Drawing.Size(124, 439);
+            this.eloamThumbnail.Size = new System.Drawing.Size(124, 537);
             this.eloamThumbnail.TabIndex = 78;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.eloamView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(283, 238);
+            this.panel2.Size = new System.Drawing.Size(437, 351);
             this.panel2.TabIndex = 80;
             // 
             // eloamView
@@ -250,7 +251,7 @@
             this.eloamView.Location = new System.Drawing.Point(0, 0);
             this.eloamView.Name = "eloamView";
             this.eloamView.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("eloamView.OcxState")));
-            this.eloamView.Size = new System.Drawing.Size(283, 238);
+            this.eloamView.Size = new System.Drawing.Size(437, 351);
             this.eloamView.TabIndex = 78;
             // 
             // splitContainer1
@@ -266,7 +267,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(565, 439);
+            this.splitContainer1.Size = new System.Drawing.Size(565, 537);
             this.splitContainer1.SplitterDistance = 437;
             this.splitContainer1.TabIndex = 81;
             // 
@@ -296,8 +297,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer2.Panel2.Controls.Add(this.groupBox12);
             this.splitContainer2.Panel2.Controls.Add(this.groupBox11);
-            this.splitContainer2.Size = new System.Drawing.Size(437, 439);
-            this.splitContainer2.SplitterDistance = 259;
+            this.splitContainer2.Size = new System.Drawing.Size(437, 537);
+            this.splitContainer2.SplitterDistance = 351;
             this.splitContainer2.TabIndex = 81;
             // 
             // btnTime
@@ -310,13 +311,13 @@
             this.btnTime.UseVisualStyleBackColor = true;
             this.btnTime.Click += new System.EventHandler(this.btnTime_Click);
             // 
-            // CaptureEloam
+            // CaptureElo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainer1);
-            this.Name = "CaptureEloam";
-            this.Size = new System.Drawing.Size(565, 439);
+            this.Name = "CaptureElo";
+            this.Size = new System.Drawing.Size(565, 537);
             this.Load += new System.EventHandler(this.CaptureEloam_Load);
             this.groupBox12.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);

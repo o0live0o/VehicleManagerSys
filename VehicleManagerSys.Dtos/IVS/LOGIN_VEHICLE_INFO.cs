@@ -1,3 +1,4 @@
+using Live0xUtils.DbUtils.Attributes;
 using System;
 using System.Data;
 
@@ -7,279 +8,323 @@ namespace VehicleManagerSys.Dtos.IVS
     {
 
         public LOGIN_VEHICLE_INFO()
-         {
-VEHICLEID="";
-HPHM="";
-HPZL="";
-HPZLDH="";
-GLCHPHM="";
-VIN="";
-JYLB="";
-JYLBDH="";
-FDJH="";
-FDJXH="";
-FDJZZCS="";
-DPXH="";
-PP="";
-CLZZCS="";
-XH="";
-PPXH="";
-QDXS="";
-QDXSDH="";
-QDZWZ="";
-ZCZWZ="";
-QZDZ="";
-QZDZDH="";
-YGGSNFKT="";
-YGGSNFKTDH="";
-RLLB="";
-RLLBDH="";
-RYBH="";
-GYFS="";
-GYFSDH="";
-CCDJRQ="";
-CCRQ="";
-ZBZL="";
-ZZL="";
-CYS="";
-CSYS="";
-CSYSDH="";
-ZDFS="";
-ZDFSDH="";
-CLZL="";
-CLZLDH="";
-ZXZXJXS="";
-ZXZXJXSDH="";
-ZXZLX="";
-ZXZLXDH="";
-ZGSJCS="";
-EDGL="";
-EDZS="";
-EDNJZS="";
-EDNJ="";
-EDYH="";
-JQFS="";
-JQFSDH="";
-FDJPL="";
-FDJGS="";
-FDJCC="";
-BSXLX="";
-BSXLXDH="";
-CXXL="";
-CXXLDH="";
-LJXSLC="";
-LTQY="";
-LTGG="";
-LTSL="";
-SYXZ="";
-SYXZDH="";
-YYZH="";
-SJDW="";
-SYR="";
-LXDH="";
-LXDZ="";
-YZBH="";
-DLRQ="";
-DLY="";
-YCY="";
-WGJYY="";
-DPJYY="";
-DTDPJYY="";
-LSJYY="";
-SQQZR="";
-WQCZY="";
-CSC="";
-CSK="";
-CSG="";
-ZJ="";
-YZLJ="";
-EZLJ="";
-SZLJ="";
-SIZLJ="";
-WZLJ="";
-LZLJ="";
-YZZLZ="";
-YZYLZ="";
-YZZZ="";
-EZZLZ="";
-EZYLZ="";
-EZZZ="";
-SZZLZ="";
-SZYLZ="";
-SZZZ="";
-SIZZLZ="";
-SIZYLZ="";
-SIZZZ="";
-WZZLZ="";
-WZYLZ="";
-WZZZ="";
-LZZLZ="";
-LZYLZ="";
-LZZZ="";
-CHZHQQK="";
-CHZHQQKDH="";
-PQHCLZZ="";
-PQHCLZZDH="";
-JZZZWZ="";
-ZZS="";
-GLCJCLSH="";
-GLCHPZL="";
-GLCHPZLDH="";
-LWCXWZJL="";
-SFSQCLC="";
-GLCJYXM="";
-LWCXWZJLDH="";
-HDZH="";
-EDNJGL="";
-JYXM_EX="";
-FWQ_ZYXZ="";
-DSBH="";
-JCBSB="";
-JCBXH="";
-JCBAZRQ="";
-JCBDYJSB="";
-JCBDYJXH="";
-JCBAZGS="";
-LWLRLSH="";
-LWLRHENF="";
-LTGGLX="";
-LTGGLXDH="";
-QDZKZZL="";
-GCZS="";
-HCCSXS="";
-YWLX="";
-YWLXDH="";
-KCLXDJ="";
-YXSSZJ="";
-GCYYZH="";
-GCYXSSZJ="";
-JYXM="";
-ZJXM="";
-AJXM="";
-MTCSFDJSS="";
-MTCSFDJSSDH="";
-ZYWLB="";
-ZYWLBDH="";
-CLSSLB="";
-CLSSLBDH="";
-SYRSFZ="";
-ZJJYRQ="";
-BXZZRQ="";
-JYYXQZ="";
-CLYTDH="";
-YTSXDH="";
-BZZXS="";
-BZZXSDH="";
-AJLSH="";
-ZJLSH="";
-WQLSH="";
-MTLSH="";
-JYXM_LW="";
-GCPZH="";
-GCLX="";
-GCLXDH="";
-QYCMZZZL="";
-DCZS="";
-XZQY="";
-ZCLBGD="";
-GCLBGD="";
-GCCSC="";
-GCCSK="";
-GCCSG="";
-GCBZZXS="";
-GCBZZXSDH="";
-ZJCLLX="";
-ZJCLLXDH="";
-SFSWPC="";
-DLYSZH="";
-SFSGSQC="";
-CLCCLX="";
-CLCCLXDH="";
-DWS="";
-DCZZ="";
-SYQK="";
-SYQKDH="";
-CPMC="";
-HPYS="";
-HPYSDH="";
-HCCSXSDH="";
-KCLXDJDH="";
-KCCC="";
-GCYXXSZJ="";
-GCVIN="";
-GCCCDJRQ="";
-GCCCRQ="";
-GCPPXH="";
-YHXZ="";
-YHSD="";
-YDXZ="";
-HXNBCD="";
-HXNBKD="";
-HXNBGD="";
-SFMJ="";
-BMJYY="";
-DGSFZXTS="";
-DGSFZXTSDH="";
-ZDJGL="";
-SZDQLX="";
-SZDQLXDH="";
-YYZHCLRQ="";
-PFLSH="";
-QDZS="";
-JYZL="";
-RYBHDH="";
-EJWHXLC="";
-EJWHHTH="";
-SFSQZ="";
-SFSWPCDH="";
-QYCMZZL="";
-BTGXZ="";
-BZZWZ="";
-QLJ="";
-HLJ="";
-XJXS="";
-XJXSDH="";
-SFMJDH="";
-SFJMPZ="";
-DDJXH="";
-CNZZXH="";
-DCRL="";
-IsTrainMode="";
-IsOBD="";
-OBDWZ="";
-IsDPF="";
-DPFXH="";
-IsSCR="";
-SCRXH="";
-IsABS="";
-IsTurbo="";
-ZCLX="";
-ZCLXDH="";
-DPHM="";
-ABS="";
-TURBO="";
-QZJCDGGP="";
-CHZHQXH="";
-OBDCommCL="";
-OBDCommCX="";
-Standard="";
-VehicleKind="";
-IsEFI="";
-IsAsm="";
-OBDOutlookID="";
-OutlookID="";
-GGMINNMD="";
-GGMAXNMD="";
-         }
-
+        {
+            VEHICLEID = "";
+            HPHM = "";
+            HPZL = "";
+            HPZLDH = "";
+            GLCHPHM = "";
+            VIN = "";
+            JYLB = "";
+            JYLBDH = "";
+            FDJH = "";
+            FDJXH = "";
+            FDJZZCS = "";
+            DPXH = "";
+            PP = "";
+            CLZZCS = "";
+            XH = "";
+            PPXH = "";
+            QDXS = "";
+            QDXSDH = "";
+            QDZWZ = "";
+            ZCZWZ = "";
+            QZDZ = "";
+            QZDZDH = "";
+            YGGSNFKT = "";
+            YGGSNFKTDH = "";
+            RLLB = "";
+            RLLBDH = "";
+            RYBH = "";
+            GYFS = "";
+            GYFSDH = "";
+            CCDJRQ = "";
+            CCRQ = "";
+            ZBZL = "";
+            ZZL = "";
+            CYS = "";
+            CSYS = "";
+            CSYSDH = "";
+            ZDFS = "";
+            ZDFSDH = "";
+            CLZL = "";
+            CLZLDH = "";
+            ZXZXJXS = "";
+            ZXZXJXSDH = "";
+            ZXZLX = "";
+            ZXZLXDH = "";
+            ZGSJCS = "";
+            EDGL = "";
+            EDZS = "";
+            EDNJZS = "";
+            EDNJ = "";
+            EDYH = "";
+            JQFS = "";
+            JQFSDH = "";
+            FDJPL = "";
+            FDJGS = "";
+            FDJCC = "";
+            BSXLX = "";
+            BSXLXDH = "";
+            CXXL = "";
+            CXXLDH = "";
+            LJXSLC = "";
+            LTQY = "";
+            LTGG = "";
+            LTSL = "";
+            SYXZ = "";
+            SYXZDH = "";
+            YYZH = "";
+            SJDW = "";
+            SYR = "";
+            LXDH = "";
+            LXDZ = "";
+            YZBH = "";
+            DLRQ = "";
+            DLY = "";
+            YCY = "";
+            WGJYY = "";
+            DPJYY = "";
+            DTDPJYY = "";
+            LSJYY = "";
+            SQQZR = "";
+            WQCZY = "";
+            CSC = "";
+            CSK = "";
+            CSG = "";
+            ZJ = "";
+            YZLJ = "";
+            EZLJ = "";
+            SZLJ = "";
+            SIZLJ = "";
+            WZLJ = "";
+            LZLJ = "";
+            YZZLZ = "";
+            YZYLZ = "";
+            YZZZ = "";
+            EZZLZ = "";
+            EZYLZ = "";
+            EZZZ = "";
+            SZZLZ = "";
+            SZYLZ = "";
+            SZZZ = "";
+            SIZZLZ = "";
+            SIZYLZ = "";
+            SIZZZ = "";
+            WZZLZ = "";
+            WZYLZ = "";
+            WZZZ = "";
+            LZZLZ = "";
+            LZYLZ = "";
+            LZZZ = "";
+            CHZHQQK = "";
+            CHZHQQKDH = "";
+            PQHCLZZ = "";
+            PQHCLZZDH = "";
+            JZZZWZ = "";
+            ZZS = "";
+            GLCJCLSH = "";
+            GLCHPZL = "";
+            GLCHPZLDH = "";
+            LWCXWZJL = "";
+            SFSQCLC = "";
+            GLCJYXM = "";
+            LWCXWZJLDH = "";
+            HDZH = "";
+            EDNJGL = "";
+            JYXM_EX = "";
+            FWQ_ZYXZ = "";
+            DSBH = "";
+            JCBSB = "";
+            JCBXH = "";
+            JCBAZRQ = "";
+            JCBDYJSB = "";
+            JCBDYJXH = "";
+            JCBAZGS = "";
+            LWLRLSH = "";
+            LWLRHENF = "";
+            LTGGLX = "";
+            LTGGLXDH = "";
+            QDZKZZL = "";
+            GCZS = "";
+            HCCSXS = "";
+            YWLX = "";
+            YWLXDH = "";
+            KCLXDJ = "";
+            YXSSZJ = "";
+            GCYYZH = "";
+            GCYXSSZJ = "";
+            JYXM = "";
+            ZJXM = "";
+            AJXM = "";
+            MTCSFDJSS = "";
+            MTCSFDJSSDH = "";
+            ZYWLB = "";
+            ZYWLBDH = "";
+            CLSSLB = "";
+            CLSSLBDH = "";
+            SYRSFZ = "";
+            ZJJYRQ = "";
+            BXZZRQ = "";
+            JYYXQZ = "";
+            CLYTDH = "";
+            YTSXDH = "";
+            BZZXS = "";
+            BZZXSDH = "";
+            AJLSH = "";
+            ZJLSH = "";
+            WQLSH = "";
+            MTLSH = "";
+            JYXM_LW = "";
+            GCPZH = "";
+            GCLX = "";
+            GCLXDH = "";
+            QYCMZZZL = "";
+            DCZS = "";
+            XZQY = "";
+            ZCLBGD = "";
+            GCLBGD = "";
+            GCCSC = "";
+            GCCSK = "";
+            GCCSG = "";
+            GCBZZXS = "";
+            GCBZZXSDH = "";
+            ZJCLLX = "";
+            ZJCLLXDH = "";
+            SFSWPC = "";
+            DLYSZH = "";
+            SFSGSQC = "";
+            CLCCLX = "";
+            CLCCLXDH = "";
+            DWS = "";
+            DCZZ = "";
+            SYQK = "";
+            SYQKDH = "";
+            CPMC = "";
+            HPYS = "";
+            HPYSDH = "";
+            HCCSXSDH = "";
+            KCLXDJDH = "";
+            KCCC = "";
+            GCYXXSZJ = "";
+            GCVIN = "";
+            GCCCDJRQ = "";
+            GCCCRQ = "";
+            GCPPXH = "";
+            YHXZ = "";
+            YHSD = "";
+            YDXZ = "";
+            HXNBCD = "";
+            HXNBKD = "";
+            HXNBGD = "";
+            SFMJ = "";
+            BMJYY = "";
+            DGSFZXTS = "";
+            DGSFZXTSDH = "";
+            ZDJGL = "";
+            SZDQLX = "";
+            SZDQLXDH = "";
+            YYZHCLRQ = "";
+            PFLSH = "";
+            QDZS = "";
+            JYZL = "";
+            RYBHDH = "";
+            EJWHXLC = "";
+            EJWHHTH = "";
+            SFSQZ = "";
+            SFSWPCDH = "";
+            QYCMZZL = "";
+            BTGXZ = "";
+            BZZWZ = "";
+            QLJ = "";
+            HLJ = "";
+            XJXS = "";
+            XJXSDH = "";
+            SFMJDH = "";
+            SFJMPZ = "";
+            DDJXH = "";
+            CNZZXH = "";
+            DCRL = "";
+            IsTrainMode = "";
+            IsOBD = "";
+            OBDWZ = "";
+            IsDPF = "";
+            DPFXH = "";
+            IsSCR = "";
+            SCRXH = "";
+            IsABS = "";
+            IsTurbo = "";
+            ZCLX = "";
+            ZCLXDH = "";
+            DPHM = "";
+            ABS = "";
+            TURBO = "";
+            QZJCDGGP = "";
+            CHZHQXH = "";
+            OBDCommCL = "";
+            OBDCommCX = "";
+            Standard = "";
+            VehicleKind = "";
+            IsEFI = "";
+            IsAsm = "";
+            OBDOutlookID = "";
+            OutlookID = "";
+            GGMINNMD = "";
+            GGMAXNMD = "";
+            ZYJSXZ = "1.2";
+            COXZ = "8.0";
+            HCXZ = "1.6";
+            HC_NOXZ = "2.9";
+            GDSCOXZ = "0.3";
+            GDSHCXZ = "50";
+            GLKQXSSX = "1.05";
+            GLKQXSXX = "0.95";
+            DSHCXZ = "80";
+            DSCOXZ = "0.6";
+            GXSXSXZ = "1.2";
+            GLXZ = "0.4";
+            ZSXZ = "0.7";
+            LGMXZ = "1";
+            HSUXZ = "40";
+            HC5025XZ = "90";
+            CO5025XZ = "0.5";
+            NO5025XZ = "700";
+            HC2540XZ = "80";
+            CO2540XZ = "0.4";
+            NO2540XZ = "650";
+            NOXZ = "1500";
+            StandardType = "1";
+        }
+        private string HB_NOXZ = "1.3";
+        private string HB_ZYJSXZ = "1.2";
+        private string HB_COXZ = "8.0";
+        private string HB_HCXZ = "1.6";
+        private string HB_HC_NOXZ = "2.9";
+        private string HB_GDSCOXZ = "0.3";
+        private string HB_GDSHCXZ = "50";
+        private string HB_GLKQXSSX = "1.05";
+        private string HB_GLKQXSXX = "0.95";
+        private string HB_DSHCXZ = "80";
+        private string HB_DSCOXZ = "0.6";
+        private string HB_GXSXSXZ = "1.2";
+        private string HB_GLXZ = "0.4";
+        private string HB_ZSXZ = "0.7";
+        private string HB_LGMXZ = "1";
+        private string HB_HSUXZ = "40";
+        private string HB_HC5025XZ = "90";
+        private string HB_CO5025XZ = "0.5";
+        private string HB_NO5025XZ = "700";
+        private string HB_HC2540XZ = "80";
+        private string HB_CO2540XZ = "0.4";
+        private string HB_NO2540XZ = "650";
 
         /// <summary>
         /// 获取或设置VEHICLEID
         /// </summary>
         public string VEHICLEID
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -287,8 +332,8 @@ GGMAXNMD="";
         /// </summary>
         public string HPHM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -296,8 +341,8 @@ GGMAXNMD="";
         /// </summary>
         public string HPZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -305,8 +350,8 @@ GGMAXNMD="";
         /// </summary>
         public string HPZLDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -314,8 +359,8 @@ GGMAXNMD="";
         /// </summary>
         public string GLCHPHM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -323,8 +368,8 @@ GGMAXNMD="";
         /// </summary>
         public string VIN
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -332,8 +377,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYLB
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -341,8 +386,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYLBDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -350,8 +395,8 @@ GGMAXNMD="";
         /// </summary>
         public string FDJH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -359,8 +404,8 @@ GGMAXNMD="";
         /// </summary>
         public string FDJXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -368,8 +413,8 @@ GGMAXNMD="";
         /// </summary>
         public string FDJZZCS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -377,8 +422,8 @@ GGMAXNMD="";
         /// </summary>
         public string DPXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -386,8 +431,8 @@ GGMAXNMD="";
         /// </summary>
         public string PP
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -395,8 +440,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLZZCS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -404,8 +449,8 @@ GGMAXNMD="";
         /// </summary>
         public string XH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -413,8 +458,8 @@ GGMAXNMD="";
         /// </summary>
         public string PPXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -422,8 +467,8 @@ GGMAXNMD="";
         /// </summary>
         public string QDXS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -431,8 +476,8 @@ GGMAXNMD="";
         /// </summary>
         public string QDXSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -440,8 +485,8 @@ GGMAXNMD="";
         /// </summary>
         public string QDZWZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -449,8 +494,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZCZWZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -458,8 +503,8 @@ GGMAXNMD="";
         /// </summary>
         public string QZDZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -467,8 +512,8 @@ GGMAXNMD="";
         /// </summary>
         public string QZDZDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -476,8 +521,8 @@ GGMAXNMD="";
         /// </summary>
         public string YGGSNFKT
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -485,8 +530,8 @@ GGMAXNMD="";
         /// </summary>
         public string YGGSNFKTDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -494,8 +539,8 @@ GGMAXNMD="";
         /// </summary>
         public string RLLB
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -503,8 +548,8 @@ GGMAXNMD="";
         /// </summary>
         public string RLLBDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -512,8 +557,8 @@ GGMAXNMD="";
         /// </summary>
         public string RYBH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -521,8 +566,8 @@ GGMAXNMD="";
         /// </summary>
         public string GYFS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -530,8 +575,8 @@ GGMAXNMD="";
         /// </summary>
         public string GYFSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -539,8 +584,8 @@ GGMAXNMD="";
         /// </summary>
         public string CCDJRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -548,8 +593,8 @@ GGMAXNMD="";
         /// </summary>
         public string CCRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -557,8 +602,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZBZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -566,8 +611,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -575,8 +620,8 @@ GGMAXNMD="";
         /// </summary>
         public string CYS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -584,8 +629,8 @@ GGMAXNMD="";
         /// </summary>
         public string CSYS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -593,8 +638,8 @@ GGMAXNMD="";
         /// </summary>
         public string CSYSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -602,8 +647,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZDFS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -611,8 +656,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZDFSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -620,8 +665,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -629,8 +674,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLZLDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -638,8 +683,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZXZXJXS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -647,8 +692,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZXZXJXSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -656,8 +701,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZXZLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -665,8 +710,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZXZLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -674,8 +719,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZGSJCS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -683,8 +728,8 @@ GGMAXNMD="";
         /// </summary>
         public string EDGL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -692,8 +737,8 @@ GGMAXNMD="";
         /// </summary>
         public string EDZS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -701,8 +746,8 @@ GGMAXNMD="";
         /// </summary>
         public string EDNJZS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -710,8 +755,8 @@ GGMAXNMD="";
         /// </summary>
         public string EDNJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -719,8 +764,8 @@ GGMAXNMD="";
         /// </summary>
         public string EDYH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -728,8 +773,8 @@ GGMAXNMD="";
         /// </summary>
         public string JQFS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -737,8 +782,8 @@ GGMAXNMD="";
         /// </summary>
         public string JQFSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -746,8 +791,8 @@ GGMAXNMD="";
         /// </summary>
         public string FDJPL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -755,8 +800,8 @@ GGMAXNMD="";
         /// </summary>
         public string FDJGS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -764,8 +809,8 @@ GGMAXNMD="";
         /// </summary>
         public string FDJCC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -773,8 +818,8 @@ GGMAXNMD="";
         /// </summary>
         public string BSXLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -782,8 +827,8 @@ GGMAXNMD="";
         /// </summary>
         public string BSXLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -791,8 +836,8 @@ GGMAXNMD="";
         /// </summary>
         public string CXXL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -800,8 +845,8 @@ GGMAXNMD="";
         /// </summary>
         public string CXXLDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -809,8 +854,8 @@ GGMAXNMD="";
         /// </summary>
         public string LJXSLC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -818,8 +863,8 @@ GGMAXNMD="";
         /// </summary>
         public string LTQY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -827,8 +872,8 @@ GGMAXNMD="";
         /// </summary>
         public string LTGG
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -836,8 +881,8 @@ GGMAXNMD="";
         /// </summary>
         public string LTSL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -845,8 +890,8 @@ GGMAXNMD="";
         /// </summary>
         public string SYXZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -854,8 +899,8 @@ GGMAXNMD="";
         /// </summary>
         public string SYXZDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -863,8 +908,8 @@ GGMAXNMD="";
         /// </summary>
         public string YYZH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -872,8 +917,8 @@ GGMAXNMD="";
         /// </summary>
         public string SJDW
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -881,8 +926,8 @@ GGMAXNMD="";
         /// </summary>
         public string SYR
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -890,8 +935,8 @@ GGMAXNMD="";
         /// </summary>
         public string LXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -899,8 +944,8 @@ GGMAXNMD="";
         /// </summary>
         public string LXDZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -908,8 +953,8 @@ GGMAXNMD="";
         /// </summary>
         public string YZBH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -917,8 +962,8 @@ GGMAXNMD="";
         /// </summary>
         public string DLRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -926,8 +971,8 @@ GGMAXNMD="";
         /// </summary>
         public string DLY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -935,8 +980,8 @@ GGMAXNMD="";
         /// </summary>
         public string YCY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -944,8 +989,8 @@ GGMAXNMD="";
         /// </summary>
         public string WGJYY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -953,8 +998,8 @@ GGMAXNMD="";
         /// </summary>
         public string DPJYY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -962,8 +1007,8 @@ GGMAXNMD="";
         /// </summary>
         public string DTDPJYY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -971,8 +1016,8 @@ GGMAXNMD="";
         /// </summary>
         public string LSJYY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -980,8 +1025,8 @@ GGMAXNMD="";
         /// </summary>
         public string SQQZR
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -989,8 +1034,8 @@ GGMAXNMD="";
         /// </summary>
         public string WQCZY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -998,8 +1043,8 @@ GGMAXNMD="";
         /// </summary>
         public string CSC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1007,8 +1052,8 @@ GGMAXNMD="";
         /// </summary>
         public string CSK
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1016,8 +1061,8 @@ GGMAXNMD="";
         /// </summary>
         public string CSG
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1025,8 +1070,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1034,8 +1079,8 @@ GGMAXNMD="";
         /// </summary>
         public string YZLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1043,8 +1088,8 @@ GGMAXNMD="";
         /// </summary>
         public string EZLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1052,8 +1097,8 @@ GGMAXNMD="";
         /// </summary>
         public string SZLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1061,8 +1106,8 @@ GGMAXNMD="";
         /// </summary>
         public string SIZLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1070,8 +1115,8 @@ GGMAXNMD="";
         /// </summary>
         public string WZLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1079,8 +1124,8 @@ GGMAXNMD="";
         /// </summary>
         public string LZLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1088,8 +1133,8 @@ GGMAXNMD="";
         /// </summary>
         public string YZZLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1097,8 +1142,8 @@ GGMAXNMD="";
         /// </summary>
         public string YZYLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1106,8 +1151,8 @@ GGMAXNMD="";
         /// </summary>
         public string YZZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1115,8 +1160,8 @@ GGMAXNMD="";
         /// </summary>
         public string EZZLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1124,8 +1169,8 @@ GGMAXNMD="";
         /// </summary>
         public string EZYLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1133,8 +1178,8 @@ GGMAXNMD="";
         /// </summary>
         public string EZZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1142,8 +1187,8 @@ GGMAXNMD="";
         /// </summary>
         public string SZZLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1151,8 +1196,8 @@ GGMAXNMD="";
         /// </summary>
         public string SZYLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1160,8 +1205,8 @@ GGMAXNMD="";
         /// </summary>
         public string SZZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1169,8 +1214,8 @@ GGMAXNMD="";
         /// </summary>
         public string SIZZLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1178,8 +1223,8 @@ GGMAXNMD="";
         /// </summary>
         public string SIZYLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1187,8 +1232,8 @@ GGMAXNMD="";
         /// </summary>
         public string SIZZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1196,8 +1241,8 @@ GGMAXNMD="";
         /// </summary>
         public string WZZLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1205,8 +1250,8 @@ GGMAXNMD="";
         /// </summary>
         public string WZYLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1214,8 +1259,8 @@ GGMAXNMD="";
         /// </summary>
         public string WZZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1223,8 +1268,8 @@ GGMAXNMD="";
         /// </summary>
         public string LZZLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1232,8 +1277,8 @@ GGMAXNMD="";
         /// </summary>
         public string LZYLZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1241,8 +1286,8 @@ GGMAXNMD="";
         /// </summary>
         public string LZZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1250,8 +1295,8 @@ GGMAXNMD="";
         /// </summary>
         public string CHZHQQK
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1259,8 +1304,8 @@ GGMAXNMD="";
         /// </summary>
         public string CHZHQQKDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1268,8 +1313,8 @@ GGMAXNMD="";
         /// </summary>
         public string PQHCLZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1277,8 +1322,8 @@ GGMAXNMD="";
         /// </summary>
         public string PQHCLZZDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1286,8 +1331,8 @@ GGMAXNMD="";
         /// </summary>
         public string JZZZWZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1295,8 +1340,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZZS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1304,8 +1349,8 @@ GGMAXNMD="";
         /// </summary>
         public string GLCJCLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1313,8 +1358,8 @@ GGMAXNMD="";
         /// </summary>
         public string GLCHPZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1322,8 +1367,8 @@ GGMAXNMD="";
         /// </summary>
         public string GLCHPZLDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1331,8 +1376,8 @@ GGMAXNMD="";
         /// </summary>
         public string LWCXWZJL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1340,8 +1385,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFSQCLC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1349,8 +1394,8 @@ GGMAXNMD="";
         /// </summary>
         public string GLCJYXM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1358,8 +1403,8 @@ GGMAXNMD="";
         /// </summary>
         public string LWCXWZJLDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1367,8 +1412,8 @@ GGMAXNMD="";
         /// </summary>
         public string HDZH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1376,8 +1421,8 @@ GGMAXNMD="";
         /// </summary>
         public string EDNJGL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1385,8 +1430,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYXM_EX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1394,8 +1439,8 @@ GGMAXNMD="";
         /// </summary>
         public string FWQ_ZYXZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1403,8 +1448,8 @@ GGMAXNMD="";
         /// </summary>
         public string DSBH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1412,8 +1457,8 @@ GGMAXNMD="";
         /// </summary>
         public string JCBSB
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1421,8 +1466,8 @@ GGMAXNMD="";
         /// </summary>
         public string JCBXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1430,8 +1475,8 @@ GGMAXNMD="";
         /// </summary>
         public string JCBAZRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1439,8 +1484,8 @@ GGMAXNMD="";
         /// </summary>
         public string JCBDYJSB
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1448,8 +1493,8 @@ GGMAXNMD="";
         /// </summary>
         public string JCBDYJXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1457,8 +1502,8 @@ GGMAXNMD="";
         /// </summary>
         public string JCBAZGS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1466,8 +1511,8 @@ GGMAXNMD="";
         /// </summary>
         public string LWLRLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1475,8 +1520,8 @@ GGMAXNMD="";
         /// </summary>
         public string LWLRHENF
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1484,8 +1529,8 @@ GGMAXNMD="";
         /// </summary>
         public string LTGGLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1493,8 +1538,8 @@ GGMAXNMD="";
         /// </summary>
         public string LTGGLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1502,8 +1547,8 @@ GGMAXNMD="";
         /// </summary>
         public string QDZKZZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1511,8 +1556,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCZS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1520,8 +1565,8 @@ GGMAXNMD="";
         /// </summary>
         public string HCCSXS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1529,8 +1574,8 @@ GGMAXNMD="";
         /// </summary>
         public string YWLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1538,8 +1583,8 @@ GGMAXNMD="";
         /// </summary>
         public string YWLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1547,8 +1592,8 @@ GGMAXNMD="";
         /// </summary>
         public string KCLXDJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1556,8 +1601,8 @@ GGMAXNMD="";
         /// </summary>
         public string YXSSZJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1565,8 +1610,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCYYZH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1574,8 +1619,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCYXSSZJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1583,8 +1628,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYXM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1592,8 +1637,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZJXM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1601,8 +1646,8 @@ GGMAXNMD="";
         /// </summary>
         public string AJXM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1610,8 +1655,8 @@ GGMAXNMD="";
         /// </summary>
         public string MTCSFDJSS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1619,8 +1664,8 @@ GGMAXNMD="";
         /// </summary>
         public string MTCSFDJSSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1628,8 +1673,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZYWLB
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1637,8 +1682,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZYWLBDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1646,8 +1691,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLSSLB
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1655,8 +1700,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLSSLBDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1664,8 +1709,8 @@ GGMAXNMD="";
         /// </summary>
         public string SYRSFZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1673,8 +1718,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZJJYRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1682,8 +1727,8 @@ GGMAXNMD="";
         /// </summary>
         public string BXZZRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1691,8 +1736,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYYXQZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1700,8 +1745,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLYTDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1709,8 +1754,8 @@ GGMAXNMD="";
         /// </summary>
         public string YTSXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1718,8 +1763,8 @@ GGMAXNMD="";
         /// </summary>
         public string BZZXS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1727,8 +1772,8 @@ GGMAXNMD="";
         /// </summary>
         public string BZZXSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1736,8 +1781,8 @@ GGMAXNMD="";
         /// </summary>
         public string AJLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1745,8 +1790,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZJLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1754,8 +1799,8 @@ GGMAXNMD="";
         /// </summary>
         public string WQLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1763,8 +1808,8 @@ GGMAXNMD="";
         /// </summary>
         public string MTLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1772,8 +1817,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYXM_LW
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1781,8 +1826,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCPZH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1790,8 +1835,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1799,8 +1844,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1808,8 +1853,8 @@ GGMAXNMD="";
         /// </summary>
         public string QYCMZZZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1817,8 +1862,8 @@ GGMAXNMD="";
         /// </summary>
         public string DCZS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1826,8 +1871,8 @@ GGMAXNMD="";
         /// </summary>
         public string XZQY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1835,8 +1880,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZCLBGD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1844,8 +1889,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCLBGD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1853,8 +1898,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCCSC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1862,8 +1907,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCCSK
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1871,8 +1916,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCCSG
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1880,8 +1925,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCBZZXS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1889,8 +1934,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCBZZXSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1898,8 +1943,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZJCLLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1907,8 +1952,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZJCLLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1916,8 +1961,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFSWPC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1925,8 +1970,8 @@ GGMAXNMD="";
         /// </summary>
         public string DLYSZH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1934,8 +1979,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFSGSQC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1943,8 +1988,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLCCLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1952,8 +1997,8 @@ GGMAXNMD="";
         /// </summary>
         public string CLCCLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1961,8 +2006,8 @@ GGMAXNMD="";
         /// </summary>
         public string DWS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1970,8 +2015,8 @@ GGMAXNMD="";
         /// </summary>
         public string DCZZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1979,8 +2024,8 @@ GGMAXNMD="";
         /// </summary>
         public string SYQK
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1988,8 +2033,8 @@ GGMAXNMD="";
         /// </summary>
         public string SYQKDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -1997,8 +2042,8 @@ GGMAXNMD="";
         /// </summary>
         public string CPMC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2006,8 +2051,8 @@ GGMAXNMD="";
         /// </summary>
         public string HPYS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2015,8 +2060,8 @@ GGMAXNMD="";
         /// </summary>
         public string HPYSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2024,8 +2069,8 @@ GGMAXNMD="";
         /// </summary>
         public string HCCSXSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2033,8 +2078,8 @@ GGMAXNMD="";
         /// </summary>
         public string KCLXDJDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2042,8 +2087,8 @@ GGMAXNMD="";
         /// </summary>
         public string KCCC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2051,8 +2096,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCYXXSZJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2060,8 +2105,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCVIN
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2069,8 +2114,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCCCDJRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2078,8 +2123,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCCCRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2087,8 +2132,8 @@ GGMAXNMD="";
         /// </summary>
         public string GCPPXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2096,8 +2141,8 @@ GGMAXNMD="";
         /// </summary>
         public string YHXZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2105,8 +2150,8 @@ GGMAXNMD="";
         /// </summary>
         public string YHSD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2114,8 +2159,8 @@ GGMAXNMD="";
         /// </summary>
         public string YDXZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2123,8 +2168,8 @@ GGMAXNMD="";
         /// </summary>
         public string HXNBCD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2132,8 +2177,8 @@ GGMAXNMD="";
         /// </summary>
         public string HXNBKD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2141,8 +2186,8 @@ GGMAXNMD="";
         /// </summary>
         public string HXNBGD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2150,8 +2195,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFMJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2159,8 +2204,8 @@ GGMAXNMD="";
         /// </summary>
         public string BMJYY
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2168,8 +2213,8 @@ GGMAXNMD="";
         /// </summary>
         public string DGSFZXTS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2177,8 +2222,8 @@ GGMAXNMD="";
         /// </summary>
         public string DGSFZXTSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2186,8 +2231,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZDJGL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2195,8 +2240,8 @@ GGMAXNMD="";
         /// </summary>
         public string SZDQLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2204,8 +2249,8 @@ GGMAXNMD="";
         /// </summary>
         public string SZDQLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2213,8 +2258,8 @@ GGMAXNMD="";
         /// </summary>
         public string YYZHCLRQ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2222,8 +2267,8 @@ GGMAXNMD="";
         /// </summary>
         public string PFLSH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2231,8 +2276,8 @@ GGMAXNMD="";
         /// </summary>
         public string QDZS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2240,8 +2285,8 @@ GGMAXNMD="";
         /// </summary>
         public string JYZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2249,8 +2294,8 @@ GGMAXNMD="";
         /// </summary>
         public string RYBHDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2258,8 +2303,8 @@ GGMAXNMD="";
         /// </summary>
         public string EJWHXLC
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2267,8 +2312,8 @@ GGMAXNMD="";
         /// </summary>
         public string EJWHHTH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2276,8 +2321,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFSQZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2285,8 +2330,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFSWPCDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2294,8 +2339,8 @@ GGMAXNMD="";
         /// </summary>
         public string QYCMZZL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2303,8 +2348,8 @@ GGMAXNMD="";
         /// </summary>
         public string BTGXZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2312,8 +2357,8 @@ GGMAXNMD="";
         /// </summary>
         public string BZZWZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2321,8 +2366,8 @@ GGMAXNMD="";
         /// </summary>
         public string QLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2330,8 +2375,8 @@ GGMAXNMD="";
         /// </summary>
         public string HLJ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2339,8 +2384,8 @@ GGMAXNMD="";
         /// </summary>
         public string XJXS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2348,8 +2393,8 @@ GGMAXNMD="";
         /// </summary>
         public string XJXSDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2357,8 +2402,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFMJDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2366,8 +2411,8 @@ GGMAXNMD="";
         /// </summary>
         public string SFJMPZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2375,8 +2420,8 @@ GGMAXNMD="";
         /// </summary>
         public string DDJXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2384,8 +2429,8 @@ GGMAXNMD="";
         /// </summary>
         public string CNZZXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2393,8 +2438,8 @@ GGMAXNMD="";
         /// </summary>
         public string DCRL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2402,8 +2447,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsTrainMode
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2411,8 +2456,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsOBD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2420,8 +2465,8 @@ GGMAXNMD="";
         /// </summary>
         public string OBDWZ
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2429,8 +2474,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsDPF
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2438,8 +2483,8 @@ GGMAXNMD="";
         /// </summary>
         public string DPFXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2447,8 +2492,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsSCR
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2456,8 +2501,8 @@ GGMAXNMD="";
         /// </summary>
         public string SCRXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2465,8 +2510,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsABS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2474,8 +2519,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsTurbo
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2483,8 +2528,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZCLX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2492,8 +2537,8 @@ GGMAXNMD="";
         /// </summary>
         public string ZCLXDH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2501,8 +2546,8 @@ GGMAXNMD="";
         /// </summary>
         public string DPHM
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2510,8 +2555,8 @@ GGMAXNMD="";
         /// </summary>
         public string ABS
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2519,8 +2564,8 @@ GGMAXNMD="";
         /// </summary>
         public string TURBO
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2528,8 +2573,8 @@ GGMAXNMD="";
         /// </summary>
         public string QZJCDGGP
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2537,8 +2582,8 @@ GGMAXNMD="";
         /// </summary>
         public string CHZHQXH
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2546,8 +2591,8 @@ GGMAXNMD="";
         /// </summary>
         public string OBDCommCL
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2555,8 +2600,8 @@ GGMAXNMD="";
         /// </summary>
         public string OBDCommCX
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2564,8 +2609,8 @@ GGMAXNMD="";
         /// </summary>
         public string Standard
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2573,8 +2618,8 @@ GGMAXNMD="";
         /// </summary>
         public string VehicleKind
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2582,8 +2627,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsEFI
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2591,8 +2636,8 @@ GGMAXNMD="";
         /// </summary>
         public string IsAsm
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2600,8 +2645,8 @@ GGMAXNMD="";
         /// </summary>
         public string OBDOutlookID
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2609,8 +2654,8 @@ GGMAXNMD="";
         /// </summary>
         public string OutlookID
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2618,8 +2663,8 @@ GGMAXNMD="";
         /// </summary>
         public string GGMINNMD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
         /// <summary>
@@ -2627,10 +2672,67 @@ GGMAXNMD="";
         /// </summary>
         public string GGMAXNMD
         {
-             get;
-             set;
+            get;
+            set;
         }
 
+        #region 限值
+        [IgField]
+        public string ZYJSXZ { get; set; }
 
+        [IgField]
+        public string COXZ { get; set; }
+
+        [IgField]
+        public string HCXZ { get; set; }
+
+        [IgField]
+        public string NOXZ { get; set; }
+
+        [IgField]
+        public string HC_NOXZ { get; set; }
+
+        [IgField]
+        public string GDSCOXZ { get; set; }
+
+        [IgField]
+        public string GDSHCXZ { get; set; }
+        [IgField]
+        public string GLKQXSSX { get; set; }
+
+        [IgField]
+        public string GLKQXSXX { get; set; }
+        [IgField]
+        public string GXSXSXZ { get; set; }
+        [IgField]
+        public string GLXZ { get; set; }
+        [IgField]
+        public string ZSXZ { get; set; }
+        [IgField]
+        public string HC5025XZ { get; set; }
+        [IgField]
+        public string CO5025XZ { get; set; }
+        [IgField]
+        public string NO5025XZ { get; set; }
+        [IgField]
+        public string HC2540XZ { get; set; }
+        [IgField]
+        public string CO2540XZ { get; set; }
+        [IgField]
+        public string NO2540XZ { get; set; }
+        [IgField]
+        public string DSHCXZ { get; set; }
+        [IgField]
+        public string DSCOXZ { get; set; }
+        [IgField]
+        public string LGMXZ { get; set; }
+        [IgField]
+        public string HSUXZ { get; set; }
+        [IgField]
+        public string StandardType { get; set; }
+
+        [IgnoreField]
+        public string StandardText { get; set; }
+        #endregion
     }
 }

@@ -71,6 +71,8 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDeleteAuthor = new EASkins.Ami_Button_2();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImgType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetectLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperator)).BeginInit();
@@ -534,7 +536,7 @@
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Image = null;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(807, 600);
+            this.btnSave.Location = new System.Drawing.Point(838, 601);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(112, 40);
             this.btnSave.TabIndex = 44;
@@ -578,17 +580,44 @@
             this.btnDeleteAuthor.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnDeleteAuthor.Click += new System.EventHandler(this.btnDeleteAuthor_Click);
             // 
+            // checkBox2
+            // 
+            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox2.AutoSize = true;
+            this.settingFiller.SetEntityField(this.checkBox2, new CI.UIComponents.Filler.CheckBoxEntry("UploadSign"));
+            this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.checkBox2.Location = new System.Drawing.Point(33, 610);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(125, 25);
+            this.checkBox2.TabIndex = 37;
+            this.checkBox2.Text = "上传签字照片";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.checkBox4.Location = new System.Drawing.Point(164, 610);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(141, 25);
+            this.checkBox4.TabIndex = 46;
+            this.checkBox4.Text = "默认外检全合格";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
             // ComprehensiveUploadSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CanMove = false;
             this.ClientSize = new System.Drawing.Size(979, 647);
+            this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.flatField1);
             this.Name = "ComprehensiveUploadSettingForm";
@@ -596,11 +625,13 @@
             this.Title = "综检上传配置";
             this.Controls.SetChildIndex(this.flatField1, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.checkBox2, 0);
             this.Controls.SetChildIndex(this.groupBox3, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
             this.Controls.SetChildIndex(this.groupBox4, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.groupBox5, 0);
+            this.Controls.SetChildIndex(this.checkBox4, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvImgType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetectLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperator)).EndInit();
@@ -615,6 +646,7 @@
             this.groupBox5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -663,5 +695,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLocalLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDetectLine;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

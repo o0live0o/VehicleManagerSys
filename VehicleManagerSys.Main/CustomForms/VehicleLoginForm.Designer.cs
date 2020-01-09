@@ -44,6 +44,8 @@
             this.txtRLLB = new CI.Controls.FlatField();
             this.txtHasDpf = new CI.Controls.FlatField();
             this.txtHasObd = new CI.Controls.FlatField();
+            this.txtJylb = new CI.Controls.FlatField();
+            this.txtStandardType = new CI.Controls.FlatField();
             this.txtPP = new CI.Controls.FlatField();
             this.txtCCRQ = new CI.Controls.FlatField();
             this.txtVIN = new CI.Controls.FlatField();
@@ -71,12 +73,12 @@
             this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.vehicleFiller = new CI.UIComponents.Filler.EntityFiller();
             this.flatField1 = new CI.Controls.FlatField();
-            this.btnClear = new EASkins.Ami_Button_2();
-            this.validator1 = new CI.UIComponents.Validate.Validator();
             this.flatField6 = new CI.Controls.FlatField();
             this.flatField8 = new CI.Controls.FlatField();
             this.flatField11 = new CI.Controls.FlatField();
-            this.txtJylb = new CI.Controls.FlatField();
+            this.btnClear = new EASkins.Ami_Button_2();
+            this.validator1 = new CI.UIComponents.Validate.Validator();
+            this.flatField12 = new CI.Controls.FlatField();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,6 +115,8 @@
             this.txtHPZL.Size = new System.Drawing.Size(237, 31);
             this.txtHPZL.Style = CI.Controls.FieldStyle.DropDown;
             this.txtHPZL.TabIndex = 2;
+            this.validator1.SetTaget(this.txtHPZL, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtHPYS
             // 
@@ -131,6 +135,8 @@
             this.txtHPYS.ReadOnly = true;
             this.txtHPYS.Size = new System.Drawing.Size(237, 31);
             this.txtHPYS.TabIndex = 1;
+            this.validator1.SetTaget(this.txtHPYS, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtSYXZ
             // 
@@ -149,6 +155,8 @@
             this.txtSYXZ.ReadOnly = true;
             this.txtSYXZ.Size = new System.Drawing.Size(237, 31);
             this.txtSYXZ.TabIndex = 5;
+            this.validator1.SetTaget(this.txtSYXZ, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtCLZL
             // 
@@ -167,6 +175,8 @@
             this.txtCLZL.Size = new System.Drawing.Size(237, 31);
             this.txtCLZL.Style = CI.Controls.FieldStyle.DropDown;
             this.txtCLZL.TabIndex = 4;
+            this.validator1.SetTaget(this.txtCLZL, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtHasScr
             // 
@@ -218,6 +228,8 @@
             this.txtJQFS.ReadOnly = true;
             this.txtJQFS.Size = new System.Drawing.Size(237, 31);
             this.txtJQFS.TabIndex = 15;
+            this.validator1.SetTaget(this.txtJQFS, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtBSQXS
             // 
@@ -253,6 +265,8 @@
             this.txtQDXS.Size = new System.Drawing.Size(237, 31);
             this.txtQDXS.Style = CI.Controls.FieldStyle.DropDown;
             this.txtQDXS.TabIndex = 19;
+            this.validator1.SetTaget(this.txtQDXS, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtRLLB
             // 
@@ -271,6 +285,8 @@
             this.txtRLLB.Size = new System.Drawing.Size(237, 31);
             this.txtRLLB.Style = CI.Controls.FieldStyle.DropDown;
             this.txtRLLB.TabIndex = 13;
+            this.validator1.SetTaget(this.txtRLLB, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtHasDpf
             // 
@@ -304,6 +320,42 @@
             this.txtHasObd.Size = new System.Drawing.Size(237, 31);
             this.txtHasObd.TabIndex = 25;
             // 
+            // txtJylb
+            // 
+            this.txtJylb.AlwaysShowDropDownStyle = true;
+            this.txtJylb.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtJylb.BackColor = System.Drawing.Color.Transparent;
+            this.txtJylb.Caption = "检验类别: ";
+            this.txtJylb.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtJylb.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("JYLB", "JYLBDH"));
+            this.txtJylb.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtJylb.Location = new System.Drawing.Point(47, 525);
+            this.txtJylb.Name = "txtJylb";
+            this.txtJylb.ReadOnly = true;
+            this.txtJylb.Size = new System.Drawing.Size(237, 31);
+            this.txtJylb.TabIndex = 33;
+            this.validator1.SetTaget(this.txtJylb, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
+            // 
+            // txtStandardType
+            // 
+            this.txtStandardType.AlwaysShowDropDownStyle = true;
+            this.txtStandardType.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtStandardType.BackColor = System.Drawing.Color.Transparent;
+            this.txtStandardType.Caption = "限值类型: ";
+            this.txtStandardType.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtStandardType.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtStandardType, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtStandardType, new CI.UIComponents.Filler.TextEntry("StandardText", "StandardType"));
+            this.txtStandardType.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtStandardType.Location = new System.Drawing.Point(323, 525);
+            this.txtStandardType.Name = "txtStandardType";
+            this.txtStandardType.ReadOnly = true;
+            this.txtStandardType.Size = new System.Drawing.Size(237, 31);
+            this.txtStandardType.TabIndex = 34;
+            // 
             // txtPP
             // 
             this.txtPP.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -317,6 +369,8 @@
             this.txtPP.Name = "txtPP";
             this.txtPP.Size = new System.Drawing.Size(237, 31);
             this.txtPP.TabIndex = 8;
+            this.validator1.SetTaget(this.txtPP, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtCCRQ
             // 
@@ -336,6 +390,8 @@
             this.txtCCRQ.Size = new System.Drawing.Size(237, 31);
             this.txtCCRQ.Style = CI.Controls.FieldStyle.DropDown;
             this.txtCCRQ.TabIndex = 7;
+            this.validator1.SetTaget(this.txtCCRQ, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtVIN
             // 
@@ -371,6 +427,8 @@
             this.txtCCDJRQ.Size = new System.Drawing.Size(237, 31);
             this.txtCCDJRQ.Style = CI.Controls.FieldStyle.DropDown;
             this.txtCCDJRQ.TabIndex = 6;
+            this.validator1.SetTaget(this.txtCCDJRQ, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField9
             // 
@@ -385,6 +443,8 @@
             this.flatField9.Name = "flatField9";
             this.flatField9.Size = new System.Drawing.Size(237, 31);
             this.flatField9.TabIndex = 18;
+            this.validator1.SetTaget(this.flatField9, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField7
             // 
@@ -399,6 +459,8 @@
             this.flatField7.Name = "flatField7";
             this.flatField7.Size = new System.Drawing.Size(237, 31);
             this.flatField7.TabIndex = 16;
+            this.validator1.SetTaget(this.flatField7, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField3
             // 
@@ -407,12 +469,14 @@
             this.flatField3.Caption = "发动机生产厂:";
             this.flatField3.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField3.CaptionWidth = 0;
-            this.vehicleFiller.SetEntityField(this.flatField3, new CI.UIComponents.Filler.TextEntry("FDJSCC", ""));
+            this.vehicleFiller.SetEntityField(this.flatField3, new CI.UIComponents.Filler.TextEntry("FDJZZCS", ""));
             this.flatField3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField3.Location = new System.Drawing.Point(323, 241);
             this.flatField3.Name = "flatField3";
             this.flatField3.Size = new System.Drawing.Size(237, 31);
             this.flatField3.TabIndex = 10;
+            this.validator1.SetTaget(this.flatField3, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtCYS
             // 
@@ -427,6 +491,8 @@
             this.txtCYS.Name = "txtCYS";
             this.txtCYS.Size = new System.Drawing.Size(237, 31);
             this.txtCYS.TabIndex = 12;
+            this.validator1.SetTaget(this.txtCYS, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtXH
             // 
@@ -442,6 +508,8 @@
             this.txtXH.Name = "txtXH";
             this.txtXH.Size = new System.Drawing.Size(237, 31);
             this.txtXH.TabIndex = 9;
+            this.validator1.SetTaget(this.txtXH, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtLJXSLC
             // 
@@ -456,6 +524,8 @@
             this.txtLJXSLC.Name = "txtLJXSLC";
             this.txtLJXSLC.Size = new System.Drawing.Size(237, 31);
             this.txtLJXSLC.TabIndex = 22;
+            this.validator1.SetTaget(this.txtLJXSLC, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtZZL
             // 
@@ -470,6 +540,8 @@
             this.txtZZL.Name = "txtZZL";
             this.txtZZL.Size = new System.Drawing.Size(237, 31);
             this.txtZZL.TabIndex = 20;
+            this.validator1.SetTaget(this.txtZZL, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtZBZL
             // 
@@ -484,6 +556,8 @@
             this.txtZBZL.Name = "txtZBZL";
             this.txtZBZL.Size = new System.Drawing.Size(237, 31);
             this.txtZBZL.TabIndex = 21;
+            this.validator1.SetTaget(this.txtZBZL, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField2
             // 
@@ -498,6 +572,8 @@
             this.flatField2.Name = "flatField2";
             this.flatField2.Size = new System.Drawing.Size(237, 31);
             this.flatField2.TabIndex = 23;
+            this.validator1.SetTaget(this.flatField2, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField10
             // 
@@ -512,6 +588,8 @@
             this.flatField10.Name = "flatField10";
             this.flatField10.Size = new System.Drawing.Size(237, 31);
             this.flatField10.TabIndex = 11;
+            this.validator1.SetTaget(this.flatField10, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField4
             // 
@@ -781,6 +859,54 @@
             this.flatField1.Size = new System.Drawing.Size(237, 31);
             this.flatField1.TabIndex = 24;
             // 
+            // flatField6
+            // 
+            this.flatField6.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flatField6.BackColor = System.Drawing.Color.Transparent;
+            this.flatField6.Caption = "车辆生产企业:";
+            this.flatField6.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField6.CaptionWidth = 0;
+            this.vehicleFiller.SetEntityField(this.flatField6, new CI.UIComponents.Filler.TextEntry("CLZZCS", ""));
+            this.flatField6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField6.Location = new System.Drawing.Point(47, 488);
+            this.flatField6.Name = "flatField6";
+            this.flatField6.Size = new System.Drawing.Size(237, 31);
+            this.flatField6.TabIndex = 30;
+            this.validator1.SetTaget(this.flatField6, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
+            // 
+            // flatField8
+            // 
+            this.flatField8.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flatField8.BackColor = System.Drawing.Color.Transparent;
+            this.flatField8.Caption = "所有人:   ";
+            this.flatField8.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField8.CaptionWidth = 0;
+            this.vehicleFiller.SetEntityField(this.flatField8, new CI.UIComponents.Filler.TextEntry("SYR", ""));
+            this.flatField8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField8.Location = new System.Drawing.Point(323, 488);
+            this.flatField8.Name = "flatField8";
+            this.flatField8.Size = new System.Drawing.Size(237, 31);
+            this.flatField8.TabIndex = 31;
+            this.validator1.SetTaget(this.flatField8, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
+            // 
+            // flatField11
+            // 
+            this.flatField11.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flatField11.BackColor = System.Drawing.Color.Transparent;
+            this.flatField11.Caption = "联系电话: ";
+            this.flatField11.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField11.CaptionWidth = 0;
+            this.vehicleFiller.SetEntityField(this.flatField11, new CI.UIComponents.Filler.TextEntry("LXDH", ""));
+            this.flatField11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField11.Location = new System.Drawing.Point(599, 488);
+            this.flatField11.Name = "flatField11";
+            this.flatField11.Size = new System.Drawing.Size(237, 31);
+            this.flatField11.TabIndex = 32;
+            this.validator1.SetTaget(this.flatField11, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
+            // 
             // btnClear
             // 
             this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -796,60 +922,21 @@
             this.btnClear.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // flatField6
+            // flatField12
             // 
-            this.flatField6.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.flatField6.BackColor = System.Drawing.Color.Transparent;
-            this.flatField6.Caption = "车辆生产企业:";
-            this.flatField6.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField6.CaptionWidth = 0;
-            this.flatField6.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField6.Location = new System.Drawing.Point(47, 488);
-            this.flatField6.Name = "flatField6";
-            this.flatField6.Size = new System.Drawing.Size(237, 31);
-            this.flatField6.TabIndex = 27;
-            // 
-            // flatField8
-            // 
-            this.flatField8.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.flatField8.BackColor = System.Drawing.Color.Transparent;
-            this.flatField8.Caption = "所有人:   ";
-            this.flatField8.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField8.CaptionWidth = 0;
-            this.flatField8.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField8.Location = new System.Drawing.Point(323, 488);
-            this.flatField8.Name = "flatField8";
-            this.flatField8.Size = new System.Drawing.Size(237, 31);
-            this.flatField8.TabIndex = 27;
-            // 
-            // flatField11
-            // 
-            this.flatField11.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.flatField11.BackColor = System.Drawing.Color.Transparent;
-            this.flatField11.Caption = "联系电话: ";
-            this.flatField11.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField11.CaptionWidth = 0;
-            this.flatField11.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField11.Location = new System.Drawing.Point(599, 488);
-            this.flatField11.Name = "flatField11";
-            this.flatField11.Size = new System.Drawing.Size(237, 31);
-            this.flatField11.TabIndex = 27;
-            // 
-            // txtJylb
-            // 
-            this.txtJylb.AlwaysShowDropDownStyle = true;
-            this.txtJylb.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtJylb.BackColor = System.Drawing.Color.Transparent;
-            this.txtJylb.Caption = "检验类别: ";
-            this.txtJylb.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtJylb.CaptionWidth = 0;
-            this.selectorFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
-            this.txtJylb.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtJylb.Location = new System.Drawing.Point(47, 525);
-            this.txtJylb.Name = "txtJylb";
-            this.txtJylb.ReadOnly = true;
-            this.txtJylb.Size = new System.Drawing.Size(237, 31);
-            this.txtJylb.TabIndex = 15;
+            this.flatField12.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flatField12.BackColor = System.Drawing.Color.Transparent;
+            this.flatField12.Caption = "发动机号: ";
+            this.flatField12.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField12.CaptionWidth = 0;
+            this.vehicleFiller.SetEntityField(this.flatField12, new CI.UIComponents.Filler.TextEntry("FDJH", ""));
+            this.flatField12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField12.Location = new System.Drawing.Point(599, 525);
+            this.flatField12.Name = "flatField12";
+            this.flatField12.Size = new System.Drawing.Size(237, 31);
+            this.flatField12.TabIndex = 73;
+            this.validator1.SetTaget(this.flatField12, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // VehicleLoginForm
             // 
@@ -857,6 +944,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1093, 614);
+            this.Controls.Add(this.flatField12);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dgvCheckItem);
             this.Controls.Add(this.btnSave);
@@ -866,6 +954,7 @@
             this.Controls.Add(this.combQueryAera);
             this.Controls.Add(this.ami_Separator1);
             this.Controls.Add(this.txtHasObd);
+            this.Controls.Add(this.txtStandardType);
             this.Controls.Add(this.txtHasDpf);
             this.Controls.Add(this.flatField10);
             this.Controls.Add(this.flatField2);
@@ -936,6 +1025,7 @@
             this.Controls.SetChildIndex(this.flatField2, 0);
             this.Controls.SetChildIndex(this.flatField10, 0);
             this.Controls.SetChildIndex(this.txtHasDpf, 0);
+            this.Controls.SetChildIndex(this.txtStandardType, 0);
             this.Controls.SetChildIndex(this.txtHasObd, 0);
             this.Controls.SetChildIndex(this.ami_Separator1, 0);
             this.Controls.SetChildIndex(this.combQueryAera, 0);
@@ -945,6 +1035,7 @@
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.dgvCheckItem, 0);
             this.Controls.SetChildIndex(this.btnClear, 0);
+            this.Controls.SetChildIndex(this.flatField12, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).EndInit();
             this.ResumeLayout(false);
 
@@ -999,5 +1090,7 @@
         private CI.Controls.FlatField flatField8;
         private CI.Controls.FlatField flatField11;
         private CI.Controls.FlatField txtJylb;
+        private CI.Controls.FlatField txtStandardType;
+        private CI.Controls.FlatField flatField12;
     }
 }

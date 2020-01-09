@@ -23,6 +23,8 @@ namespace VehicleManagerSys.Common.Dtos
             Company = "";
             PlateColor = "";
             Token = "";
+            UploadSign = false;
+            AutoLogin = false;
         }
 
         public string url { get; set; }
@@ -73,6 +75,8 @@ namespace VehicleManagerSys.Common.Dtos
 
         public int Y_ZJ { get; set; }
 
+        public bool UploadSign { get; set; }
+
         public ImgTypeEntity[] ImgList { get; set; }
 
         public DetectLineEntity[] Lines { get; set; }
@@ -80,6 +84,8 @@ namespace VehicleManagerSys.Common.Dtos
         public bool DetectLineC { get; set; }
 
         public string Token { get; set; }
+
+        public bool AutoLogin { get; set; }
     }
 }
 

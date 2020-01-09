@@ -32,6 +32,8 @@ namespace VehicleManagerSys.Common
 
         public static volatile object AppLocker = new object();
 
+
+
         static AppHelper()
         {
             if (!Directory.Exists(ConfigFolder))
@@ -83,12 +85,60 @@ namespace VehicleManagerSys.Common
                 {
                     Constants.Add(new Constant() { Code = "1", Name = "是", ConstantType = "SysYesOrNo"});
                     Constants.Add(new Constant() { Code = "0", Name = "否", ConstantType = "SysYesOrNo" });
+                    Constants.Add(new Constant() { Code = "1", Name = "限值a", ConstantType = "StandardType" });
+                    Constants.Add(new Constant() { Code = "2", Name = "限值b", ConstantType = "StandardType" });
+
+                    Constants.Add(new Constant() { Code = "0", Name = "蓝牌", ConstantType = "HPYS_Ex" });
+                    Constants.Add(new Constant() { Code = "1", Name = "黄牌", ConstantType = "HPYS_Ex" });
+                    Constants.Add(new Constant() { Code = "2", Name = "白牌", ConstantType = "HPYS_Ex" });
+                    Constants.Add(new Constant() { Code = "3", Name = "黑牌", ConstantType = "HPYS_Ex" });
+                    Constants.Add(new Constant() { Code = "4", Name = "绿牌", ConstantType = "HPYS_Ex" });
+                    Constants.Add(new Constant() { Code = "5", Name = "黄绿", ConstantType = "HPYS_Ex" });
                 }
             }
             catch
             {
                 throw;
             }
+        }
+
+        /// <summary>
+        /// 根据Code找到CONSTDEFINE表中对应的中文名
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static string GetDefineName(string type, string code)
+        {
+            if (!string.IsNullOrEmpty(code))
+            {
+                Constant localTypeDefine = Constants.Where(p => p.ConstantType.Equals(type) && p.Code.Equals(code)).FirstOrDefault();
+                if (localTypeDefine != null)
+                {
+                    return localTypeDefine.Name;
+                }
+            }
+            return "";
+        }
+
+
+        /// <summary>
+        /// 根据中文名找到CONSTDEFINE表中对应的Code
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static string GetDefineCode(string type, string name)
+        {
+            if (!string.IsNullOrEmpty(name))
+            {
+                Constant localTypeDefine = Constants.Where(p => p.ConstantType.Equals(type) && p.Name.Equals(name)).FirstOrDefault();
+                if (localTypeDefine != null)
+                {
+                    return localTypeDefine.Code;
+                }
+            }
+            return "";
         }
     }
 }

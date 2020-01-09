@@ -56,5 +56,28 @@ namespace VehicleManagerSys.Core
             return null;
 
         }
+
+        public static byte[] GetImageByPath(string strPath, int x, int y, bool bChange = false)
+        {
+            if (File.Exists(strPath))
+            {
+                FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                byte[] imgBytesIn = br.ReadBytes((int)fs.Length);
+                br.Close();
+                br.Dispose();
+                fs.Close();
+                fs.Dispose();
+                if (bChange)
+                {
+                    return Tools.ChageImage(imgBytesIn, x, y);
+                }
+                else
+                {
+                    return imgBytesIn;
+                }
+            }
+            return null;
+        }
     }
 }

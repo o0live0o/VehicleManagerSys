@@ -14,7 +14,7 @@ using VehicleManagerSys.Dtos.ComprehensiveDtos;
 
 namespace VehicleManagerSys.Main.Controls
 {
-    public partial class CaptureEloam : UserControl
+    public partial class CaptureElo : UserControl
     {
         private EloamGlobal global;
         private EloamVideo m_pVideo;
@@ -37,7 +37,7 @@ namespace VehicleManagerSys.Main.Controls
         //设备列表
         private List<EloamDevice> m_deviceList;
 
-        public CaptureEloam()
+        public CaptureElo()
         {
 
             InitializeComponent();

@@ -14,7 +14,7 @@ namespace VehicleManagerSys.Core.ExtendMethods
         {
             if (string.IsNullOrEmpty(s) || s == "-")
             {
-                s = "无";
+                s = "-";
             }
             return s;
         }
@@ -248,7 +248,7 @@ namespace VehicleManagerSys.Core.ExtendMethods
 
         public static string To_Net_ZJPD(this string s)
         {
-            string strResult = "N";
+            string strResult = "4";
 
             switch (s)
             {

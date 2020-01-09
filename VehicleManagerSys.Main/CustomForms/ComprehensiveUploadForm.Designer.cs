@@ -36,8 +36,8 @@
             this.btnUpload = new EASkins.Emi_Button_2();
             this.txtUploadLog = new System.Windows.Forms.RichTextBox();
             this.combAuthor = new EASkins.Ami_ComboBox();
-            this.ami_HeaderLabel3 = new EASkins.Ami_HeaderLabel();
-            this.captureEloam1 = new VehicleManagerSys.Main.CustomForms.CaptureEloam();
+            this.labOperator = new EASkins.Ami_HeaderLabel();
+            this.captureElo1 = new VehicleManagerSys.Main.Controls.CaptureElo();
             this.SuspendLayout();
             // 
             // ami_HeaderLabel1
@@ -94,7 +94,7 @@
             this.chkTrust.Checked = true;
             this.chkTrust.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTrust.Depth = 0;
-            this.chkTrust.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.chkTrust.Font = new System.Drawing.Font("Roboto", 10F);
             this.chkTrust.Location = new System.Drawing.Point(28, 204);
             this.chkTrust.Margin = new System.Windows.Forms.Padding(0);
             this.chkTrust.MouseLocation = new System.Drawing.Point(-1, -1);
@@ -149,27 +149,27 @@
             this.combAuthor.StartIndex = 0;
             this.combAuthor.TabIndex = 17;
             // 
-            // ami_HeaderLabel3
+            // labOperator
             // 
-            this.ami_HeaderLabel3.AutoSize = true;
-            this.ami_HeaderLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.ami_HeaderLabel3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.ami_HeaderLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(77)))));
-            this.ami_HeaderLabel3.Location = new System.Drawing.Point(24, 258);
-            this.ami_HeaderLabel3.Name = "ami_HeaderLabel3";
-            this.ami_HeaderLabel3.Size = new System.Drawing.Size(111, 20);
-            this.ami_HeaderLabel3.TabIndex = 18;
-            this.ami_HeaderLabel3.Text = "授权签字员：";
+            this.labOperator.AutoSize = true;
+            this.labOperator.BackColor = System.Drawing.Color.Transparent;
+            this.labOperator.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.labOperator.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(77)))));
+            this.labOperator.Location = new System.Drawing.Point(24, 258);
+            this.labOperator.Name = "labOperator";
+            this.labOperator.Size = new System.Drawing.Size(111, 20);
+            this.labOperator.TabIndex = 18;
+            this.labOperator.Text = "授权签字员：";
             // 
-            // captureEloam1
+            // captureElo1
             // 
-            this.captureEloam1.CapturePath = null;
-            this.captureEloam1.Location = new System.Drawing.Point(395, 59);
-            this.captureEloam1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.captureEloam1.Name = "captureEloam1";
-            this.captureEloam1.Size = new System.Drawing.Size(870, 747);
-            this.captureEloam1.TabIndex = 7;
-            this.captureEloam1.VehicleNo = null;
+            this.captureElo1.CapturePath = null;
+            this.captureElo1.Location = new System.Drawing.Point(369, 60);
+            this.captureElo1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.captureElo1.Name = "captureElo1";
+            this.captureElo1.Size = new System.Drawing.Size(886, 736);
+            this.captureElo1.TabIndex = 19;
+            this.captureElo1.VehicleNo = null;
             // 
             // ComprehensiveUploadForm
             // 
@@ -177,7 +177,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CanMove = false;
             this.ClientSize = new System.Drawing.Size(1265, 801);
-            this.Controls.Add(this.ami_HeaderLabel3);
+            this.Controls.Add(this.captureElo1);
+            this.Controls.Add(this.labOperator);
             this.Controls.Add(this.combAuthor);
             this.Controls.Add(this.txtUploadLog);
             this.Controls.Add(this.btnUpload);
@@ -186,7 +187,6 @@
             this.Controls.Add(this.labTestNo);
             this.Controls.Add(this.ami_HeaderLabel2);
             this.Controls.Add(this.ami_HeaderLabel1);
-            this.Controls.Add(this.captureEloam1);
             this.IsShowCloseBtn = true;
             this.MinimumSize = new System.Drawing.Size(261, 65);
             this.Name = "ComprehensiveUploadForm";
@@ -194,7 +194,6 @@
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ComprehensiveUploadForm_FormClosing);
             this.Shown += new System.EventHandler(this.ComprehensiveUploadForm_Shown);
-            this.Controls.SetChildIndex(this.captureEloam1, 0);
             this.Controls.SetChildIndex(this.ami_HeaderLabel1, 0);
             this.Controls.SetChildIndex(this.ami_HeaderLabel2, 0);
             this.Controls.SetChildIndex(this.labTestNo, 0);
@@ -203,15 +202,14 @@
             this.Controls.SetChildIndex(this.btnUpload, 0);
             this.Controls.SetChildIndex(this.txtUploadLog, 0);
             this.Controls.SetChildIndex(this.combAuthor, 0);
-            this.Controls.SetChildIndex(this.ami_HeaderLabel3, 0);
+            this.Controls.SetChildIndex(this.labOperator, 0);
+            this.Controls.SetChildIndex(this.captureElo1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private CaptureEloam captureEloam1;
         private EASkins.Ami_HeaderLabel ami_HeaderLabel1;
         private EASkins.Ami_HeaderLabel ami_HeaderLabel2;
         private EASkins.Ami_Label labTestNo;
@@ -220,6 +218,8 @@
         private EASkins.Emi_Button_2 btnUpload;
         private System.Windows.Forms.RichTextBox txtUploadLog;
         private EASkins.Ami_ComboBox combAuthor;
-        private EASkins.Ami_HeaderLabel ami_HeaderLabel3;
+        private EASkins.Ami_HeaderLabel labOperator;
+        private Controls.CaptureElo captureElo1;
+        //private Controls.CaptureElo captureElo1;
     }
 }
