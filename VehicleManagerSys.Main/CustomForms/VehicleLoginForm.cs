@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using VehicleManagerSys.Common;
 using VehicleManagerSys.Dtos;
 using VehicleManagerSys.Dtos.Emuns;
-using VehicleManagerSys.Dtos.IVS;
+using VehicleManagerSys.Entity.IVS;
 using VehicleManagerSys.Interface;
 using VehicleManagerSys.Main.CustomCache;
 using VehicleManagerSys.Main.Selectors;

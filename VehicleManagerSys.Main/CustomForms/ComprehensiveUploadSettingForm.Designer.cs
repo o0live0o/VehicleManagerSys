@@ -53,6 +53,7 @@
             this.txtImgPath = new CI.Controls.FlatField();
             this.dgvOperator = new System.Windows.Forms.DataGridView();
             this.colOperator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -71,7 +72,6 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDeleteAuthor = new EASkins.Ami_Button_2();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImgType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetectLine)).BeginInit();
@@ -350,6 +350,19 @@
             this.colOperator.HeaderText = "授权签字人";
             this.colOperator.Name = "colOperator";
             // 
+            // checkBox2
+            // 
+            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox2.AutoSize = true;
+            this.settingFiller.SetEntityField(this.checkBox2, new CI.UIComponents.Filler.CheckBoxEntry("UploadSign"));
+            this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.checkBox2.Location = new System.Drawing.Point(33, 610);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(125, 25);
+            this.checkBox2.TabIndex = 37;
+            this.checkBox2.Text = "上传签字照片";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -580,19 +593,6 @@
             this.btnDeleteAuthor.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnDeleteAuthor.Click += new System.EventHandler(this.btnDeleteAuthor_Click);
             // 
-            // checkBox2
-            // 
-            this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.checkBox2.AutoSize = true;
-            this.settingFiller.SetEntityField(this.checkBox2, new CI.UIComponents.Filler.CheckBoxEntry("UploadSign"));
-            this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.checkBox2.Location = new System.Drawing.Point(33, 610);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(125, 25);
-            this.checkBox2.TabIndex = 37;
-            this.checkBox2.Text = "上传签字照片";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
             // checkBox4
             // 
             this.checkBox4.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -604,6 +604,7 @@
             this.checkBox4.TabIndex = 46;
             this.checkBox4.Text = "默认外检全合格";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Visible = false;
             // 
             // ComprehensiveUploadSettingForm
             // 

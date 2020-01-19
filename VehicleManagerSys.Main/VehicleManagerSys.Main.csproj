@@ -158,6 +158,12 @@
     <Compile Include="CustomForms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomForms\ReportTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\ReportTestForm.Designer.cs">
+      <DependentUpon>ReportTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomForms\VehicleLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     <EmbeddedResource Include="CustomForms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomForms\ReportTestForm.resx">
+      <DependentUpon>ReportTestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\VehicleLoginForm.resx">
       <DependentUpon>VehicleLoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,6 +265,10 @@
     <ProjectReference Include="..\VehicleManagerSys.Dtos\VehicleManagerSys.Dtos.csproj">
       <Project>{83A50BEF-0583-40F7-AD95-A9543ABAD05B}</Project>
       <Name>VehicleManagerSys.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VehicleManagerSys.Entity\VehicleManagerSys.Entity.csproj">
+      <Project>{48d28aa6-129f-4d3a-af9a-fe4d37819169}</Project>
+      <Name>VehicleManagerSys.Entity</Name>
     </ProjectReference>
     <ProjectReference Include="..\VehicleManagerSys.Interface\VehicleManagerSys.Interface.csproj">
       <Project>{0A1EBD71-235F-45F1-A3FE-969D5B77C2DE}</Project>

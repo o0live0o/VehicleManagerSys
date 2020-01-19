@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Live0xUtils.DbUtils.SqlServer;
 using System.Collections;
-using VehicleManagerSys.Dtos.IVS;
 using VehicleManagerSys.Common;
 using HZH_Controls;
 using System.Threading;
+using VehicleManagerSys.Entity.IVS;
 
 namespace VehicleManagerSys.Main.CustomForms
 {

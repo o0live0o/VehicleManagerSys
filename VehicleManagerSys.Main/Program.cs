@@ -35,7 +35,8 @@ namespace VehicleManagerSys.Main
                         AppHelper.DbSetting.DataBaseName,
                         AppHelper.DbSetting.DataBaseUser,
                         AppHelper.DbSetting.DataBasePwd);
-
+                //Application.Run(new ReportTestForm());
+                //return;01065299445
                 LoginForm loginForm = new LoginForm();
                 DialogResult dialogResult = loginForm.ShowDialog();
                 if (dialogResult == DialogResult.OK)

@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Live0xUtils.DbUtils.SqlServer;
-using VehicleManagerSys.Dtos.IVS;
 using System.Collections;
 using CI.UIComponents.Helper;
 using VehicleManagerSys.Common;
 using HZH_Controls;
+using VehicleManagerSys.Entity.IVS;
 
 namespace VehicleManagerSys.Main.CustomForms
 {

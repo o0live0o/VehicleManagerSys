@@ -18,7 +18,7 @@ namespace VehicleManagerSys.Core
         private Font MixBoldFont { get; set; }
         public PdfHelper()
         {
-            BaseFont ArialFont = BaseFont.CreateFont("Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            BaseFont ArialFont = BaseFont.CreateFont("STZHONGS.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             BoldFont = new Font(ArialFont, 11, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
             NormalFont = new Font(ArialFont, 11, iTextSharp.text.Font.NORMAL, new BaseColor(System.Drawing.Color.Black));
         }
@@ -91,8 +91,8 @@ namespace VehicleManagerSys.Core
             Paragraph paragraph = new Paragraph();
             paragraph.IndentationLeft = 36f;
             paragraph.IndentationRight = 36f;
-
-            paragraph.Alignment = Element.ALIGN_LEFT;
+           
+            paragraph.Alignment = Element.ALIGN_CENTER;
             paragraph.Add(chunk);
             paragraph.SpacingAfter = 12f;
             return paragraph;
@@ -184,7 +184,7 @@ namespace VehicleManagerSys.Core
         {
             float width = doc.Right;
             PdfPTable table = CreateTable(1, width);
-            PdfPCell cell = CreateCell("", NormalFont, Element.ALIGN_LEFT, true, 1, false, new BaseColor(179, 179, 179, 100));
+            PdfPCell cell = CreateCell("", NormalFont, Element.ALIGN_LEFT, 1, 1,false, new BaseColor(179, 179, 179, 100));
             table.AddCell(cell);
             doc.Add(table);
         }
@@ -229,7 +229,7 @@ namespace VehicleManagerSys.Core
         /// <returns></returns>
         public PdfPCell CreateCell(string text, Font font, int align)
         {
-            return CreateCell(text, font, align, false, 1, false);
+            return CreateCell(text, font, align, 1, 1, false);
         }
         /// <summary>
         /// 
@@ -240,9 +240,9 @@ namespace VehicleManagerSys.Core
         /// <param name="title"></param>
         /// <param name="colspan"></param>
         /// <returns></returns>
-        public PdfPCell CreateCell(string text, Font font, int align, bool title, int colspan)
+        public PdfPCell CreateCell(string text, Font font, int align, int colspan, int rowspan)
         {
-            return CreateCell(text, font, align, title, colspan, false, new BaseColor(134, 195, 228, 100));
+            return CreateCell(text, font, align, colspan, rowspan, false, new BaseColor(134, 195, 228, 100));
         }
         /// <summary>
         /// 
@@ -254,9 +254,9 @@ namespace VehicleManagerSys.Core
         /// <param name="colspan"></param>
         /// <param name="noBorder"></param>
         /// <returns></returns>
-        public PdfPCell CreateCell(string text, Font font, int align, bool title, int colspan, bool noBorder)
+        public PdfPCell CreateCell(string text, Font font, int align, int colspan,int rowspan, bool noBorder)
         {
-            return CreateCell(text, font, align, title, colspan, noBorder, new BaseColor(134, 195, 228, 100));
+            return CreateCell(text, font, align, colspan, rowspan, noBorder, new BaseColor(134, 195, 228, 100));
         }
         /// <summary>
         /// 
@@ -269,7 +269,7 @@ namespace VehicleManagerSys.Core
         /// <param name="noBorder"></param>
         /// <param name="bgColor"></param>
         /// <returns></returns>
-        public PdfPCell CreateCell(string text, Font font, int align, bool title, int colspan, bool noBorder, BaseColor bgColor)
+        public PdfPCell CreateCell(string text, Font font, int align, int colspan,int rowspan, bool noBorder, BaseColor bgColor)
         {
             if (text == "")
                 text = " ";
@@ -280,8 +280,10 @@ namespace VehicleManagerSys.Core
             cell.HorizontalAlignment = align;
             cell.VerticalAlignment = Element.ALIGN_MIDDLE;
             cell.Colspan = colspan;
-            if (title)
-                cell.BackgroundColor = bgColor;
+            cell.MinimumHeight = 15f;
+            cell.Rowspan = rowspan;
+            //if (title)
+            //    cell.BackgroundColor = bgColor;
             if (noBorder)
                 cell.BorderWidth = 0;
             else
@@ -408,7 +410,7 @@ namespace VehicleManagerSys.Core
 
         public void AddLeftCell(PdfPTable table, string caption, int colspan, bool noBorder)
         {
-            PdfPCell cell = CreateCell(caption, NormalFont, Element.ALIGN_LEFT, false, colspan, noBorder);
+            PdfPCell cell = CreateCell(caption, NormalFont, Element.ALIGN_LEFT, colspan,1, noBorder);
             table.AddCell(cell);
         }
         public void AddLeftCell(PdfPTable table, string caption, BaseColor bgColor)
@@ -785,6 +787,16 @@ namespace VehicleManagerSys.Core
             Document doc = new Document(PageSize.A4, 36, 36, 36, 36);
             doc.SetMargins(marginLeft, marginRight, marginTop, marginBottom);
             return doc;
+        }
+
+        public void DrawLine(PdfContentByte canvas,float beginX,float beginY,float endX,float endY)
+        {
+            canvas.SaveState();
+            canvas.MoveTo(beginX, beginY);
+            canvas.LineTo(endX, endY);
+            canvas.Stroke();
+            canvas.RestoreState();
+
         }
 
 

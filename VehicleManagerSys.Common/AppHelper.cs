@@ -140,5 +140,14 @@ namespace VehicleManagerSys.Common
             }
             return "";
         }
+
+        public static void CreatePblicKey()
+        { 
+        }
+
+        public static void CreatePrivateKey()
+        { 
+        }
+       
     }
 }

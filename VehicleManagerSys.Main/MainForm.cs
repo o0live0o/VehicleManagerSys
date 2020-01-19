@@ -22,9 +22,6 @@ namespace VehicleManagerSys.Main
             AppHelper.MainForm = this;
             InitMenu();
             labUser.Text = AppHelper.UserInfo.UserName;
-            LogHelper.Trace("测试Trace");
-            LogHelper.Debug("测试Debug");
-            LogHelper.Error("测试Error");
         }
 
         /// <summary>
@@ -39,6 +36,7 @@ namespace VehicleManagerSys.Main
 
             TreeNode tnDataManager = new TreeNode("数据管理");
             tnDataManager.Nodes.Add("综检上传");
+           // tnDataManager.Nodes.Add("报告单");
             this.tvMenu.Nodes.Add(tnDataManager);
 
             TreeNode tnSetting = new TreeNode("系统管理");
@@ -61,6 +59,9 @@ namespace VehicleManagerSys.Main
                     break;
                 case "综检上传":
                     AddForm(new ComprehensiveTestForm());
+                    break;
+                case "报告单":
+                    AddForm(new ReportTestForm());
                     break;
                 case "综检上传配置":
                     AddForm(new ComprehensiveUploadSettingForm());

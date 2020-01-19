@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1BE23DD7-3D8C-4927-9EC6-C8DD0EDB3C93}</ProjectGuid>
+    <ProjectGuid>{48D28AA6-129F-4D3A-AF9A-FE4D37819169}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VehicleManagerSys.Core</RootNamespace>
-    <AssemblyName>VehicleManagerSys.Core</AssemblyName>
+    <RootNamespace>VehicleManagerSys.Entity</RootNamespace>
+    <AssemblyName>VehicleManagerSys.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,25 +32,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CI.UIComponents">
-      <HintPath>..\..\src\CI.UIComponents.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp">
-      <HintPath>..\..\src\itextsharp.dll</HintPath>
-    </Reference>
     <Reference Include="Live0xUtils">
       <HintPath>..\..\src\Live0xUtils.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\src\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="O2S.Components.PDFRender4NET">
-      <HintPath>..\..\src\O2S.Components.PDFRender4NET.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,29 +45,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtendMethods\ExtendMethod.cs" />
-    <Compile Include="Interfaces\IComprehensiveUploadService.cs" />
-    <Compile Include="PDFHelper.cs" />
+    <Compile Include="IVS\Class1.cs" />
+    <Compile Include="IVS\EMPLOYEE_USER.cs" />
+    <Compile Include="IVS\IgFieldAttribute.cs" />
+    <Compile Include="IVS\LOGIN_VEHICLE_INFO.cs" />
+    <Compile Include="IVS\RESULT_ASM.cs" />
+    <Compile Include="IVS\RESULT_BRAKE.cs" />
+    <Compile Include="IVS\RESULT_BRAKE_ZJ.cs" />
+    <Compile Include="IVS\RESULT_CHASISS_MANUAL.cs" />
+    <Compile Include="IVS\RESULT_CHASISS_MANUAL_ZJ.cs" />
+    <Compile Include="IVS\RESULT_DPCG.cs" />
+    <Compile Include="IVS\RESULT_HB_OBD.cs" />
+    <Compile Include="IVS\RESULT_IMAGE.cs" />
+    <Compile Include="IVS\RESULT_IMAGE_ZJ.cs" />
+    <Compile Include="IVS\RESULT_KERBMASS.cs" />
+    <Compile Include="IVS\RESULT_LAMP.cs" />
+    <Compile Include="IVS\RESULT_LAMP_ZJ.cs" />
+    <Compile Include="IVS\RESULT_LD.cs" />
+    <Compile Include="IVS\RESULT_NOSIZE.cs" />
+    <Compile Include="IVS\RESULT_OVERALLSIZE.cs" />
+    <Compile Include="IVS\RESULT_OVERALLSIZE_ZJ.cs" />
+    <Compile Include="IVS\RESULT_ROAD.cs" />
+    <Compile Include="IVS\RESULT_SDS.cs" />
+    <Compile Include="IVS\RESULT_SIDESLIP.cs" />
+    <Compile Include="IVS\RESULT_SIDESLIP_ZJ.cs" />
+    <Compile Include="IVS\RESULT_SPEAKER.cs" />
+    <Compile Include="IVS\RESULT_SPEED.cs" />
+    <Compile Include="IVS\RESULT_SPEED_ZJ.cs" />
+    <Compile Include="IVS\RESULT_SUSPENSION.cs" />
+    <Compile Include="IVS\RESULT_VEHICLE_INFO.cs" />
+    <Compile Include="IVS\RESULT_VMAS.cs" />
+    <Compile Include="IVS\RESULT_ZYJS.cs" />
+    <Compile Include="IVS\VEHICLE_DISPATCH.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\SafetyTechnologyReport.cs" />
-    <Compile Include="Services\ComprehensiveUploadService.cs" />
-    <Compile Include="Services\ComprehensiveUploadService_SC.cs" />
-    <Compile Include="Tools.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VehicleManagerSys.Common\VehicleManagerSys.Common.csproj">
-      <Project>{A6589B5F-E702-47DB-8380-D57F7F05F1EB}</Project>
-      <Name>VehicleManagerSys.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VehicleManagerSys.Dtos\VehicleManagerSys.Dtos.csproj">
-      <Project>{83A50BEF-0583-40F7-AD95-A9543ABAD05B}</Project>
-      <Name>VehicleManagerSys.Dtos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VehicleManagerSys.Entity\VehicleManagerSys.Entity.csproj">
-      <Project>{48d28aa6-129f-4d3a-af9a-fe4d37819169}</Project>
-      <Name>VehicleManagerSys.Entity</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

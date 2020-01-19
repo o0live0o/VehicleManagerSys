@@ -9,13 +9,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VehicleManagerSys.Common;
 using VehicleManagerSys.Core.ExtendMethods;
 using VehicleManagerSys.Dtos.ComprehensiveDtos;
-using VehicleManagerSys.Dtos.IVS;
+using VehicleManagerSys.Entity.IVS;
+
 
 namespace VehicleManagerSys.Core.Services
 {
@@ -154,7 +156,7 @@ namespace VehicleManagerSys.Core.Services
                             }
                         }
                     }));
-                    //侧滑
+                    //侧
                     taskList.Add(taskFactory.StartNew(() =>
                     {
                         string searchSql = string.Format(sql, "RESULT_SIDESLIP_ZJ", jclsh);
@@ -345,8 +347,12 @@ namespace VehicleManagerSys.Core.Services
                 ShareDetectInfo record = new ShareDetectInfo();
                 Dictionary<object, object> dic = new Dictionary<object, object>();
 
-                //IsNew = GetIsNewVehicle(m_RESULT_VEHICLE_INFO.CCDJRQ, m_RESULT_VEHICLE_INFO.GXRQ);
-
+                IsNew = GetIsNewVehicle(m_RESULT_VEHICLE_INFO.CCDJRQ, m_RESULT_VEHICLE_INFO.CLXXSJ);
+                if(!IsNew)
+                    logDelegate.BeginInvoke("在用车", Color.Blue, null, null);
+                else
+                    logDelegate.BeginInvoke("新车", Color.Blue, null, null);
+                logDelegate.BeginInvoke($"出厂日期: {m_RESULT_VEHICLE_INFO.CCDJRQ}检测日期:{m_RESULT_VEHICLE_INFO.CLXXSJ}", Color.Blue, null, null);
                 #region 基本信息
                 record.dsId = AppHelper.ComprehensiveSetting.CompanyId;
                 record.detectSn = m_RESULT_VEHICLE_INFO.ZJLSH;
@@ -425,7 +431,7 @@ namespace VehicleManagerSys.Core.Services
                     record.brakeTestRigCoefficient = detectLineEntity.Coefficient;
                 }
                 #region 动力性 Power
-                if (DetectItem.Contains("G0") && m_RESULT_DPCG != null)
+                if (!IsNew && DetectItem.Contains("G0") && m_RESULT_DPCG != null)
                 {
 
                     power powerEntity = new power();
@@ -442,19 +448,28 @@ namespace VehicleManagerSys.Core.Services
                         powerEntity.loadingForce = m_RESULT_DPCG.GK_JZL;
                         powerEntity.steadySpeed = m_RESULT_DPCG.GK_WDCS;
                         powerEntity.evaluate = m_RESULT_DPCG.GK_PD.To_Net_ZJPD();
-                       
+
                         powerEntity.count = DetectItemList.Count(p => p.Equals("G0")).ToString();
                         if (powerEntity.evaluate == "0")
                         {
                             powerEntity.evaluate = "1";
                         }
+                        record.power = powerEntity;
                     }
-                    record.power = powerEntity;
+                }
+                else
+                {
+                    if (DetectItem.Contains("G0"))
+                    {
+                        power powerEntity = new power();
+                        powerEntity.evaluate = "1";
+                        record.power = powerEntity;
+                    }
                 }
                 #endregion
 
                 #region 燃料经济性
-                if (DetectItem.Contains("G5") && m_RESULT_DPCG != null)
+                if (!IsNew && DetectItem.Contains("G5") && m_RESULT_DPCG != null)
                 {
                     fuelEconomy fuelEntity = new fuelEconomy();
                     if (string.IsNullOrEmpty(m_RESULT_DPCG.JCLSH) == false)
@@ -465,6 +480,15 @@ namespace VehicleManagerSys.Core.Services
                         fuelEntity.count = DetectItemList.Count(p => p.Equals("G5")).ToString();
                     }
                     record.fuelEconomy = fuelEntity;
+                }
+                else
+                {
+                    if (DetectItem.Contains("G5"))
+                    {
+                        fuelEconomy fuelEntity = new fuelEconomy();
+                        fuelEntity.evaluate = "0";
+                        record.fuelEconomy = fuelEntity;
+                    }
                 }
                 #endregion
 
@@ -1173,7 +1197,7 @@ namespace VehicleManagerSys.Core.Services
 
 
                 //等速百公里油耗 3.5吨以上
-                if (DetectItem.Contains("G5") && m_RESULT_DPCG != null)
+                if (!IsNew && DetectItem.Contains("G5") && m_RESULT_DPCG != null)
                 {
                     singleItem singleItem21 = new singleItem();
                     singleItem21.itemCode = "constant_speed_fuel_consumption_per_hundred_kilometers";
@@ -1618,7 +1642,7 @@ namespace VehicleManagerSys.Core.Services
                     LvItemList.Add("1");
                 }
                 //动力性(km/h)
-                if (m_RESULT_DPCG != null)
+                if (!IsNew && m_RESULT_DPCG != null)
                 {
                     if (DetectItem.Contains("G0"))
                     {
@@ -1636,22 +1660,47 @@ namespace VehicleManagerSys.Core.Services
                         {
                             logDelegate.BeginInvoke("动力性不合格", Color.Blue, null, null);
                         }
+
                         LvItemList.Add(perforItem1.evaluate);
                         listPerforItem.Add(perforItem1);
                     }
-
-                    if (DetectItem.Contains("G5"))
+                }
+                else
+                {
+                    if (DetectItem.Contains("G0"))
                     {
-                        //经济性(L/100km)
-                        performanceItem perforItem2 = new performanceItem();
-                        perforItem2.itemCode = "economy";
-                        perforItem2.detectData = m_RESULT_DPCG.YH_SCZ;
-                        perforItem2.standardValue = elt + m_RESULT_DPCG.YH_BZ;
-                        perforItem2.evaluate = m_RESULT_DPCG.YH_PD.To_Net_ZJPD();// ExtendMethod.GetDsYQMsg(dsYQ, "dtDPCG", "YH_PD");//vDPCG.YH_PD.To_Net_ZJPD();
-                        listPerforItem.Add(perforItem2);
-                        KeyItemList.Add(perforItem2.evaluate);
+                        performanceItem perforItem1 = new performanceItem();
+                        perforItem1.itemCode = "power";
+                        perforItem1.evaluate = "1";
+                        listPerforItem.Add(perforItem1);
                     }
                 }
+
+                if (!IsNew && DetectItem.Contains("G5"))
+                {
+                    //经济性(L/100km)
+                    performanceItem perforItem2 = new performanceItem();
+                    perforItem2.itemCode = "economy";
+
+                    perforItem2.detectData = m_RESULT_DPCG.YH_SCZ;
+                    perforItem2.standardValue = elt + m_RESULT_DPCG.YH_BZ;
+                    perforItem2.evaluate = m_RESULT_DPCG.YH_PD.To_Net_ZJPD();// ExtendMethod.GetDsYQMsg(dsYQ, "dtDPCG", "YH_PD");//vDPCG.YH_PD.To_Net_ZJPD();
+
+                    listPerforItem.Add(perforItem2);
+                    KeyItemList.Add(perforItem2.evaluate);
+
+                }
+                else
+                {
+                    if (DetectItem.Contains("G5"))
+                    {
+                        performanceItem perforItem2 = new performanceItem();
+                        perforItem2.itemCode = "economy";
+                        perforItem2.evaluate = "0";
+                        listPerforItem.Add(perforItem2);
+                    }
+                }
+            
 
                 if (!IsHC)
                 {
@@ -2424,8 +2473,10 @@ namespace VehicleManagerSys.Core.Services
                     //perforItem79.itemCode = "slip_second_wheel";
                 }
                 //}
-                listPerforItem.RemoveAll(x =>x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals(""));
-
+                if(!IsNew)
+                    listPerforItem.RemoveAll(x =>x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals(""));
+                else
+                    listPerforItem.RemoveAll(x => (!x.itemCode.Equals("economy") && !x.itemCode.Equals("power")) &&  (x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals("")));
                 #endregion
                 detectRpt.performanceItem = listPerforItem;
                 #endregion
@@ -2901,6 +2952,15 @@ namespace VehicleManagerSys.Core.Services
             return list;
         }
 
+         private bool GetIsNewVehicle(string strCCDJRQ, string strGXRQ)
+        {
+            if (!string.IsNullOrEmpty(strCCDJRQ) && !string.IsNullOrEmpty(strGXRQ))
+            {
+                return Convert.ToDateTime(strCCDJRQ).AddMonths(3) > Convert.ToDateTime(strGXRQ) ? true : false;
+            }
+
+            return false;
+        }
 
     }
 }

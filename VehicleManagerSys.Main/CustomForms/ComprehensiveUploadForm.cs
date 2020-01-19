@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VehicleManagerSys.Common;
 using VehicleManagerSys.Core.Services;
-using VehicleManagerSys.Dtos.IVS;
+using VehicleManagerSys.Entity.IVS;
 
 namespace VehicleManagerSys.Main.CustomForms
 {
