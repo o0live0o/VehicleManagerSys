@@ -43,9 +43,9 @@
             // 
             this.emi_Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.emi_Separator1.Location = new System.Drawing.Point(-1, 894);
+            this.emi_Separator1.Location = new System.Drawing.Point(-1, 887);
             this.emi_Separator1.Name = "emi_Separator1";
-            this.emi_Separator1.Size = new System.Drawing.Size(1501, 10);
+            this.emi_Separator1.Size = new System.Drawing.Size(1461, 10);
             this.emi_Separator1.TabIndex = 1;
             this.emi_Separator1.Text = "emi_Separator1";
             // 
@@ -58,7 +58,7 @@
             this.panControl.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panControl.Location = new System.Drawing.Point(225, 64);
             this.panControl.Name = "panControl";
-            this.panControl.Size = new System.Drawing.Size(1275, 831);
+            this.panControl.Size = new System.Drawing.Size(1235, 824);
             this.panControl.TabIndex = 2;
             // 
             // btnClose
@@ -102,7 +102,7 @@
             this.tvMenu.ShowLines = false;
             this.tvMenu.ShowPlusMinus = false;
             this.tvMenu.ShowRootLines = false;
-            this.tvMenu.Size = new System.Drawing.Size(225, 831);
+            this.tvMenu.Size = new System.Drawing.Size(225, 824);
             this.tvMenu.TabIndex = 0;
             this.tvMenu.TipFont = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.tvMenu.TipImage = ((System.Drawing.Image)(resources.GetObject("tvMenu.TipImage")));
@@ -142,7 +142,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1500, 927);
+            this.ClientSize = new System.Drawing.Size(1460, 920);
             this.Controls.Add(this.labUser);
             this.Controls.Add(this.ami_HeaderLabel1);
             this.Controls.Add(this.btnClose);

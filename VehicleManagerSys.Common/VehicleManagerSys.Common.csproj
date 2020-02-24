@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,14 +55,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHelper.cs" />
+    <Compile Include="AppTools.cs" />
+    <Compile Include="Attributes\AutoMapperAttribute.cs" />
+    <Compile Include="Attributes\DefineAttribute.cs" />
+    <Compile Include="Attributes\DigitsAttribute.cs" />
+    <Compile Include="Attributes\MapperAttribute.cs" />
     <Compile Include="Dtos\ComprehensiveInfo.cs" />
     <Compile Include="Dtos\Constant.cs" />
+    <Compile Include="Dtos\EnvironmentNetSetting.cs" />
+    <Compile Include="Dtos\MapRegular.cs" />
+    <Compile Include="Dtos\NetTypeDefine.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dtos\DbInfo.cs" />
     <Compile Include="Dtos\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="constant.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

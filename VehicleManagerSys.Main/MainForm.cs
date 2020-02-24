@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VehicleManagerSys.Common;
 using VehicleManagerSys.Main.CustomForms;
+using VehicleManagerSys.Main.UserControls;
 
 namespace VehicleManagerSys.Main
 {
@@ -32,6 +33,8 @@ namespace VehicleManagerSys.Main
             ControlHelper.FreezeControl(this, true);
             TreeNode tnLogin = new TreeNode("车辆报检");
             tnLogin.Nodes.Add("环保报检");
+            tnLogin.Nodes.Add("环保报检(云网)");
+            tnLogin.Nodes.Add("环保复检(云网)");
             this.tvMenu.Nodes.Add(tnLogin);
 
             TreeNode tnDataManager = new TreeNode("数据管理");
@@ -41,7 +44,9 @@ namespace VehicleManagerSys.Main
 
             TreeNode tnSetting = new TreeNode("系统管理");
             tnSetting.Nodes.Add("系统设置");
-            tnSetting.Nodes.Add("综检上传配置");
+            tnSetting.Nodes.Add("综检联网配置");
+            tnSetting.Nodes.Add("环保联网配置");
+            tnSetting.Nodes.Add("字段转换配置");
             this.tvMenu.Nodes.Add(tnSetting);
         }
 
@@ -63,11 +68,20 @@ namespace VehicleManagerSys.Main
                 case "报告单":
                     AddForm(new ReportTestForm());
                     break;
-                case "综检上传配置":
+                case "综检联网配置":
                     AddForm(new ComprehensiveUploadSettingForm());
                     break;
                 case "系统设置":
                     AddForm(new DbSettingForm());
+                    break;
+                case "环保报检(云网)":
+                    AddControl(new LoginControl());
+                    break;
+                case "环保复检(云网)":
+                    AddControl(new LoginControl());
+                    break;
+                case "环保联网配置":
+                    AddForm(new NetSetting_YW_Form());
                     break;
             }
         }
@@ -82,6 +96,16 @@ namespace VehicleManagerSys.Main
             form.BringToFront();
             form.Show();
         }
+
+        public void AddControl(Control control)
+        {
+            control.Dock = DockStyle.Fill;
+            control.AllowDrop = false;
+            panControl.Controls.Add(control);
+            control.BringToFront();
+            control.Show();
+        }
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {

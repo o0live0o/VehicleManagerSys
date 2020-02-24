@@ -48,6 +48,7 @@ namespace VehicleManagerSys.Main
                         {
                             frmLoading.CurrentMsg = new KeyValuePair<int, string>(10, "正在加载常量...");
                             AppHelper.GetInstance().LoadContsatnt();
+                            AppHelper.GetInstance().InitNetDefine();
                             frmLoading.CurrentMsg = new KeyValuePair<int, string>(100, "加载完成！");
                         }
                         catch (Exception ex)

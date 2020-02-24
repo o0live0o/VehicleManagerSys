@@ -15,19 +15,24 @@ namespace VehicleManagerSys.Common
         private static AppHelper _appHelper = null;
         //配置文件夹路径
         public static string ConfigFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs");  
+        //字段转换文件夹路径
+        public static string AutoMapperConfigs = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AutoMapperConfig");
         //数据库配置文件
         public static string DbConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "DbConfig.json"); 
-        //综检上传信息配置文件
+        //综检联网信息配置文件
         public static string ComprehensiveConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "ComprehensiveConfig.json");
+        //环保联网信息配置文件
+        public static string EnvironmentConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "EnvironmentConfig.json");
         //用户信息
         public static UserInfo UserInfo = new UserInfo() { UserName = "(未登录)" };
         //数据库常量
         public static List<Constant> Constants = new List<Constant>();
-
+        
         public static DbInfo DbSetting = null;
         public static ComprehensiveInfo ComprehensiveSetting = null;
+        public static EnvironmentNetSetting EnvironmentNetSetting = null;
 
-
+        public static List<NetTypeDefine> NetDefine = new List<NetTypeDefine>();
         public static Form MainForm = null;
 
         public static volatile object AppLocker = new object();
@@ -39,12 +44,18 @@ namespace VehicleManagerSys.Common
             if (!Directory.Exists(ConfigFolder))
                 Directory.CreateDirectory(ConfigFolder);
 
+            if (!Directory.Exists(AutoMapperConfigs))
+                Directory.CreateDirectory(AutoMapperConfigs);
+
             if (!File.Exists(DbConfigFile))
                 File.WriteAllText(DbConfigFile, JsonConvert.SerializeObject(new DbInfo(), Formatting.Indented));
 
             if (!File.Exists(ComprehensiveConfigFile))
                 File.WriteAllText(ComprehensiveConfigFile, JsonConvert.SerializeObject(new ComprehensiveInfo(), Formatting.Indented));
 
+            if (!File.Exists(EnvironmentConfigFile))
+                File.WriteAllText(EnvironmentConfigFile, JsonConvert.SerializeObject(new EnvironmentNetSetting(), Formatting.Indented));
+            
             _appHelper = new AppHelper();
         }
 
@@ -64,6 +75,7 @@ namespace VehicleManagerSys.Common
             {
                 DbSetting = JsonConvert.DeserializeObject<DbInfo>(File.ReadAllText(DbConfigFile));
                 ComprehensiveSetting = JsonConvert.DeserializeObject<ComprehensiveInfo>(File.ReadAllText(ComprehensiveConfigFile));
+                EnvironmentNetSetting = JsonConvert.DeserializeObject<EnvironmentNetSetting>(File.ReadAllText(EnvironmentConfigFile));
                 if (!string.IsNullOrEmpty(ComprehensiveSetting.ImagePath) && !Directory.Exists(ComprehensiveSetting.ImagePath))
                 {
                     Directory.CreateDirectory(ComprehensiveSetting.ImagePath);
@@ -75,6 +87,30 @@ namespace VehicleManagerSys.Common
             }
         }
 
+        public bool InitNetDefine()
+        {
+            bool succ = true;
+            try
+            {
+                NetDefine = Live0xUtils.DbUtils.SqlServer.MssqlHelper.GetInstance().QueryList<NetTypeDefine>("SELECT * FROM NetTypeDefine", null).ToList();
+     
+                if (NetDefine == null || NetDefine.Count == 0)
+                {
+                    succ = false;
+                    File.WriteAllText(AppHelper.ConfigFolder + "DefineType.txt", "读取定义信息失败,不能进行正常检测");
+                }
+                File.WriteAllText(AppHelper.ConfigFolder + "DefineType.txt", JsonConvert.SerializeObject(new List<object>() { NetDefine }, Formatting.Indented));
+            }
+            catch (Exception ex)
+            {
+                succ = false;
+                //File.WriteAllText("初始化定义信息失败.txt", ex.Message);
+                //MessageBox.Show("读取定义信息失败：" + ex.Message);
+                //File.WriteAllText(AppHelper.ConfigFolder + "DefineType.txt", "读取定义信息失败：" + ex.Message);
+            }
+            return succ;
+        }
+
         public  void  LoadContsatnt()
         {
             try
@@ -83,17 +119,19 @@ namespace VehicleManagerSys.Common
                 Constants = Live0xUtils.DbUtils.SqlServer.MssqlHelper.GetInstance().QueryList<Constant>(sql,null).ToList();
                 if (Constants != null)
                 {
-                    Constants.Add(new Constant() { Code = "1", Name = "是", ConstantType = "SysYesOrNo"});
-                    Constants.Add(new Constant() { Code = "0", Name = "否", ConstantType = "SysYesOrNo" });
-                    Constants.Add(new Constant() { Code = "1", Name = "限值a", ConstantType = "StandardType" });
-                    Constants.Add(new Constant() { Code = "2", Name = "限值b", ConstantType = "StandardType" });
-
                     Constants.Add(new Constant() { Code = "0", Name = "蓝牌", ConstantType = "HPYS_Ex" });
                     Constants.Add(new Constant() { Code = "1", Name = "黄牌", ConstantType = "HPYS_Ex" });
                     Constants.Add(new Constant() { Code = "2", Name = "白牌", ConstantType = "HPYS_Ex" });
                     Constants.Add(new Constant() { Code = "3", Name = "黑牌", ConstantType = "HPYS_Ex" });
                     Constants.Add(new Constant() { Code = "4", Name = "绿牌", ConstantType = "HPYS_Ex" });
                     Constants.Add(new Constant() { Code = "5", Name = "黄绿", ConstantType = "HPYS_Ex" });
+                }
+
+                if (File.Exists("constant.json"))
+                {
+                    string constantJson = File.ReadAllText("constant.json",Encoding.GetEncoding("GB2312"));
+                    List<Constant> fileConstants = JsonConvert.DeserializeObject<List<Constant>>(constantJson);
+                    Constants.AddRange(fileConstants.ToArray());
                 }
             }
             catch
@@ -139,6 +177,33 @@ namespace VehicleManagerSys.Common
                 }
             }
             return "";
+        }
+
+        public static string  GetFileContent(string filePath)
+        {
+            if (File.Exists(filePath))
+                return File.ReadAllText(filePath);
+            throw new Exception("文件不存在");
+        }
+
+        public static string GetNetType(string type, string local)
+        {
+            NetTypeDefine define = NetDefine.Where(p => p.DefineType.Equals(type) && p.LocalCode.Equals(local.Replace(",", "").Replace("，", ""))).FirstOrDefault();
+            if (define != null)
+            {
+                return define.NetCode;
+            }
+            return local;
+        }
+
+        public static string GetLocalType(string type, string net)
+        {
+            NetTypeDefine define = NetDefine.Where(p => p.DefineType.Equals(type) && p.NetCode.Equals(net)).FirstOrDefault();
+            if (define != null)
+            {
+                return define.LocalCode;
+            }
+            return net;
         }
 
         public static void CreatePblicKey()

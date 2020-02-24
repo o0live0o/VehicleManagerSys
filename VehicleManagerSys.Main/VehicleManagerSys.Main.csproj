@@ -35,6 +35,9 @@
     <ApplicationIcon>acar.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="AxInterop.eloamComLib">
       <HintPath>..\..\src\AxInterop.eloamComLib.dll</HintPath>
     </Reference>
@@ -86,6 +89,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -110,11 +116,23 @@
     <Compile Include="CustomForms\AreaCodeForm.Designer.cs">
       <DependentUpon>AreaCodeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomForms\AutoMapConfigForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\AutoMapConfigForm.Designer.cs">
+      <DependentUpon>AutoMapConfigForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomForms\CaptureEloam.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomForms\CaptureEloam.Designer.cs">
       <DependentUpon>CaptureEloam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForms\YunWangReCheckForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\YunWangReCheckForm.Designer.cs">
+      <DependentUpon>YunWangReCheckForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomForms\ComprehensiveTestForm.cs">
       <SubType>Form</SubType>
@@ -133,6 +151,12 @@
     </Compile>
     <Compile Include="CustomForms\ComprehensiveUploadSettingForm.Designer.cs">
       <DependentUpon>ComprehensiveUploadSettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForms\NetSetting_YW_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\NetSetting_YW_Form.Designer.cs">
+      <DependentUpon>NetSetting_YW_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomForms\DbSettingForm.cs">
       <SubType>Form</SubType>
@@ -176,6 +200,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Profiles\VehicleProfile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\ConstListControl.cs">
@@ -189,14 +214,26 @@
     </Compile>
     <Compile Include="Selectors\ConstViewer.cs" />
     <Compile Include="SimpleFactory.cs" />
+    <Compile Include="UserControls\LoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\LoginControl.Designer.cs">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Controls\CaptureElo.resx">
       <DependentUpon>CaptureElo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\AreaCodeForm.resx">
       <DependentUpon>AreaCodeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomForms\AutoMapConfigForm.resx">
+      <DependentUpon>AutoMapConfigForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\CaptureEloam.resx">
       <DependentUpon>CaptureEloam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomForms\YunWangReCheckForm.resx">
+      <DependentUpon>YunWangReCheckForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\ComprehensiveTestForm.resx">
       <DependentUpon>ComprehensiveTestForm.cs</DependentUpon>
@@ -206,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\ComprehensiveUploadSettingForm.resx">
       <DependentUpon>ComprehensiveUploadSettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomForms\NetSetting_YW_Form.resx">
+      <DependentUpon>NetSetting_YW_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\DbSettingForm.resx">
       <DependentUpon>DbSettingForm.cs</DependentUpon>
@@ -240,6 +280,10 @@
     <EmbeddedResource Include="Selectors\ConstListControl.resx">
       <DependentUpon>ConstListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\LoginControl.resx">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

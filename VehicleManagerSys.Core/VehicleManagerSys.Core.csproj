@@ -60,11 +60,13 @@
   <ItemGroup>
     <Compile Include="ExtendMethods\ExtendMethod.cs" />
     <Compile Include="Interfaces\IComprehensiveUploadService.cs" />
+    <Compile Include="Interfaces\IVehicleBusiness.cs" />
     <Compile Include="PDFHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\SafetyTechnologyReport.cs" />
     <Compile Include="Services\ComprehensiveUploadService.cs" />
     <Compile Include="Services\ComprehensiveUploadService_SC.cs" />
+    <Compile Include="Services\VehicleBusinessYW.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -38,9 +38,9 @@ namespace VehicleManagerSys.Main.CustomForms
                             Match match = regex.Match(str);
                             dic.Add(match.Groups["Code"].Value, match.Groups["Name"].Value);
                         }
-                        catch (Exception ex)
+                        catch 
                         {
-
+                            throw;
                         }
                     }
                     dgvCode.DataSource = (from v in dic select new { Code = v.Key, Name = v.Value }).ToArray();

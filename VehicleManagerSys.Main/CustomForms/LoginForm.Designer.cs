@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.panel3 = new System.Windows.Forms.Panel();
             this.labDbSetting = new EASkins.Ami_LinkLabel();
             this.labWarn = new System.Windows.Forms.Label();
@@ -257,7 +258,9 @@
             this.ClientSize = new System.Drawing.Size(414, 329);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginForm";
+            this.ShowInTaskbar = true;
             this.Text = "LoginForm";
             this.Title = "用户登录";
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);

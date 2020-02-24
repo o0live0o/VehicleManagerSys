@@ -1,0 +1,187 @@
+[
+  {
+    "Code": "0",
+    "Name": "国产",
+    "ConstantType": "CountryType"
+  },
+  {
+    "Code": "1",
+    "Name": "进口",
+    "ConstantType": "CountryType"
+  },
+  {
+    "Code": "2",
+    "Name": "合资",
+    "ConstantType": "CountryType"
+  },
+  {
+    "Code": "1",
+    "Name": "是",
+    "ConstantType": "SysYesOrNo"
+  },
+  {
+    "Code": "0",
+    "Name": "否",
+    "ConstantType": "SysYesOrNo"
+  },
+  {
+    "Code": "1",
+    "Name": "限值a",
+    "ConstantType": "StandardType"
+  },
+  {
+    "Code": "2",
+    "Name": "限值b",
+    "ConstantType": "StandardType"
+  },
+  {
+    "Code": "1",
+    "Name": "黄标",
+    "ConstantType": "SignType"
+  },
+  {
+    "Code": "2",
+    "Name": "国I绿标",
+    "ConstantType": "SignType"
+  },
+  {
+    "Code": "3",
+    "Name": "国II绿标",
+    "ConstantType": "SignType"
+  },
+  {
+    "Code": "4",
+    "Name": "国III绿标",
+    "ConstantType": "SignType"
+  },
+  {
+    "Code": "5",
+    "Name": "国IV绿标",
+    "ConstantType": "SignType"
+  },
+  {
+    "Code": "6",
+    "Name": "国V绿标",
+    "ConstantType": "SignType"
+  },
+  {
+    "Code": "A",
+    "Name": "正常",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "B",
+    "Name": "转出",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "C",
+    "Name": "被盗抢",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "D",
+    "Name": "停驶",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "E",
+    "Name": "注销",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "G",
+    "Name": "违法未处理",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "H",
+    "Name": "海关监管",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "I",
+    "Name": "事故未处理",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "J",
+    "Name": "嫌疑车",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "K",
+    "Name": "查封",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "L",
+    "Name": "暂扣",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "M",
+    "Name": "强制注销",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "N",
+    "Name": "事故逃逸",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "O",
+    "Name": "锁定",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "P",
+    "Name": "达到报废标准公告牌证作废",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "Q",
+    "Name": "逾期未检验",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "Z",
+    "Name": "其他",
+    "ConstantType": "VehicleStatus"
+  },
+  {
+    "Code": "0",
+    "Name": "国0",
+    "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "1",
+    "Name": "国Ⅰ",
+    "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "2",
+    "Name": "国Ⅱ",
+    "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "3",
+    "Name": "国Ⅲ",
+    "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "4",
+    "Name": "国Ⅳ",
+    "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "5",
+    "Name": "国Ⅴ",
+    "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "6",
+    "Name": "国VI",
+    "ConstantType": "EmissionStandard"
+  }
+]
