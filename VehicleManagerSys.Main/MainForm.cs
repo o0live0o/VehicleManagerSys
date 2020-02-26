@@ -78,10 +78,13 @@ namespace VehicleManagerSys.Main
                     AddControl(new LoginControl());
                     break;
                 case "环保复检(云网)":
-                    AddControl(new LoginControl());
+                    AddForm(new YunWangReCheckForm());
                     break;
                 case "环保联网配置":
                     AddForm(new NetSetting_YW_Form());
+                    break;
+                case "字段转换配置":
+                    AddForm(new ValChangeForm());
                     break;
             }
         }

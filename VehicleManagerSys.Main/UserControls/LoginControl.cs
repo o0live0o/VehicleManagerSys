@@ -160,6 +160,7 @@ namespace VehicleManagerSys.Main.UserControls
         /// <returns></returns>
         private bool Send()
         {
+            if (!validator1.Validate()) return false;
             bool succ = false;
             string[] carIgnoreArr = null;
             try
@@ -174,16 +175,19 @@ namespace VehicleManagerSys.Main.UserControls
                     loginFiller.FillEntity(vehicle_dispatch);
                     vehicle_dispatch.PFLSH = message.NetTestNo;
                     vehicle_dispatch.JCCS = message.Times;
-
+                    vehicle_dispatch.FJXM = "";
+                    vehicle_dispatch.YJXM = "";
+                    vehicle_dispatch.JCZT_STATUS = "0";
                     //更新联网流水号
                     string sql = $"UPDATE VehicleInfo SET TestNoForNet = '{message.NetTestNo}' WHERE  PlateNo = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
                     m_mssqlHelper.ExcuteNonQuery(sql,null);
                     sql = $"UPDATE VehicleInfo SET PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
                     m_mssqlHelper.ExcuteNonQuery(sql, null);
 
-                    carIgnoreArr = (from p in vehicle_dispatch.GetType().GetProperties()
-                                    where p.GetValue(vehicle_dispatch, null) == null || string.IsNullOrEmpty(p.GetValue(vehicle_dispatch, null).ToString())
-                                    select p.Name).ToArray();
+                    //carIgnoreArr = (from p in vehicle_dispatch.GetType().GetProperties()
+                    //                where p.GetValue(vehicle_dispatch, null) == null || string.IsNullOrEmpty(p.GetValue(vehicle_dispatch, null).ToString())
+                    //                select p.Name).ToArray();
+                    carIgnoreArr = new string[] { "ID", "JCZL", "LTGG", "ZJLWZT", "SFJMPZ", "OBDJYY", "WQYCY", "OBDCommCL", "OBDCommCX", "Standard", "VehicleKind", "IsEFI", "IsAsm", "OBDOutlookID", "OutlookID", "GGMINNMD", "GGMAXNMD" };
                     succ = m_mssqlHelper.InsertOrUpdate(vehicle_dispatch, null, new string[] { "HPHM", "VIN" }, carIgnoreArr);
 
                     if (succ)
@@ -191,7 +195,7 @@ namespace VehicleManagerSys.Main.UserControls
                             + "检测次数:" + message.Times + Environment.NewLine 
                             + "联网流水号:" + message.NetTestNo, ContentAlignment.MiddleCenter, 1000);
                     else
-                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！", ContentAlignment.MiddleCenter, 1000);
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！"+message.Msg, ContentAlignment.MiddleCenter, 1000);
                 }
             }
             catch (Exception ex)
@@ -207,6 +211,8 @@ namespace VehicleManagerSys.Main.UserControls
         /// <returns></returns>
         private bool Save()
         {
+            if (!validator1.Validate()) return false;
+
             bool succ = false;
             string[] carIgnoreArr = null;
             try
@@ -261,6 +267,11 @@ namespace VehicleManagerSys.Main.UserControls
         {
             Save();
             Send();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

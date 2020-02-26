@@ -33,9 +33,9 @@ namespace VehicleManagerSys.Core.Services
                 AppTools.FillEntiyByAttr(info, hwdl);
                 //TODO 特殊转换
                 Hashtable hashtable = new Hashtable();
-                hashtable.Add("jkid","");
-                hashtable.Add("jkxlh","");
-                hashtable.Add("writejson","");
+                hashtable.Add("jkid","HWDL");
+                hashtable.Add("jkxlh",AppHelper.EnvironmentNetSetting.SerialNumber);
+                hashtable.Add("writejson", JsonConvert.SerializeObject(hwdl)) ;
                 Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
                 string s = httpRequest.HttpPost("url", JsonConvert.SerializeObject(hashtable));
                 hashtable.Clear();
@@ -46,7 +46,7 @@ namespace VehicleManagerSys.Core.Services
                 if (message.Succ)
                 {
                     Hashtable data = new Hashtable();
-                    data = JsonConvert.DeserializeObject<Hashtable>(hashtable["JYLSH"].ToString());
+                    data = JsonConvert.DeserializeObject<Hashtable>(hashtable["data"].ToString());
                     message.NetTestNo = data["JYLSH"].ToString();
                     message.Times = data["JYCS"].ToString();
                 }

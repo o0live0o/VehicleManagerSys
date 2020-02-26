@@ -102,6 +102,7 @@
             this.flatField30 = new CI.Controls.FlatField();
             this.selectorFiller = new CI.UIComponents.Filler.EntityFiller();
             this.btnSend = new EASkins.Emi_Button_2();
+            this.validator1 = new CI.UIComponents.Validate.Validator();
             this.SuspendLayout();
             // 
             // flatField12
@@ -166,6 +167,7 @@
             this.btnSearch.TabIndex = 113;
             this.btnSearch.Text = "查  询";
             this.btnSearch.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // combQueryPlateType
             // 
@@ -311,9 +313,9 @@
             this.txtHasObd.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasObd.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtHasObd, new CI.UIComponents.Filler.TextEntry("", "IsOBD"));
+            this.selectorFiller.SetEntityField(this.txtHasObd, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtHasObd, new CI.UIComponents.Filler.TextEntry("HasOBDTxt", "HasOBD"));
             this.netFiller.SetEntityField(this.txtHasObd, new CI.UIComponents.Filler.TextEntry("", "SFYOBD"));
-            this.selectorFiller.SetEntityField(this.txtHasObd, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtHasObd.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasObd.Location = new System.Drawing.Point(618, 463);
             this.txtHasObd.Name = "txtHasObd";
@@ -328,9 +330,9 @@
             this.txtStandardType.Caption = "限值类型: ";
             this.txtStandardType.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtStandardType.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtStandardType, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtStandardType, new CI.UIComponents.Filler.TextEntry("LimitTypeText", "LimitType"));
             this.netFiller.SetEntityField(this.txtStandardType, new CI.UIComponents.Filler.TextEntry("", "XZFL"));
-            this.selectorFiller.SetEntityField(this.txtStandardType, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtStandardType.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtStandardType.Location = new System.Drawing.Point(869, 500);
             this.txtStandardType.Name = "txtStandardType";
@@ -347,8 +349,8 @@
             this.txtHasDpf.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasDpf.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("IsDPF", "IsDPFDH"));
-            this.netFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("", "SFYDPF"));
             this.selectorFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.netFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("", "SFYDPF"));
             this.txtHasDpf.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasDpf.Location = new System.Drawing.Point(618, 426);
             this.txtHasDpf.Name = "txtHasDpf";
@@ -502,8 +504,8 @@
             this.txtHasScr.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasScr.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtHasScr, new CI.UIComponents.Filler.TextEntry("IsSCR", "IsSCRDH"));
-            this.vehicleFiller.SetEntityField(this.txtHasScr, new CI.UIComponents.Filler.TextEntry("HasSCRTxt", "HasSCR"));
             this.selectorFiller.SetEntityField(this.txtHasScr, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtHasScr, new CI.UIComponents.Filler.TextEntry("HasSCRTxt", "HasSCR"));
             this.txtHasScr.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasScr.Location = new System.Drawing.Point(64, 463);
             this.txtHasScr.Name = "txtHasScr";
@@ -535,9 +537,9 @@
             this.txtGYFS.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtGYFS.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtGYFS, new CI.UIComponents.Filler.TextEntry("GYFS", "GYFSDH"));
+            this.selectorFiller.SetEntityField(this.txtGYFS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtGYFS, new CI.UIComponents.Filler.TextEntry("FuelSupplyTypeTxt", "FuelSupplyType"));
             this.netFiller.SetEntityField(this.txtGYFS, new CI.UIComponents.Filler.TextEntry("", "GYFSDM"));
-            this.selectorFiller.SetEntityField(this.txtGYFS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtGYFS.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtGYFS.Location = new System.Drawing.Point(616, 286);
             this.txtGYFS.Name = "txtGYFS";
@@ -570,9 +572,9 @@
             this.txtJylb.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtJylb.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("JYLB", "JYLBDH"));
+            this.selectorFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("DetectTypeTxt", "DetectType"));
             this.netFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("", "JCLXDM"));
-            this.selectorFiller.SetEntityField(this.txtJylb, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtJylb.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtJylb.Location = new System.Drawing.Point(340, 426);
             this.txtJylb.Name = "txtJylb";
@@ -589,9 +591,9 @@
             this.txtJQFS.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtJQFS.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtJQFS, new CI.UIComponents.Filler.TextEntry("JQFS", "JQFSDH"));
+            this.selectorFiller.SetEntityField(this.txtJQFS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtJQFS, new CI.UIComponents.Filler.TextEntry("IntakeTypeTxt", "IntakeType"));
             this.netFiller.SetEntityField(this.txtJQFS, new CI.UIComponents.Filler.TextEntry("", "JQFSDM"));
-            this.selectorFiller.SetEntityField(this.txtJQFS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtJQFS.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtJQFS.Location = new System.Drawing.Point(64, 286);
             this.txtJQFS.Name = "txtJQFS";
@@ -608,9 +610,9 @@
             this.txtBSQXS.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtBSQXS.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("BSXLX", "BSXLXDH"));
+            this.selectorFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("TransmissionTypeTxt", "TransmissionType"));
             this.netFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("", "BSXXSDM"));
-            this.selectorFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtBSQXS.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtBSQXS.Location = new System.Drawing.Point(616, 251);
             this.txtBSQXS.Name = "txtBSQXS";
@@ -643,9 +645,9 @@
             this.txtQDXS.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtQDXS.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtQDXS, new CI.UIComponents.Filler.TextEntry("QDXS", "QDXSDH"));
+            this.selectorFiller.SetEntityField(this.txtQDXS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtQDXS, new CI.UIComponents.Filler.TextEntry("DriveTypeTxt", "DriveType"));
             this.netFiller.SetEntityField(this.txtQDXS, new CI.UIComponents.Filler.TextEntry("", "QDFSDM"));
-            this.selectorFiller.SetEntityField(this.txtQDXS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtQDXS.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtQDXS.Location = new System.Drawing.Point(869, 286);
             this.txtQDXS.Name = "txtQDXS";
@@ -679,9 +681,9 @@
             this.txtRLLB.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtRLLB.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtRLLB, new CI.UIComponents.Filler.TextEntry("RLLB", "RLLBDH"));
+            this.selectorFiller.SetEntityField(this.txtRLLB, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtRLLB, new CI.UIComponents.Filler.TextEntry("FuelTypeTxt", "FuelType"));
             this.netFiller.SetEntityField(this.txtRLLB, new CI.UIComponents.Filler.TextEntry("", "RLLBDM"));
-            this.selectorFiller.SetEntityField(this.txtRLLB, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtRLLB.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtRLLB.Location = new System.Drawing.Point(340, 251);
             this.txtRLLB.Name = "txtRLLB";
@@ -749,9 +751,9 @@
             this.txtSYXZ.CaptionLength = 5;
             this.txtSYXZ.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtSYXZ, new CI.UIComponents.Filler.TextEntry("SYXZ", "SYXZDH"));
+            this.selectorFiller.SetEntityField(this.txtSYXZ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtSYXZ, new CI.UIComponents.Filler.TextEntry("UseTypeTxt", "UseType"));
             this.netFiller.SetEntityField(this.txtSYXZ, new CI.UIComponents.Filler.TextEntry("", "SYXZDM"));
-            this.selectorFiller.SetEntityField(this.txtSYXZ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtSYXZ.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtSYXZ.Location = new System.Drawing.Point(616, 146);
             this.txtSYXZ.Name = "txtSYXZ";
@@ -785,9 +787,9 @@
             this.txtCCRQ.CaptionWidth = 0;
             this.txtCCRQ.DataType = CI.Controls.FieldDataType.DateTime;
             this.loginFiller.SetEntityField(this.txtCCRQ, new CI.UIComponents.Filler.TextEntry("CCRQ", ""));
+            this.selectorFiller.SetEntityField(this.txtCCRQ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtCCRQ, new CI.UIComponents.Filler.TextEntry("ManufactureDate", ""));
             this.netFiller.SetEntityField(this.txtCCRQ, new CI.UIComponents.Filler.TextEntry("", "CCRQ"));
-            this.selectorFiller.SetEntityField(this.txtCCRQ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtCCRQ.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCCRQ.Format = "yyyy-MM-dd";
             this.txtCCRQ.Location = new System.Drawing.Point(340, 181);
@@ -813,6 +815,8 @@
             this.txtVIN.Name = "txtVIN";
             this.txtVIN.Size = new System.Drawing.Size(237, 31);
             this.txtVIN.TabIndex = 77;
+            this.validator1.SetTaget(this.txtVIN, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // txtCLZL
             // 
@@ -823,9 +827,9 @@
             this.txtCLZL.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCLZL.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtCLZL, new CI.UIComponents.Filler.TextEntry("CLZL", "CLZLDH"));
+            this.selectorFiller.SetEntityField(this.txtCLZL, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtCLZL, new CI.UIComponents.Filler.TextEntry("VehicleTypeTxt", "VehicleType"));
             this.netFiller.SetEntityField(this.txtCLZL, new CI.UIComponents.Filler.TextEntry("", "CLLXDM"));
-            this.selectorFiller.SetEntityField(this.txtCLZL, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtCLZL.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCLZL.Location = new System.Drawing.Point(340, 146);
             this.txtCLZL.Name = "txtCLZL";
@@ -843,9 +847,9 @@
             this.txtCCDJRQ.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCCDJRQ.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtCCDJRQ, new CI.UIComponents.Filler.TextEntry("CCDJRQ", ""));
+            this.selectorFiller.SetEntityField(this.txtCCDJRQ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtCCDJRQ, new CI.UIComponents.Filler.TextEntry("RegisterDate", ""));
             this.netFiller.SetEntityField(this.txtCCDJRQ, new CI.UIComponents.Filler.TextEntry("", "ZCDJRQ"));
-            this.selectorFiller.SetEntityField(this.txtCCDJRQ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtCCDJRQ.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCCDJRQ.Format = "yyyy-MM-dd";
             this.txtCCDJRQ.Location = new System.Drawing.Point(64, 181);
@@ -865,9 +869,9 @@
             this.txtHPYS.CaptionLength = 5;
             this.txtHPYS.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtHPYS, new CI.UIComponents.Filler.TextEntry("HPYS", "HPYSDH"));
+            this.selectorFiller.SetEntityField(this.txtHPYS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtHPYS, new CI.UIComponents.Filler.TextEntry("PlateColorTxt", "PlateColor"));
             this.netFiller.SetEntityField(this.txtHPYS, new CI.UIComponents.Filler.TextEntry("", "HPYSDM"));
-            this.selectorFiller.SetEntityField(this.txtHPYS, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtHPYS.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHPYS.Location = new System.Drawing.Point(340, 111);
             this.txtHPYS.Name = "txtHPYS";
@@ -884,9 +888,9 @@
             this.txtHPZL.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHPZL.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtHPZL, new CI.UIComponents.Filler.TextEntry("HPZL", "HPZLDH"));
+            this.selectorFiller.SetEntityField(this.txtHPZL, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtHPZL, new CI.UIComponents.Filler.TextEntry("PlateTypeTxt", "PlateType"));
             this.netFiller.SetEntityField(this.txtHPZL, new CI.UIComponents.Filler.TextEntry("", "HPZLDM"));
-            this.selectorFiller.SetEntityField(this.txtHPZL, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtHPZL.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHPZL.Location = new System.Drawing.Point(616, 111);
             this.txtHPZL.Name = "txtHPZL";
@@ -910,6 +914,8 @@
             this.txtHPHM.Name = "txtHPHM";
             this.txtHPHM.Size = new System.Drawing.Size(237, 31);
             this.txtHPHM.TabIndex = 74;
+            this.validator1.SetTaget(this.txtHPHM, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
             // flatField14
             // 
@@ -950,9 +956,9 @@
             this.txtHasEgr.Caption = "是否有EGR:";
             this.txtHasEgr.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasEgr.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtHasEgr, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtHasEgr, new CI.UIComponents.Filler.TextEntry("HasEGRTxt", "HasEGR"));
             this.netFiller.SetEntityField(this.txtHasEgr, new CI.UIComponents.Filler.TextEntry("", "SFYEGR"));
-            this.selectorFiller.SetEntityField(this.txtHasEgr, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtHasEgr.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasEgr.Location = new System.Drawing.Point(64, 500);
             this.txtHasEgr.Name = "txtHasEgr";
@@ -967,9 +973,9 @@
             this.txtHasHCL.Caption = "是否有后处理装置:";
             this.txtHasHCL.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasHCL.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtHasHCL, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtHasHCL, new CI.UIComponents.Filler.TextEntry("HasTreatmentDeviceTxt", "HasTreatmentDevice"));
             this.netFiller.SetEntityField(this.txtHasHCL, new CI.UIComponents.Filler.TextEntry("", "SFYHCLZZ"));
-            this.selectorFiller.SetEntityField(this.txtHasHCL, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtHasHCL.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasHCL.Location = new System.Drawing.Point(64, 611);
             this.txtHasHCL.Name = "txtHasHCL";
@@ -984,8 +990,8 @@
             this.txtDK.Caption = "是否电控: ";
             this.txtDK.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtDK.CaptionWidth = 0;
-            this.netFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("", "SFDK"));
             this.selectorFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.netFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("", "SFDK"));
             this.txtDK.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtDK.Location = new System.Drawing.Point(869, 216);
             this.txtDK.Name = "txtDK";
@@ -1016,9 +1022,9 @@
             this.txtCloseStableSys.Caption = "是否能关闭车身稳定系统:";
             this.txtCloseStableSys.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCloseStableSys.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtCloseStableSys, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtCloseStableSys, new CI.UIComponents.Filler.TextEntry("CloseStabilitySysTxt", "CloseStabilitySys"));
             this.netFiller.SetEntityField(this.txtCloseStableSys, new CI.UIComponents.Filler.TextEntry("", "SFNGBESP"));
-            this.selectorFiller.SetEntityField(this.txtCloseStableSys, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtCloseStableSys.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCloseStableSys.Location = new System.Drawing.Point(340, 572);
             this.txtCloseStableSys.Name = "txtCloseStableSys";
@@ -1033,9 +1039,9 @@
             this.txtVehicleStatus.Caption = "车辆状态: ";
             this.txtVehicleStatus.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtVehicleStatus.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtVehicleStatus, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtVehicleStatus, new CI.UIComponents.Filler.TextEntry("VehicleStatusTxt", "VehicleStatus"));
             this.netFiller.SetEntityField(this.txtVehicleStatus, new CI.UIComponents.Filler.TextEntry("", "JDCZTDM"));
-            this.selectorFiller.SetEntityField(this.txtVehicleStatus, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtVehicleStatus.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtVehicleStatus.Location = new System.Drawing.Point(64, 537);
             this.txtVehicleStatus.Name = "txtVehicleStatus";
@@ -1081,9 +1087,9 @@
             this.txtRYZF.Caption = "是否有燃油蒸发控制装置:";
             this.txtRYZF.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtRYZF.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtRYZF, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtRYZF, new CI.UIComponents.Filler.TextEntry("EVAPControlTxt", "EVAPControl"));
             this.netFiller.SetEntityField(this.txtRYZF, new CI.UIComponents.Filler.TextEntry("", "SFYRYZFKZZZ"));
-            this.selectorFiller.SetEntityField(this.txtRYZF, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtRYZF.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtRYZF.Location = new System.Drawing.Point(869, 572);
             this.txtRYZF.Name = "txtRYZF";
@@ -1098,9 +1104,9 @@
             this.txtHasCHZHQ.Caption = "是否有催化转化器:";
             this.txtHasCHZHQ.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasCHZHQ.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtHasCHZHQ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtHasCHZHQ, new CI.UIComponents.Filler.TextEntry("HasCatalyticConverterTxt", "HasCatalyticConverter"));
             this.netFiller.SetEntityField(this.txtHasCHZHQ, new CI.UIComponents.Filler.TextEntry("", "SFYCHZHQ"));
-            this.selectorFiller.SetEntityField(this.txtHasCHZHQ, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtHasCHZHQ.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasCHZHQ.Location = new System.Drawing.Point(616, 611);
             this.txtHasCHZHQ.Name = "txtHasCHZHQ";
@@ -1146,9 +1152,9 @@
             this.txtEnterTown.Caption = "是否进入城镇:";
             this.txtEnterTown.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtEnterTown.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtEnterTown, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtEnterTown, new CI.UIComponents.Filler.TextEntry("IsEntryTownTxt", "IsEntryTown"));
             this.netFiller.SetEntityField(this.txtEnterTown, new CI.UIComponents.Filler.TextEntry("", "SFJRCZ"));
-            this.selectorFiller.SetEntityField(this.txtEnterTown, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtEnterTown.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtEnterTown.Location = new System.Drawing.Point(616, 574);
             this.txtEnterTown.Name = "txtEnterTown";
@@ -1257,9 +1263,9 @@
             this.txtCountry.Caption = "国别:     ";
             this.txtCountry.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCountry.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtCountry, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtCountry, new CI.UIComponents.Filler.TextEntry("CountryTxt", "Country"));
             this.netFiller.SetEntityField(this.txtCountry, new CI.UIComponents.Filler.TextEntry("", "GBDM"));
-            this.selectorFiller.SetEntityField(this.txtCountry, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtCountry.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtCountry.Location = new System.Drawing.Point(618, 537);
             this.txtCountry.Name = "txtCountry";
@@ -1289,9 +1295,9 @@
             this.txtSignType.Caption = "环保分类标志:";
             this.txtSignType.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtSignType.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtSignType, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtSignType, new CI.UIComponents.Filler.TextEntry("ClassifyMarkTxt", "ClassifyMark"));
             this.netFiller.SetEntityField(this.txtSignType, new CI.UIComponents.Filler.TextEntry("", "HBFLBZDM"));
-            this.selectorFiller.SetEntityField(this.txtSignType, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtSignType.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtSignType.Location = new System.Drawing.Point(869, 463);
             this.txtSignType.Name = "txtSignType";
@@ -1307,9 +1313,9 @@
             this.txtEmissionStandard.Caption = "排放标准: ";
             this.txtEmissionStandard.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtEmissionStandard.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtEmissionStandard, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtEmissionStandard, new CI.UIComponents.Filler.TextEntry("EmissionStandardTxt", "EmissionStandard"));
             this.netFiller.SetEntityField(this.txtEmissionStandard, new CI.UIComponents.Filler.TextEntry("", "GBDM"));
-            this.selectorFiller.SetEntityField(this.txtEmissionStandard, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.txtEmissionStandard.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtEmissionStandard.Location = new System.Drawing.Point(618, 500);
             this.txtEmissionStandard.Name = "txtEmissionStandard";
@@ -1503,5 +1509,6 @@
         private CI.UIComponents.Filler.EntityFiller selectorFiller;
         private CI.Controls.FlatField txtEmissionStandard;
         private EASkins.Emi_Button_2 btnSend;
+        private CI.UIComponents.Validate.Validator validator1;
     }
 }

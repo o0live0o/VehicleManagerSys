@@ -14,6 +14,8 @@ using CI.UIComponents.Helper;
 using VehicleManagerSys.Common;
 using HZH_Controls;
 using VehicleManagerSys.Entity.IVS;
+using Newtonsoft.Json;
+using VehicleManagerSys.Dtos;
 
 namespace VehicleManagerSys.Main.CustomForms
 {
@@ -34,12 +36,12 @@ namespace VehicleManagerSys.Main.CustomForms
                 try
                 {
                     Hashtable hashtable = null;
-                    string sql = "SELECT TOP 20 * FROM RESULT_VEHICLE_INFO WHERE 1 =1  AND CHARINDEX('Z',JYZL) > 0  ";
-                     sql = "SELECT TOP 20 * FROM RESULT_VEHICLE_INFO WHERE 1 =1  AND CHARINDEX('12',JYLBDH) > 0  ";
+                    string sql = "SELECT TOP 20 * FROM RESULT_VEHICLE_INFO WHERE 1 =1  ";
+
                     if (!string.IsNullOrEmpty(txtSeachPlateNo.Text.Trim()))
                     {
                         hashtable = new Hashtable();
-                        hashtable.Add("HPHM", "%"+txtSeachPlateNo.Text.Trim() + "%");
+                        hashtable.Add("HPHM", "%" + txtSeachPlateNo.Text.Trim() + "%");
                         sql += " AND HPHM like @HPHM";
                     }
                     sql += " ORDER BY ID DESC";
@@ -61,17 +63,111 @@ namespace VehicleManagerSys.Main.CustomForms
                     });
                 }
 
-            },null, AppHelper.MainForm,true,"正在查询……",200);       
+            }, null, AppHelper.MainForm, true, "正在查询……", 200);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            //if (e.RowIndex < 0) return;
+            //RESULT_VEHICLE_INFO info = CGridHelper.GetCurrentData<RESULT_VEHICLE_INFO>(dgv);
+            //if(info != null)
+            //{
+            //    ((MainForm)AppHelper.MainForm).AddForm(new ComprehensiveUploadForm(info));
+            //}
+            ReCheck();
+        }
+
+        private void btnReCheck_Click(object sender, EventArgs e)
+        {
+            ReCheck();
+        }
+
+        private void ReCheck()
+        {
+            VEHICLE_DISPATCH dispatchInfo = new VEHICLE_DISPATCH();
+            if (dgv.CurrentRow.Index < 0) return;
             RESULT_VEHICLE_INFO info = CGridHelper.GetCurrentData<RESULT_VEHICLE_INFO>(dgv);
-            if(info != null)
+            if (info != null)
             {
-                ((MainForm)AppHelper.MainForm).AddForm(new ComprehensiveUploadForm(info));
+                AppMessage message = new AppMessage() { Succ = false, Msg = "程序异常" };
+                YunWangReCheckOptForm optForm = new YunWangReCheckOptForm(info.HPHM, info.PFLSH);
+                DialogResult dialogResult = optForm.ShowDialog(this);
+                if (dialogResult == DialogResult.OK)
+                {
+                    try
+                    {
+                        Hashtable hashtable = new Hashtable();
+                        hashtable.Add("JYLSH", info.PFLSH);
+                        hashtable.Add("JGBH", AppHelper.EnvironmentNetSetting.StationNo);
+                        hashtable.Add("SFWGJC", optForm.IsCheckAppearance ? 1 : 0);
+                        string writejson = JsonConvert.SerializeObject(hashtable);
+                        hashtable.Clear();
+                        hashtable.Add("jkid", "HWFDL");
+                        hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
+                        hashtable.Add("writejson", writejson);
+                        Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
+                        string str = httpRequest.HttpPost(AppHelper.EnvironmentNetSetting.Url, JsonConvert.SerializeObject(hashtable));
+
+                        hashtable.Clear();
+                        hashtable = JsonConvert.DeserializeObject<Hashtable>(str);
+                        message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
+                        message.Succ = hashtable["code"] == null ? false :
+                            (hashtable["code"].ToString().Equals("success") ? true : false);
+                        if (message.Succ)
+                        {
+                            Hashtable data = new Hashtable();
+                            data = JsonConvert.DeserializeObject<Hashtable>(hashtable["data"].ToString());
+                            message.NetTestNo = data["JYLSH"].ToString();
+                            message.Times = data["JYCS"].ToString();
+                        }
+
+                        if (message.Succ)
+                        {
+                            Hashtable queryTable = new Hashtable();
+                            string sql = "SELECT * FROM LOGIN_VEHICLE_INFO WHERE HPHM = @HPHM AND VIN = @VIN";
+                            queryTable.Add("HPHM", info.HPHM);
+                            queryTable.Add("VIN", info.VIN);
+                            LOGIN_VEHICLE_INFO loginInfo = _mssqlHelper.Query<LOGIN_VEHICLE_INFO>(sql, queryTable);
+
+
+                            foreach (var loginProperty in loginInfo.GetType().GetProperties())
+                            {
+                                foreach (var dispatchProperty in dispatchInfo.GetType().GetProperties())
+                                {
+                                    if (loginProperty.Name.Equals(dispatchProperty.Name))
+                                    {
+                                        dispatchProperty.SetValue(dispatchInfo, loginProperty.GetValue(loginInfo, null), null);
+                                    }
+                                }
+                            }
+
+                            dispatchInfo.JCZT_STATUS = "0";
+                            dispatchInfo.YJXM = "";
+                            dispatchInfo.FJXM = "";
+                            dispatchInfo.PFLSH = message.NetTestNo;
+                            dispatchInfo.JCCS = message.Times;
+
+                            //string[] carIgnoreArr = (from p in dispatchInfo.GetType().GetProperties()
+                            //                where p.GetValue(dispatchInfo, null) == null || string.IsNullOrEmpty(p.GetValue(dispatchInfo, null).ToString())
+                            //                select p.Name).ToArray();
+
+                            bool succ = _mssqlHelper.InsertOrUpdate(dispatchInfo, null, new string[] { "HPHM", "VIN" }, new string[] { "ID","JCZL","LTGG" ,"ZJLWZT" ,"SFJMPZ","OBDJYY","WQYCY" ,"OBDCommCL" ,"OBDCommCX","Standard","VehicleKind","IsEFI","IsAsm","OBDOutlookID" ,"OutlookID","GGMINNMD","GGMAXNMD" });
+                            if (succ)
+                                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！", ContentAlignment.MiddleCenter, 1000);
+                            else
+                                FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
+                        }
+                        else
+                            FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
+                    }
+                    catch (Exception ex)
+                    {
+                        message.Msg = ex.Message;
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检异常！" + ex.Message, ContentAlignment.MiddleCenter, 1000);
+                    }
+                }
             }
         }
+
     }
 }
