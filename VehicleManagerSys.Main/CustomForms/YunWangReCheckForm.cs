@@ -119,6 +119,8 @@ namespace VehicleManagerSys.Main.CustomForms
                             data = JsonConvert.DeserializeObject<Hashtable>(hashtable["data"].ToString());
                             message.NetTestNo = data["JYLSH"].ToString();
                             message.Times = data["JYCS"].ToString();
+                            message.DetectItem = data["JCFFDM"].ToString();
+                            message.DetectItem = AppHelper.GetLocalType("JYXM", message.DetectItem);
                         }
 
                         if (message.Succ)
@@ -146,14 +148,15 @@ namespace VehicleManagerSys.Main.CustomForms
                             dispatchInfo.FJXM = "";
                             dispatchInfo.PFLSH = message.NetTestNo;
                             dispatchInfo.JCCS = message.Times;
-
+                            dispatchInfo.JYXM = message.DetectItem + ",";
+                            dispatchInfo.JCLSH = "P" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                             //string[] carIgnoreArr = (from p in dispatchInfo.GetType().GetProperties()
                             //                where p.GetValue(dispatchInfo, null) == null || string.IsNullOrEmpty(p.GetValue(dispatchInfo, null).ToString())
                             //                select p.Name).ToArray();
 
                             bool succ = _mssqlHelper.InsertOrUpdate(dispatchInfo, null, new string[] { "HPHM", "VIN" }, new string[] { "ID","JCZL","LTGG" ,"ZJLWZT" ,"SFJMPZ","OBDJYY","WQYCY" ,"OBDCommCL" ,"OBDCommCX","Standard","VehicleKind","IsEFI","IsAsm","OBDOutlookID" ,"OutlookID","GGMINNMD","GGMAXNMD" });
                             if (succ)
-                                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！", ContentAlignment.MiddleCenter, 1000);
+                                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！检验项目:"+message.DetectItem , ContentAlignment.MiddleCenter, 3000);
                             else
                                 FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
                         }

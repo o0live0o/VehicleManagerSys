@@ -645,6 +645,15 @@ namespace VehicleManagerSys.Dtos
         }
 
         /// <summary>
+        /// 获取或设置是否电控
+        /// </summary>
+        public string IsElectricControlTxt
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 获取或设置变速箱形式
         /// </summary>
         public string TransmissionTypeTxt
@@ -1120,8 +1129,29 @@ namespace VehicleManagerSys.Dtos
             get;
             set;
         }
+
+        public string TreatmentDeviceType
+        {
+            get;
+            set;
+        }
+
+        public string TreatmentDeviceTypeTxt
+        {
+            get;
+            set;
+        }
+
+        public string FuelModel
+        {
+            get;
+            set;
+        }
+
+        public string FuelModelTxt
+        {
+            get;
+            set;
+        }
     }
-
-
-
 }

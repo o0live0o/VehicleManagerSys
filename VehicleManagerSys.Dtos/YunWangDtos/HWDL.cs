@@ -81,9 +81,9 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
             λdown = "";
             λup = "";
             XZFL = "";
-            JYLSH = "";
-            JYCS = "";
-            JCFFDM = "";
+            //JYLSH = "";
+            //JYCS = "";
+            //JCFFDM = "";
         }
         /// <summary>
         /// 获取或设置检测机构编号
@@ -108,6 +108,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置号牌颜色代码
         /// </summary>
         [Mapper("PlateColor")]
+        [Define("HPYS")]
         public string HPYSDM
         {
             get;
@@ -308,6 +309,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置变速箱形式代码
         /// </summary>
         [Mapper("TransmissionType")]
+        [Define("BSXLX")]
         public string BSXXSDM
         {
             get;
@@ -318,6 +320,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置进气方式代码
         /// </summary>
         [Mapper("IntakeType")]
+        [Define("JQFS")]
         public string JQFSDM
         {
             get;
@@ -328,6 +331,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置燃料种类代码
         /// </summary>
         [Mapper("FuelType")]
+        [Define("RLLB")]
         public string RLZLDM
         {
             get;
@@ -347,6 +351,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置供油方式代码
         /// </summary>
         [Mapper("FuelSupplyType")]
+        [Define("GYFS")]
         public string GYFSDM
         {
             get;
@@ -357,6 +362,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置驱动方式代码
         /// </summary>
         [Mapper("DriveType")]
+        [Define("QDXS")]
         public string QDFSDM
         {
             get;
@@ -416,6 +422,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// <summary>
         /// 获取或设置后处理装置种类代码
         /// </summary>
+        [Mapper("TreatmentDeviceType")]
         public string HCLZZZLDM
         {
             get;
@@ -682,7 +689,6 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// <summary>
         /// 获取或设置排放判定依据
         /// </summary>
-        [Mapper("EmissionStandard")]
         public string PFPDYJ
         {
             get;
@@ -692,7 +698,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// <summary>
         /// 获取或设置燃料类别代码
         /// </summary>
-        [Mapper("FuelType")]
+       [Mapper("FuelModel")]
         public string RLLBDM
         {
             get;
@@ -771,40 +777,43 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置排放限值分类
         /// </summary>
         [Mapper("LimitType")]
+        [Define("XZFL")]
         public string XZFL
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// 获取或设置检验流水号
-        /// </summary>
-        [Mapper("TestNoForNet")]
-        public string JYLSH
-        {
-            get;
-            set;
-        }
+        ///// <summary>
+        ///// 获取或设置检验流水号
+        ///// </summary>
+        //[Mapper("TestNoForNet")]
+        //public string JYLSH
+        //{
+        //    get;
+        //    set;
+        //}
 
-        /// <summary>
-        /// 获取或设置检验次数
-        /// </summary>
-        [Mapper("Times")]
-        public string JYCS
-        {
-            get;
-            set;
-        }
+        ///// <summary>
+        ///// 获取或设置检验次数
+        ///// </summary>
+        //[Mapper("Times")]
+        //public string JYCS
+        //{
+        //    get;
+        //    set;
+        //}
 
-        /// <summary>
-        /// 获取或设置检测方法代码
-        /// </summary>
-        public string JCFFDM
-        {
-            get;
-            set;
-        }
+        ///// <summary>
+        ///// 获取或设置检测方法代码
+        ///// </summary>
+        //[Mapper("DetectItem")]
+        //[Define("JYXM")]
+        //public string JCFFDM
+        //{
+        //    get;
+        //    set;
+        //}
 
     }
 

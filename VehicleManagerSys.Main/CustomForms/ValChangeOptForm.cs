@@ -59,5 +59,10 @@ namespace VehicleManagerSys.Main.CustomForms
                 FrmTips.ShowTipsError(AppHelper.MainForm, "保存失败！"+ex.Message, ContentAlignment.MiddleCenter, 1000);
             }
         }
+
+        private void ValChangeOptForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

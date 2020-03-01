@@ -17,6 +17,7 @@ using System.Threading;
 using VehicleManagerSys.Core.Interfaces;
 using VehicleManagerSys.Core.Services;
 using VehicleManagerSys.Entity.IVS;
+using System.Collections;
 
 namespace VehicleManagerSys.Main.UserControls
 {
@@ -45,6 +46,9 @@ namespace VehicleManagerSys.Main.UserControls
         private ConstSelector _hasObdSelector = null;
         private ConstSelector _hasSrcSelector = null;
         private ConstSelector _hasEgrSelector = null;
+        private ConstSelector _checkItemSelector = null;
+        private ConstSelector _treatmentDeviceType = null;
+        private ConstSelector _fuelModelSelector = null;
 
         private ConstSelector _emissionStandardSelector = null;
         private ConstSelector _isDK = null;
@@ -117,7 +121,7 @@ namespace VehicleManagerSys.Main.UserControls
             _hasEgrSelector = new ConstSelector(txtHasEgr, false, false, "SysYesOrNo", txtHasScr.Width);
             _hasEgrSelector.EntityFiller = selectorFiller;
 
-            _jylbSelector = new ConstSelector(txtJylb, false, false, "JYLB", txtHasScr.Width);
+            _jylbSelector = new ConstSelector(txtJylb, false, false, "DetectType", txtHasScr.Width);
             _jylbSelector.EntityFiller = selectorFiller;
 
             _stanadrdTypeSelector = new ConstSelector(txtStandardType, false, false, "StandardType", txtHasScr.Width);
@@ -144,8 +148,17 @@ namespace VehicleManagerSys.Main.UserControls
             _hasCHZHQ = new ConstSelector(txtHasCHZHQ, false, false, "SysYesOrNo", txtHasCHZHQ.Width);
             _hasCHZHQ.EntityFiller = selectorFiller;
 
+            //_checkItemSelector = new ConstSelector(txtCheckItem,false,false,"CheckItem",txtCheckItem.Width);
+            //_checkItemSelector.EntityFiller = selectorFiller;
+
+            _fuelModelSelector = new ConstSelector(txtFuleModel,false,false, "FuleModel",txtFuleModel.Width);
+            _fuelModelSelector.EntityFiller = selectorFiller;
+
             _emissionStandardSelector = new ConstSelector(txtEmissionStandard, false, false, "EmissionStandard", txtEmissionStandard.Width);
             _emissionStandardSelector.EntityFiller = selectorFiller;
+
+            _treatmentDeviceType = new ConstSelector(txtTreatmentDeviceType,false,false, "DealDeviceType", txtTreatmentDeviceType.Width);
+            _treatmentDeviceType.EntityFiller = selectorFiller;
 
             _isDK = new ConstSelector(txtDK, false, false, "SysYesOrNo", txtDK.Width);
             _isDK.EntityFiller = selectorFiller;
@@ -161,14 +174,21 @@ namespace VehicleManagerSys.Main.UserControls
         private bool Send()
         {
             if (!validator1.Validate()) return false;
+            //if (string.IsNullOrEmpty(txtCheckItem.Text) || (txtCheckItem.Tag != null && string.IsNullOrEmpty(txtCheckItem.Tag.ToString())))
+            //{
+            //    FrmTips.ShowTipsError(AppHelper.MainForm, "请选择检验项目", ContentAlignment.MiddleCenter, 2000);
+            //    return false;
+            //}
             bool succ = false;
             string[] carIgnoreArr = null;
             try
             {
                 m_vehicleInfo = new VehicleInfo();
                 FillEntity(m_vehicleInfo); //m_vehicleInfo.TestNoForNet
-                
-                 AppMessage message = m_vehicleBusiness.SaveCar(m_vehicleInfo);
+
+              
+
+                 AppMessage message = m_vehicleBusiness.SendCar(m_vehicleInfo);
                 if (message.Succ)
                 {
                     VEHICLE_DISPATCH vehicle_dispatch = new VEHICLE_DISPATCH();
@@ -178,10 +198,13 @@ namespace VehicleManagerSys.Main.UserControls
                     vehicle_dispatch.FJXM = "";
                     vehicle_dispatch.YJXM = "";
                     vehicle_dispatch.JCZT_STATUS = "0";
+                    vehicle_dispatch.JYXM = message.DetectItem + ","; 
+
+                    vehicle_dispatch.JCLSH = "P" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                     //更新联网流水号
                     string sql = $"UPDATE VehicleInfo SET TestNoForNet = '{message.NetTestNo}' WHERE  PlateNo = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
                     m_mssqlHelper.ExcuteNonQuery(sql,null);
-                    sql = $"UPDATE VehicleInfo SET PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
+                    sql = $"UPDATE LOGIN_VEHICLE_INFO SET PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
                     m_mssqlHelper.ExcuteNonQuery(sql, null);
 
                     //carIgnoreArr = (from p in vehicle_dispatch.GetType().GetProperties()
@@ -192,11 +215,13 @@ namespace VehicleManagerSys.Main.UserControls
 
                     if (succ)
                         FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！"
-                            + "检测次数:" + message.Times + Environment.NewLine 
-                            + "联网流水号:" + message.NetTestNo, ContentAlignment.MiddleCenter, 1000);
+                            + "检测方法:"+message.DetectItem+ "检测次数:" + message.Times + Environment.NewLine 
+                            + "联网流水号:" + message.NetTestNo, ContentAlignment.MiddleCenter, 5000);
                     else
                         FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！"+message.Msg, ContentAlignment.MiddleCenter, 1000);
                 }
+                else
+                    FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
             }
             catch (Exception ex)
             {
@@ -232,6 +257,7 @@ namespace VehicleManagerSys.Main.UserControls
                 //保存LOGIN_VEHICLE_INFO表
                 LOGIN_VEHICLE_INFO login_vehicle_info = new LOGIN_VEHICLE_INFO();
                 loginFiller.FillEntity(login_vehicle_info);
+                login_vehicle_info.PPXH = login_vehicle_info.PP + login_vehicle_info.XH;
                 carIgnoreArr = (from p in login_vehicle_info.GetType().GetProperties()
                                 where p.GetValue(login_vehicle_info, null) == null || string.IsNullOrEmpty(p.GetValue(login_vehicle_info, null).ToString())
                                 select p.Name).ToArray();
@@ -271,7 +297,56 @@ namespace VehicleManagerSys.Main.UserControls
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string plateNo = txtQueryPlateNo .Text.Trim();
+                if (string.IsNullOrEmpty(plateNo))
+                {
+                    FrmTips.ShowTipsError(AppHelper.MainForm, "号牌号码不能为空");
+                    return;
+                }
 
+                plateNo = combQueryAera.Text + plateNo;
+
+                LOGIN_VEHICLE_INFO loginInfo = new LOGIN_VEHICLE_INFO();
+                Hashtable hashtable = new Hashtable();
+                string sql = "SELECT * FROM LOGIN_VEHICLE_INFO WHERE HPHM = @HPHM";
+                hashtable.Add("HPHM", plateNo);
+                loginInfo = m_mssqlHelper.Query<LOGIN_VEHICLE_INFO>(sql, hashtable);
+
+                VehicleInfo vehicleInfo = new VehicleInfo();
+                hashtable.Clear();
+                sql = "SELECT * FROM VehicleInfo WHERE PlateNo = @PlateNo";
+                hashtable.Add("PlateNo", plateNo);
+                vehicleInfo = m_mssqlHelper.Query<VehicleInfo>(sql, hashtable);
+
+                bool hasVal = false;
+
+                if (loginInfo != null &&  !string.IsNullOrEmpty(loginInfo.HPHM))              
+                {
+                    hasVal = true;
+                    loginFiller.DisplayEntity(loginInfo);
+                }
+
+                if (vehicleInfo != null && !string.IsNullOrEmpty(vehicleInfo.PlateNo))
+                {
+                    hasVal = true;
+                    vehicleFiller.DisplayEntity(vehicleInfo);
+                }
+                   
+                if(!hasVal)
+                    FrmTips.ShowTipsError(AppHelper.MainForm, "没有查询到车辆信息");
+            }
+            catch (Exception ex)
+            {
+                FrmTips.ShowTipsError(AppHelper.MainForm, "查询异常:" + ex.Message);
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            loginFiller.DisplayEntity(null);
+            vehicleFiller.DisplayEntity(null);
         }
     }
 }

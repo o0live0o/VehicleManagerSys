@@ -183,5 +183,135 @@
     "Code": "6",
     "Name": "国VI",
     "ConstantType": "EmissionStandard"
+  },
+  {
+    "Code": "1",
+    "Name": "燃油",
+    "ConstantType": "FuleModel"
+  },
+  {
+    "Code": "2",
+    "Name": "单一燃料",
+    "ConstantType": "FuleModel"
+  },
+  {
+    "Code": "3",
+    "Name": "两用燃料",
+    "ConstantType": "FuleModel"
+  },
+  {
+    "Code": "4",
+    "Name": "混合动力电动",
+    "ConstantType": "FuleModel"
+  },
+  {
+    "Code": "X5",
+    "Name": "Lugdown工况",
+    "ConstantType": "CheckItem"
+  },
+  {
+    "Code": "X1",
+    "Name": "双怠速",
+    "ConstantType": "CheckItem"
+  },
+  {
+    "Code": "X2",
+    "Name": "ASM工况",
+    "ConstantType": "CheckItem"
+  },
+  {
+    "Code": "X3",
+    "Name": "VMAS工况",
+    "ConstantType": "CheckItem"
+  },
+  {
+    "Code": "X4",
+    "Name": "自由加速（不透光）",
+    "ConstantType": "CheckItem"
+  },
+  {
+    "Code": "X6",
+    "Name": "自由加速（滤纸）",
+    "ConstantType": "CheckItem"
+  },
+  {
+    "Code": "1",
+    "Name": "三元催化",
+    "ConstantType": "DealDeviceType"
+  },
+  {
+    "Code": "2",
+    "Name": "DPF",
+    "ConstantType": "DealDeviceType"
+  },
+  {
+    "Code": "3",
+    "Name": "SCE",
+    "ConstantType": "DealDeviceType"
+  },
+  {
+    "Code": "4",
+    "Name": "DOC",
+    "ConstantType": "DealDeviceType"
+  },
+  {
+    "Code": "5",
+    "Name": "POC",
+    "ConstantType": "DealDeviceType"
+  },
+  {
+    "Code": "6",
+    "Name": "其它",
+    "ConstantType": "DealDeviceType"
+  },
+  {
+    "Code": "1",
+    "Name": "定期检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "2",
+    "Name": "注册登记检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "3",
+    "Name": "实验比对",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "4",
+    "Name": "转入检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "5",
+    "Name": "委托检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "6",
+    "Name": "黄改绿检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "7",
+    "Name": "转出检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "8",
+    "Name": "路检检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "9",
+    "Name": "入户检验",
+    "ConstantType": "DetectType"
+  },
+  {
+    "Code": "10",
+    "Name": "测试检验",
+    "ConstantType": "DetectType"
   }
 ]

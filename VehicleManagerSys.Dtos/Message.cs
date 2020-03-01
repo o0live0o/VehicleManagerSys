@@ -13,6 +13,7 @@ namespace VehicleManagerSys.Dtos
         private string _netTestNo = "";
         private string _localTestNo = "";
         private string _times = "1";
+        private string _detectItem = "";
         private VehicleInfo _vehicleInfo = null;
 
         public bool Succ { get => _succ; set => _succ = value; }
@@ -21,5 +22,6 @@ namespace VehicleManagerSys.Dtos
         public string NetTestNo { get => _netTestNo; set => _netTestNo = value; }
         public string LocalTestNo { get => _localTestNo; set => _localTestNo = value; }
         public string Times { get => _times; set => _times = value; }
+        public string DetectItem { get => _detectItem; set => _detectItem = value; }
     }
 }

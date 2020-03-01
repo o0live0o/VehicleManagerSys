@@ -23,5 +23,7 @@ namespace VehicleManagerSys.Common.Dtos
         public string NetCode { get; set; }
 
         public string Remark { get; set; }
+
+        public string DefineName { get; set; }
     }
 }

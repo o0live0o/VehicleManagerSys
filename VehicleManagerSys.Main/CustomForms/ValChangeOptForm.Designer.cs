@@ -43,13 +43,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.validator1 = new CI.UIComponents.Validate.Validator();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label1.Location = new System.Drawing.Point(38, 77);
+            this.label1.Location = new System.Drawing.Point(42, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 21);
             this.label1.TabIndex = 9;
@@ -59,7 +61,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label2.Location = new System.Drawing.Point(38, 154);
+            this.label2.Location = new System.Drawing.Point(42, 229);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 21);
             this.label2.TabIndex = 9;
@@ -81,7 +83,7 @@
             this.btnSave.IsRadius = true;
             this.btnSave.IsShowRect = false;
             this.btnSave.IsShowTips = false;
-            this.btnSave.Location = new System.Drawing.Point(383, 331);
+            this.btnSave.Location = new System.Drawing.Point(376, 304);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
             this.btnSave.RectColor = System.Drawing.Color.Gainsboro;
@@ -97,17 +99,17 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label4.Location = new System.Drawing.Point(38, 239);
+            this.label4.Location = new System.Drawing.Point(42, 97);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 21);
+            this.label4.Size = new System.Drawing.Size(74, 21);
             this.label4.TabIndex = 21;
-            this.label4.Text = "类型";
+            this.label4.Text = "类型名称";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label6.Location = new System.Drawing.Point(298, 77);
+            this.label6.Location = new System.Drawing.Point(295, 163);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 21);
             this.label6.TabIndex = 25;
@@ -116,7 +118,7 @@
             // textBox1
             // 
             this.entityFiller.SetEntityField(this.textBox1, new CI.UIComponents.Filler.TextEntry("LocalName", ""));
-            this.textBox1.Location = new System.Drawing.Point(42, 112);
+            this.textBox1.Location = new System.Drawing.Point(42, 195);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(200, 23);
             this.textBox1.TabIndex = 26;
@@ -124,15 +126,15 @@
             // textBox2
             // 
             this.entityFiller.SetEntityField(this.textBox2, new CI.UIComponents.Filler.TextEntry("NetName", ""));
-            this.textBox2.Location = new System.Drawing.Point(42, 196);
+            this.textBox2.Location = new System.Drawing.Point(42, 261);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(200, 23);
             this.textBox2.TabIndex = 26;
             // 
             // textBox3
             // 
-            this.entityFiller.SetEntityField(this.textBox3, new CI.UIComponents.Filler.TextEntry("DefineType", ""));
-            this.textBox3.Location = new System.Drawing.Point(42, 274);
+            this.entityFiller.SetEntityField(this.textBox3, new CI.UIComponents.Filler.TextEntry("DefineName", ""));
+            this.textBox3.Location = new System.Drawing.Point(42, 129);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(200, 23);
             this.textBox3.TabIndex = 26;
@@ -142,7 +144,7 @@
             // textBox4
             // 
             this.entityFiller.SetEntityField(this.textBox4, new CI.UIComponents.Filler.TextEntry("LocalCode", ""));
-            this.textBox4.Location = new System.Drawing.Point(302, 112);
+            this.textBox4.Location = new System.Drawing.Point(295, 195);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(200, 23);
             this.textBox4.TabIndex = 26;
@@ -152,7 +154,7 @@
             // textBox5
             // 
             this.entityFiller.SetEntityField(this.textBox5, new CI.UIComponents.Filler.TextEntry("NetCode", ""));
-            this.textBox5.Location = new System.Drawing.Point(302, 196);
+            this.textBox5.Location = new System.Drawing.Point(295, 261);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(200, 23);
             this.textBox5.TabIndex = 26;
@@ -162,7 +164,7 @@
             // textBox6
             // 
             this.entityFiller.SetEntityField(this.textBox6, new CI.UIComponents.Filler.TextEntry("Remark", ""));
-            this.textBox6.Location = new System.Drawing.Point(302, 274);
+            this.textBox6.Location = new System.Drawing.Point(42, 327);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(200, 23);
             this.textBox6.TabIndex = 26;
@@ -171,7 +173,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label7.Location = new System.Drawing.Point(298, 154);
+            this.label7.Location = new System.Drawing.Point(295, 229);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 21);
             this.label7.TabIndex = 24;
@@ -181,18 +183,37 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label8.Location = new System.Drawing.Point(298, 239);
+            this.label8.Location = new System.Drawing.Point(42, 295);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 21);
             this.label8.TabIndex = 20;
             this.label8.Text = "备注";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label3.Location = new System.Drawing.Point(295, 97);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 21);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "类型";
+            // 
+            // textBox7
+            // 
+            this.entityFiller.SetEntityField(this.textBox7, new CI.UIComponents.Filler.TextEntry("DefineType", ""));
+            this.textBox7.Location = new System.Drawing.Point(295, 129);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(200, 23);
+            this.textBox7.TabIndex = 26;
+            // 
             // ValChangeOptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(544, 401);
+            this.ClientSize = new System.Drawing.Size(544, 380);
             this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox2);
@@ -201,6 +222,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label8);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label2);
@@ -208,10 +230,12 @@
             this.Name = "ValChangeOptForm";
             this.Text = "InputLambdaForm";
             this.Title = "字段配置";
+            this.Load += new System.EventHandler(this.ValChangeOptForm_Load);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.label7, 0);
@@ -220,6 +244,7 @@
             this.Controls.SetChildIndex(this.textBox2, 0);
             this.Controls.SetChildIndex(this.textBox5, 0);
             this.Controls.SetChildIndex(this.textBox3, 0);
+            this.Controls.SetChildIndex(this.textBox7, 0);
             this.Controls.SetChildIndex(this.textBox6, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -242,5 +267,7 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
         private CI.UIComponents.Validate.Validator validator1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }

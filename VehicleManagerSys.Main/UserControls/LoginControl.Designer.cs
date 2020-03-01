@@ -97,9 +97,11 @@
             this.flatField38 = new CI.Controls.FlatField();
             this.txtSignType = new CI.Controls.FlatField();
             this.txtEmissionStandard = new CI.Controls.FlatField();
+            this.flatField30 = new CI.Controls.FlatField();
+            this.txtTreatmentDeviceType = new CI.Controls.FlatField();
+            this.txtFuleModel = new CI.Controls.FlatField();
             this.loginFiller = new CI.UIComponents.Filler.EntityFiller();
             this.netFiller = new CI.UIComponents.Filler.EntityFiller();
-            this.flatField30 = new CI.Controls.FlatField();
             this.selectorFiller = new CI.UIComponents.Filler.EntityFiller();
             this.btnSend = new EASkins.Emi_Button_2();
             this.validator1 = new CI.UIComponents.Validate.Validator();
@@ -119,7 +121,7 @@
             this.flatField12.Location = new System.Drawing.Point(618, 317);
             this.flatField12.Name = "flatField12";
             this.flatField12.Size = new System.Drawing.Size(237, 31);
-            this.flatField12.TabIndex = 117;
+            this.flatField12.TabIndex = 26;
             // 
             // btnClear
             // 
@@ -134,6 +136,7 @@
             this.btnClear.TabIndex = 116;
             this.btnClear.Text = "清 空";
             this.btnClear.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSave
             // 
@@ -320,7 +323,7 @@
             this.txtHasObd.Location = new System.Drawing.Point(618, 463);
             this.txtHasObd.Name = "txtHasObd";
             this.txtHasObd.Size = new System.Drawing.Size(237, 31);
-            this.txtHasObd.TabIndex = 99;
+            this.txtHasObd.TabIndex = 42;
             // 
             // txtStandardType
             // 
@@ -338,7 +341,7 @@
             this.txtStandardType.Name = "txtStandardType";
             this.txtStandardType.ReadOnly = true;
             this.txtStandardType.Size = new System.Drawing.Size(237, 31);
-            this.txtStandardType.TabIndex = 108;
+            this.txtStandardType.TabIndex = 47;
             // 
             // txtHasDpf
             // 
@@ -350,12 +353,13 @@
             this.txtHasDpf.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("IsDPF", "IsDPFDH"));
             this.selectorFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("HasDPFTxt", "HasDPF"));
             this.netFiller.SetEntityField(this.txtHasDpf, new CI.UIComponents.Filler.TextEntry("", "SFYDPF"));
             this.txtHasDpf.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtHasDpf.Location = new System.Drawing.Point(618, 426);
             this.txtHasDpf.Name = "txtHasDpf";
             this.txtHasDpf.Size = new System.Drawing.Size(237, 31);
-            this.txtHasDpf.TabIndex = 102;
+            this.txtHasDpf.TabIndex = 38;
             // 
             // flatField10
             // 
@@ -371,7 +375,7 @@
             this.flatField10.Location = new System.Drawing.Point(340, 214);
             this.flatField10.Name = "flatField10";
             this.flatField10.Size = new System.Drawing.Size(237, 31);
-            this.flatField10.TabIndex = 85;
+            this.flatField10.TabIndex = 13;
             // 
             // flatField2
             // 
@@ -387,7 +391,7 @@
             this.flatField2.Location = new System.Drawing.Point(869, 319);
             this.flatField2.Name = "flatField2";
             this.flatField2.Size = new System.Drawing.Size(237, 31);
-            this.flatField2.TabIndex = 97;
+            this.flatField2.TabIndex = 27;
             // 
             // flatField5
             // 
@@ -400,7 +404,7 @@
             this.flatField5.Location = new System.Drawing.Point(869, 426);
             this.flatField5.Name = "flatField5";
             this.flatField5.Size = new System.Drawing.Size(237, 31);
-            this.flatField5.TabIndex = 103;
+            this.flatField5.TabIndex = 39;
             // 
             // flatField11
             // 
@@ -416,7 +420,7 @@
             this.flatField11.Location = new System.Drawing.Point(869, 391);
             this.flatField11.Name = "flatField11";
             this.flatField11.Size = new System.Drawing.Size(237, 31);
-            this.flatField11.TabIndex = 106;
+            this.flatField11.TabIndex = 35;
             // 
             // flatField8
             // 
@@ -432,7 +436,7 @@
             this.flatField8.Location = new System.Drawing.Point(340, 354);
             this.flatField8.Name = "flatField8";
             this.flatField8.Size = new System.Drawing.Size(237, 31);
-            this.flatField8.TabIndex = 105;
+            this.flatField8.TabIndex = 29;
             // 
             // flatField6
             // 
@@ -448,7 +452,7 @@
             this.flatField6.Location = new System.Drawing.Point(64, 426);
             this.flatField6.Name = "flatField6";
             this.flatField6.Size = new System.Drawing.Size(237, 31);
-            this.flatField6.TabIndex = 104;
+            this.flatField6.TabIndex = 36;
             // 
             // flatField4
             // 
@@ -462,7 +466,7 @@
             this.flatField4.Location = new System.Drawing.Point(340, 463);
             this.flatField4.Name = "flatField4";
             this.flatField4.Size = new System.Drawing.Size(237, 31);
-            this.flatField4.TabIndex = 101;
+            this.flatField4.TabIndex = 41;
             // 
             // flatField1
             // 
@@ -474,10 +478,10 @@
             this.vehicleFiller.SetEntityField(this.flatField1, new CI.UIComponents.Filler.TextEntry("CatalyticConverterModel", ""));
             this.netFiller.SetEntityField(this.flatField1, new CI.UIComponents.Filler.TextEntry("CHZHQXH", ""));
             this.flatField1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField1.Location = new System.Drawing.Point(869, 609);
+            this.flatField1.Location = new System.Drawing.Point(340, 648);
             this.flatField1.Name = "flatField1";
             this.flatField1.Size = new System.Drawing.Size(237, 31);
-            this.flatField1.TabIndex = 98;
+            this.flatField1.TabIndex = 61;
             // 
             // txtZBZL
             // 
@@ -493,7 +497,7 @@
             this.txtZBZL.Location = new System.Drawing.Point(64, 321);
             this.txtZBZL.Name = "txtZBZL";
             this.txtZBZL.Size = new System.Drawing.Size(237, 31);
-            this.txtZBZL.TabIndex = 95;
+            this.txtZBZL.TabIndex = 24;
             // 
             // txtHasScr
             // 
@@ -510,7 +514,7 @@
             this.txtHasScr.Location = new System.Drawing.Point(64, 463);
             this.txtHasScr.Name = "txtHasScr";
             this.txtHasScr.Size = new System.Drawing.Size(237, 31);
-            this.txtHasScr.TabIndex = 100;
+            this.txtHasScr.TabIndex = 40;
             // 
             // flatField9
             // 
@@ -526,7 +530,7 @@
             this.flatField9.Location = new System.Drawing.Point(869, 253);
             this.flatField9.Name = "flatField9";
             this.flatField9.Size = new System.Drawing.Size(237, 31);
-            this.flatField9.TabIndex = 92;
+            this.flatField9.TabIndex = 19;
             // 
             // txtGYFS
             // 
@@ -546,7 +550,7 @@
             this.txtGYFS.ReadOnly = true;
             this.txtGYFS.Size = new System.Drawing.Size(237, 31);
             this.txtGYFS.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtGYFS.TabIndex = 91;
+            this.txtGYFS.TabIndex = 22;
             // 
             // flatField7
             // 
@@ -556,12 +560,13 @@
             this.flatField7.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField7.CaptionWidth = 0;
             this.loginFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("pl", ""));
+            this.vehicleFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("Displacement", ""));
             this.netFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("FDJPL", ""));
             this.flatField7.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField7.Location = new System.Drawing.Point(340, 286);
             this.flatField7.Name = "flatField7";
             this.flatField7.Size = new System.Drawing.Size(237, 31);
-            this.flatField7.TabIndex = 90;
+            this.flatField7.TabIndex = 21;
             // 
             // txtJylb
             // 
@@ -580,7 +585,7 @@
             this.txtJylb.Name = "txtJylb";
             this.txtJylb.ReadOnly = true;
             this.txtJylb.Size = new System.Drawing.Size(237, 31);
-            this.txtJylb.TabIndex = 107;
+            this.txtJylb.TabIndex = 37;
             // 
             // txtJQFS
             // 
@@ -599,7 +604,7 @@
             this.txtJQFS.Name = "txtJQFS";
             this.txtJQFS.ReadOnly = true;
             this.txtJQFS.Size = new System.Drawing.Size(237, 31);
-            this.txtJQFS.TabIndex = 89;
+            this.txtJQFS.TabIndex = 20;
             // 
             // txtBSQXS
             // 
@@ -614,11 +619,11 @@
             this.vehicleFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("TransmissionTypeTxt", "TransmissionType"));
             this.netFiller.SetEntityField(this.txtBSQXS, new CI.UIComponents.Filler.TextEntry("", "BSXXSDM"));
             this.txtBSQXS.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtBSQXS.Location = new System.Drawing.Point(616, 251);
+            this.txtBSQXS.Location = new System.Drawing.Point(869, 648);
             this.txtBSQXS.Name = "txtBSQXS";
             this.txtBSQXS.ReadOnly = true;
             this.txtBSQXS.Size = new System.Drawing.Size(237, 31);
-            this.txtBSQXS.TabIndex = 88;
+            this.txtBSQXS.TabIndex = 63;
             // 
             // flatField3
             // 
@@ -634,7 +639,7 @@
             this.flatField3.Location = new System.Drawing.Point(64, 214);
             this.flatField3.Name = "flatField3";
             this.flatField3.Size = new System.Drawing.Size(237, 31);
-            this.flatField3.TabIndex = 84;
+            this.flatField3.TabIndex = 12;
             // 
             // txtQDXS
             // 
@@ -654,7 +659,7 @@
             this.txtQDXS.ReadOnly = true;
             this.txtQDXS.Size = new System.Drawing.Size(237, 31);
             this.txtQDXS.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtQDXS.TabIndex = 93;
+            this.txtQDXS.TabIndex = 23;
             // 
             // txtCYS
             // 
@@ -670,7 +675,7 @@
             this.txtCYS.Location = new System.Drawing.Point(64, 251);
             this.txtCYS.Name = "txtCYS";
             this.txtCYS.Size = new System.Drawing.Size(237, 31);
-            this.txtCYS.TabIndex = 86;
+            this.txtCYS.TabIndex = 16;
             // 
             // txtRLLB
             // 
@@ -690,7 +695,7 @@
             this.txtRLLB.ReadOnly = true;
             this.txtRLLB.Size = new System.Drawing.Size(237, 31);
             this.txtRLLB.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtRLLB.TabIndex = 87;
+            this.txtRLLB.TabIndex = 17;
             // 
             // txtXH
             // 
@@ -707,7 +712,7 @@
             this.txtXH.Location = new System.Drawing.Point(869, 181);
             this.txtXH.Name = "txtXH";
             this.txtXH.Size = new System.Drawing.Size(237, 31);
-            this.txtXH.TabIndex = 83;
+            this.txtXH.TabIndex = 11;
             // 
             // txtLJXSLC
             // 
@@ -723,7 +728,7 @@
             this.txtLJXSLC.Location = new System.Drawing.Point(869, 144);
             this.txtLJXSLC.Name = "txtLJXSLC";
             this.txtLJXSLC.Size = new System.Drawing.Size(237, 31);
-            this.txtLJXSLC.TabIndex = 96;
+            this.txtLJXSLC.TabIndex = 7;
             // 
             // txtZZL
             // 
@@ -739,7 +744,7 @@
             this.txtZZL.Location = new System.Drawing.Point(340, 317);
             this.txtZZL.Name = "txtZZL";
             this.txtZZL.Size = new System.Drawing.Size(237, 31);
-            this.txtZZL.TabIndex = 94;
+            this.txtZZL.TabIndex = 25;
             // 
             // txtSYXZ
             // 
@@ -759,7 +764,7 @@
             this.txtSYXZ.Name = "txtSYXZ";
             this.txtSYXZ.ReadOnly = true;
             this.txtSYXZ.Size = new System.Drawing.Size(237, 31);
-            this.txtSYXZ.TabIndex = 79;
+            this.txtSYXZ.TabIndex = 6;
             // 
             // txtPP
             // 
@@ -775,7 +780,7 @@
             this.txtPP.Location = new System.Drawing.Point(616, 181);
             this.txtPP.Name = "txtPP";
             this.txtPP.Size = new System.Drawing.Size(237, 31);
-            this.txtPP.TabIndex = 82;
+            this.txtPP.TabIndex = 10;
             // 
             // txtCCRQ
             // 
@@ -797,7 +802,7 @@
             this.txtCCRQ.ReadOnly = true;
             this.txtCCRQ.Size = new System.Drawing.Size(237, 31);
             this.txtCCRQ.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtCCRQ.TabIndex = 81;
+            this.txtCCRQ.TabIndex = 9;
             // 
             // txtVIN
             // 
@@ -814,7 +819,7 @@
             this.txtVIN.Location = new System.Drawing.Point(64, 146);
             this.txtVIN.Name = "txtVIN";
             this.txtVIN.Size = new System.Drawing.Size(237, 31);
-            this.txtVIN.TabIndex = 77;
+            this.txtVIN.TabIndex = 4;
             this.validator1.SetTaget(this.txtVIN, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
                 ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
@@ -836,7 +841,7 @@
             this.txtCLZL.ReadOnly = true;
             this.txtCLZL.Size = new System.Drawing.Size(237, 31);
             this.txtCLZL.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtCLZL.TabIndex = 78;
+            this.txtCLZL.TabIndex = 5;
             // 
             // txtCCDJRQ
             // 
@@ -857,7 +862,7 @@
             this.txtCCDJRQ.ReadOnly = true;
             this.txtCCDJRQ.Size = new System.Drawing.Size(237, 31);
             this.txtCCDJRQ.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtCCDJRQ.TabIndex = 80;
+            this.txtCCDJRQ.TabIndex = 8;
             // 
             // txtHPYS
             // 
@@ -877,7 +882,7 @@
             this.txtHPYS.Name = "txtHPYS";
             this.txtHPYS.ReadOnly = true;
             this.txtHPYS.Size = new System.Drawing.Size(237, 31);
-            this.txtHPYS.TabIndex = 75;
+            this.txtHPYS.TabIndex = 1;
             // 
             // txtHPZL
             // 
@@ -897,7 +902,7 @@
             this.txtHPZL.ReadOnly = true;
             this.txtHPZL.Size = new System.Drawing.Size(237, 31);
             this.txtHPZL.Style = CI.Controls.FieldStyle.DropDown;
-            this.txtHPZL.TabIndex = 76;
+            this.txtHPZL.TabIndex = 2;
             // 
             // txtHPHM
             // 
@@ -913,7 +918,7 @@
             this.txtHPHM.Location = new System.Drawing.Point(64, 111);
             this.txtHPHM.Name = "txtHPHM";
             this.txtHPHM.Size = new System.Drawing.Size(237, 31);
-            this.txtHPHM.TabIndex = 74;
+            this.txtHPHM.TabIndex = 0;
             this.validator1.SetTaget(this.txtHPHM, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
                 ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
@@ -931,7 +936,7 @@
             this.flatField14.Location = new System.Drawing.Point(618, 391);
             this.flatField14.Name = "flatField14";
             this.flatField14.Size = new System.Drawing.Size(237, 31);
-            this.flatField14.TabIndex = 119;
+            this.flatField14.TabIndex = 34;
             // 
             // flatField16
             // 
@@ -946,7 +951,7 @@
             this.flatField16.Location = new System.Drawing.Point(869, 111);
             this.flatField16.Name = "flatField16";
             this.flatField16.Size = new System.Drawing.Size(237, 31);
-            this.flatField16.TabIndex = 121;
+            this.flatField16.TabIndex = 3;
             // 
             // txtHasEgr
             // 
@@ -963,7 +968,7 @@
             this.txtHasEgr.Location = new System.Drawing.Point(64, 500);
             this.txtHasEgr.Name = "txtHasEgr";
             this.txtHasEgr.Size = new System.Drawing.Size(237, 31);
-            this.txtHasEgr.TabIndex = 122;
+            this.txtHasEgr.TabIndex = 44;
             // 
             // txtHasHCL
             // 
@@ -980,7 +985,7 @@
             this.txtHasHCL.Location = new System.Drawing.Point(64, 611);
             this.txtHasHCL.Name = "txtHasHCL";
             this.txtHasHCL.Size = new System.Drawing.Size(237, 31);
-            this.txtHasHCL.TabIndex = 123;
+            this.txtHasHCL.TabIndex = 56;
             // 
             // txtDK
             // 
@@ -991,12 +996,13 @@
             this.txtDK.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.txtDK.CaptionWidth = 0;
             this.selectorFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("IsElectricControlTxt", "IsElectricControl"));
             this.netFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("", "SFDK"));
             this.txtDK.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.txtDK.Location = new System.Drawing.Point(869, 216);
             this.txtDK.Name = "txtDK";
             this.txtDK.Size = new System.Drawing.Size(237, 31);
-            this.txtDK.TabIndex = 124;
+            this.txtDK.TabIndex = 15;
             // 
             // flatField20
             // 
@@ -1012,7 +1018,7 @@
             this.flatField20.Location = new System.Drawing.Point(616, 214);
             this.flatField20.Name = "flatField20";
             this.flatField20.Size = new System.Drawing.Size(237, 31);
-            this.flatField20.TabIndex = 125;
+            this.flatField20.TabIndex = 14;
             // 
             // txtCloseStableSys
             // 
@@ -1029,7 +1035,7 @@
             this.txtCloseStableSys.Location = new System.Drawing.Point(340, 572);
             this.txtCloseStableSys.Name = "txtCloseStableSys";
             this.txtCloseStableSys.Size = new System.Drawing.Size(237, 31);
-            this.txtCloseStableSys.TabIndex = 126;
+            this.txtCloseStableSys.TabIndex = 53;
             // 
             // txtVehicleStatus
             // 
@@ -1046,7 +1052,7 @@
             this.txtVehicleStatus.Location = new System.Drawing.Point(64, 537);
             this.txtVehicleStatus.Name = "txtVehicleStatus";
             this.txtVehicleStatus.Size = new System.Drawing.Size(237, 31);
-            this.txtVehicleStatus.TabIndex = 127;
+            this.txtVehicleStatus.TabIndex = 48;
             // 
             // flatField23
             // 
@@ -1061,7 +1067,7 @@
             this.flatField23.Location = new System.Drawing.Point(340, 537);
             this.flatField23.Name = "flatField23";
             this.flatField23.Size = new System.Drawing.Size(237, 31);
-            this.flatField23.TabIndex = 128;
+            this.flatField23.TabIndex = 49;
             // 
             // flatField24
             // 
@@ -1077,7 +1083,7 @@
             this.flatField24.Location = new System.Drawing.Point(64, 354);
             this.flatField24.Name = "flatField24";
             this.flatField24.Size = new System.Drawing.Size(237, 31);
-            this.flatField24.TabIndex = 129;
+            this.flatField24.TabIndex = 28;
             // 
             // txtRYZF
             // 
@@ -1094,7 +1100,7 @@
             this.txtRYZF.Location = new System.Drawing.Point(869, 572);
             this.txtRYZF.Name = "txtRYZF";
             this.txtRYZF.Size = new System.Drawing.Size(237, 31);
-            this.txtRYZF.TabIndex = 130;
+            this.txtRYZF.TabIndex = 55;
             // 
             // txtHasCHZHQ
             // 
@@ -1108,10 +1114,10 @@
             this.vehicleFiller.SetEntityField(this.txtHasCHZHQ, new CI.UIComponents.Filler.TextEntry("HasCatalyticConverterTxt", "HasCatalyticConverter"));
             this.netFiller.SetEntityField(this.txtHasCHZHQ, new CI.UIComponents.Filler.TextEntry("", "SFYCHZHQ"));
             this.txtHasCHZHQ.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtHasCHZHQ.Location = new System.Drawing.Point(616, 611);
+            this.txtHasCHZHQ.Location = new System.Drawing.Point(618, 648);
             this.txtHasCHZHQ.Name = "txtHasCHZHQ";
             this.txtHasCHZHQ.Size = new System.Drawing.Size(237, 31);
-            this.txtHasCHZHQ.TabIndex = 131;
+            this.txtHasCHZHQ.TabIndex = 62;
             // 
             // flatField27
             // 
@@ -1127,7 +1133,7 @@
             this.flatField27.Location = new System.Drawing.Point(618, 354);
             this.flatField27.Name = "flatField27";
             this.flatField27.Size = new System.Drawing.Size(237, 31);
-            this.flatField27.TabIndex = 132;
+            this.flatField27.TabIndex = 30;
             // 
             // flatField28
             // 
@@ -1142,7 +1148,7 @@
             this.flatField28.Location = new System.Drawing.Point(869, 537);
             this.flatField28.Name = "flatField28";
             this.flatField28.Size = new System.Drawing.Size(237, 31);
-            this.flatField28.TabIndex = 133;
+            this.flatField28.TabIndex = 51;
             // 
             // txtEnterTown
             // 
@@ -1159,7 +1165,7 @@
             this.txtEnterTown.Location = new System.Drawing.Point(616, 574);
             this.txtEnterTown.Name = "txtEnterTown";
             this.txtEnterTown.Size = new System.Drawing.Size(237, 31);
-            this.txtEnterTown.TabIndex = 136;
+            this.txtEnterTown.TabIndex = 54;
             // 
             // flatField32
             // 
@@ -1175,7 +1181,7 @@
             this.flatField32.Location = new System.Drawing.Point(869, 354);
             this.flatField32.Name = "flatField32";
             this.flatField32.Size = new System.Drawing.Size(237, 31);
-            this.flatField32.TabIndex = 137;
+            this.flatField32.TabIndex = 31;
             // 
             // flatField33
             // 
@@ -1191,7 +1197,7 @@
             this.flatField33.Location = new System.Drawing.Point(64, 389);
             this.flatField33.Name = "flatField33";
             this.flatField33.Size = new System.Drawing.Size(237, 31);
-            this.flatField33.TabIndex = 138;
+            this.flatField33.TabIndex = 32;
             // 
             // flatField34
             // 
@@ -1207,7 +1213,7 @@
             this.flatField34.Location = new System.Drawing.Point(340, 391);
             this.flatField34.Name = "flatField34";
             this.flatField34.Size = new System.Drawing.Size(237, 31);
-            this.flatField34.TabIndex = 139;
+            this.flatField34.TabIndex = 33;
             // 
             // flatField35
             // 
@@ -1223,7 +1229,7 @@
             this.flatField35.Location = new System.Drawing.Point(64, 574);
             this.flatField35.Name = "flatField35";
             this.flatField35.Size = new System.Drawing.Size(237, 31);
-            this.flatField35.TabIndex = 140;
+            this.flatField35.TabIndex = 52;
             // 
             // flatField36
             // 
@@ -1238,7 +1244,7 @@
             this.flatField36.Location = new System.Drawing.Point(340, 500);
             this.flatField36.Name = "flatField36";
             this.flatField36.Size = new System.Drawing.Size(237, 31);
-            this.flatField36.TabIndex = 141;
+            this.flatField36.TabIndex = 45;
             // 
             // flatField37
             // 
@@ -1250,10 +1256,10 @@
             this.vehicleFiller.SetEntityField(this.flatField37, new CI.UIComponents.Filler.TextEntry("TreatmentDeviceModel", ""));
             this.netFiller.SetEntityField(this.flatField37, new CI.UIComponents.Filler.TextEntry("HCLZZXH", ""));
             this.flatField37.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField37.Location = new System.Drawing.Point(340, 609);
+            this.flatField37.Location = new System.Drawing.Point(618, 611);
             this.flatField37.Name = "flatField37";
             this.flatField37.Size = new System.Drawing.Size(237, 31);
-            this.flatField37.TabIndex = 142;
+            this.flatField37.TabIndex = 58;
             // 
             // txtCountry
             // 
@@ -1270,7 +1276,7 @@
             this.txtCountry.Location = new System.Drawing.Point(618, 537);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(237, 31);
-            this.txtCountry.TabIndex = 136;
+            this.txtCountry.TabIndex = 50;
             // 
             // flatField38
             // 
@@ -1282,10 +1288,10 @@
             this.vehicleFiller.SetEntityField(this.flatField38, new CI.UIComponents.Filler.TextEntry("ChassisModel", ""));
             this.netFiller.SetEntityField(this.flatField38, new CI.UIComponents.Filler.TextEntry("DPXH", ""));
             this.flatField38.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField38.Location = new System.Drawing.Point(340, 646);
+            this.flatField38.Location = new System.Drawing.Point(869, 609);
             this.flatField38.Name = "flatField38";
             this.flatField38.Size = new System.Drawing.Size(237, 31);
-            this.flatField38.TabIndex = 143;
+            this.flatField38.TabIndex = 59;
             // 
             // txtSignType
             // 
@@ -1303,7 +1309,7 @@
             this.txtSignType.Name = "txtSignType";
             this.txtSignType.ReadOnly = true;
             this.txtSignType.Size = new System.Drawing.Size(237, 31);
-            this.txtSignType.TabIndex = 108;
+            this.txtSignType.TabIndex = 43;
             // 
             // txtEmissionStandard
             // 
@@ -1320,7 +1326,7 @@
             this.txtEmissionStandard.Location = new System.Drawing.Point(618, 500);
             this.txtEmissionStandard.Name = "txtEmissionStandard";
             this.txtEmissionStandard.Size = new System.Drawing.Size(237, 31);
-            this.txtEmissionStandard.TabIndex = 144;
+            this.txtEmissionStandard.TabIndex = 46;
             // 
             // flatField30
             // 
@@ -1329,12 +1335,47 @@
             this.flatField30.Caption = "单车轴重: ";
             this.flatField30.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField30.CaptionWidth = 0;
+            this.vehicleFiller.SetEntityField(this.flatField30, new CI.UIComponents.Filler.TextEntry("AxleWeight", ""));
             this.netFiller.SetEntityField(this.flatField30, new CI.UIComponents.Filler.TextEntry("DCZZ", ""));
             this.flatField30.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField30.Location = new System.Drawing.Point(64, 648);
             this.flatField30.Name = "flatField30";
             this.flatField30.Size = new System.Drawing.Size(237, 31);
-            this.flatField30.TabIndex = 143;
+            this.flatField30.TabIndex = 60;
+            // 
+            // txtTreatmentDeviceType
+            // 
+            this.txtTreatmentDeviceType.AlwaysShowDropDownStyle = true;
+            this.txtTreatmentDeviceType.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtTreatmentDeviceType.BackColor = System.Drawing.Color.Transparent;
+            this.txtTreatmentDeviceType.Caption = "后处理装置类型:";
+            this.txtTreatmentDeviceType.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtTreatmentDeviceType.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtTreatmentDeviceType, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtTreatmentDeviceType, new CI.UIComponents.Filler.TextEntry("TreatmentDeviceTypeTxt", "TreatmentDeviceType"));
+            this.txtTreatmentDeviceType.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtTreatmentDeviceType.Location = new System.Drawing.Point(340, 611);
+            this.txtTreatmentDeviceType.Name = "txtTreatmentDeviceType";
+            this.txtTreatmentDeviceType.Size = new System.Drawing.Size(237, 31);
+            this.txtTreatmentDeviceType.TabIndex = 57;
+            // 
+            // txtFuleModel
+            // 
+            this.txtFuleModel.AlwaysShowDropDownStyle = true;
+            this.txtFuleModel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtFuleModel.BackColor = System.Drawing.Color.Transparent;
+            this.txtFuleModel.Caption = "燃料类型: ";
+            this.txtFuleModel.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtFuleModel.CaptionWidth = 0;
+            this.selectorFiller.SetEntityField(this.txtFuleModel, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtFuleModel, new CI.UIComponents.Filler.TextEntry("FuelModelTxt", "FuelModel"));
+            this.txtFuleModel.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtFuleModel.Location = new System.Drawing.Point(618, 251);
+            this.txtFuleModel.Name = "txtFuleModel";
+            this.txtFuleModel.ReadOnly = true;
+            this.txtFuleModel.Size = new System.Drawing.Size(237, 31);
+            this.txtFuleModel.Style = CI.Controls.FieldStyle.DropDown;
+            this.txtFuleModel.TabIndex = 18;
             // 
             // btnSend
             // 
@@ -1378,6 +1419,7 @@
             this.Controls.Add(this.txtCloseStableSys);
             this.Controls.Add(this.flatField20);
             this.Controls.Add(this.txtDK);
+            this.Controls.Add(this.txtTreatmentDeviceType);
             this.Controls.Add(this.txtHasHCL);
             this.Controls.Add(this.txtHasEgr);
             this.Controls.Add(this.flatField16);
@@ -1414,6 +1456,7 @@
             this.Controls.Add(this.flatField3);
             this.Controls.Add(this.txtQDXS);
             this.Controls.Add(this.txtCYS);
+            this.Controls.Add(this.txtFuleModel);
             this.Controls.Add(this.txtRLLB);
             this.Controls.Add(this.txtXH);
             this.Controls.Add(this.txtLJXSLC);
@@ -1510,5 +1553,7 @@
         private CI.Controls.FlatField txtEmissionStandard;
         private EASkins.Emi_Button_2 btnSend;
         private CI.UIComponents.Validate.Validator validator1;
+        private CI.Controls.FlatField txtTreatmentDeviceType;
+        private CI.Controls.FlatField txtFuleModel;
     }
 }
