@@ -243,7 +243,7 @@
             this.combQueryAera.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.combQueryAera.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
             this.combQueryAera.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.combQueryAera.DropDownHeight = 100;
+            this.combQueryAera.DropDownHeight = 200;
             this.combQueryAera.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combQueryAera.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.combQueryAera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
@@ -559,7 +559,7 @@
             this.flatField7.Caption = "排量(L):  ";
             this.flatField7.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
             this.flatField7.CaptionWidth = 0;
-            this.loginFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("pl", ""));
+            this.loginFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("FDJPL", ""));
             this.vehicleFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("Displacement", ""));
             this.netFiller.SetEntityField(this.flatField7, new CI.UIComponents.Filler.TextEntry("FDJPL", ""));
             this.flatField7.Font = new System.Drawing.Font("微软雅黑", 12F);
@@ -567,6 +567,8 @@
             this.flatField7.Name = "flatField7";
             this.flatField7.Size = new System.Drawing.Size(237, 31);
             this.flatField7.TabIndex = 21;
+            this.validator1.SetTaget(this.flatField7, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
+                ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空", "")))}));
             // 
             // txtJylb
             // 
@@ -1398,6 +1400,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.Controls.Add(this.txtEmissionStandard);
             this.Controls.Add(this.flatField38);
             this.Controls.Add(this.flatField30);

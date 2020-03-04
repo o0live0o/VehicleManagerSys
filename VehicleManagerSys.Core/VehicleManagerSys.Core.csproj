@@ -34,6 +34,9 @@
     <Reference Include="CI.UIComponents">
       <HintPath>..\..\src\CI.UIComponents.dll</HintPath>
     </Reference>
+    <Reference Include="HZH_Controls">
+      <HintPath>..\..\src\HZH_Controls.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\..\src\itextsharp.dll</HintPath>
     </Reference>
@@ -50,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

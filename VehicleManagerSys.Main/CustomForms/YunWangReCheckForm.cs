@@ -16,6 +16,7 @@ using HZH_Controls;
 using VehicleManagerSys.Entity.IVS;
 using Newtonsoft.Json;
 using VehicleManagerSys.Dtos;
+using System.Net;
 
 namespace VehicleManagerSys.Main.CustomForms
 {
@@ -101,15 +102,24 @@ namespace VehicleManagerSys.Main.CustomForms
                         hashtable.Add("JGBH", AppHelper.EnvironmentNetSetting.StationNo);
                         hashtable.Add("SFWGJC", optForm.IsCheckAppearance ? 1 : 0);
                         string writejson = JsonConvert.SerializeObject(hashtable);
-                        hashtable.Clear();
-                        hashtable.Add("jkid", "HWFDL");
-                        hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
-                        hashtable.Add("writejson", writejson);
-                        Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
-                        string str = httpRequest.HttpPost(AppHelper.EnvironmentNetSetting.Url, JsonConvert.SerializeObject(hashtable));
+
+                        WebClient webClient = new WebClient();
+                        string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "write/";
+                        var result = webClient.UploadValues(uploadUrl, new System.Collections.Specialized.NameValueCollection() {
+                   { "jkid","HWGCKS"},
+                   { "jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber},
+                   { "writejson", writejson},
+                });
+                        string s = Encoding.UTF8.GetString(result);
+                        //hashtable.Clear();
+                        //hashtable.Add("jkid", "HWFDL");
+                        //hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
+                        //hashtable.Add("writejson", writejson);
+                        //Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
+                        //string str = httpRequest.HttpPost(AppHelper.EnvironmentNetSetting.Url, JsonConvert.SerializeObject(hashtable));
 
                         hashtable.Clear();
-                        hashtable = JsonConvert.DeserializeObject<Hashtable>(str);
+                        hashtable = JsonConvert.DeserializeObject<Hashtable>(s);
                         message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
                         message.Succ = hashtable["code"] == null ? false :
                             (hashtable["code"].ToString().Equals("success") ? true : false);
@@ -121,6 +131,7 @@ namespace VehicleManagerSys.Main.CustomForms
                             message.Times = data["JYCS"].ToString();
                             message.DetectItem = data["JCFFDM"].ToString();
                             message.DetectItem = AppHelper.GetLocalType("JYXM", message.DetectItem);
+                            StartProcess(message.NetTestNo, message.Times);
                         }
 
                         if (message.Succ)
@@ -154,9 +165,9 @@ namespace VehicleManagerSys.Main.CustomForms
                             //                where p.GetValue(dispatchInfo, null) == null || string.IsNullOrEmpty(p.GetValue(dispatchInfo, null).ToString())
                             //                select p.Name).ToArray();
 
-                            bool succ = _mssqlHelper.InsertOrUpdate(dispatchInfo, null, new string[] { "HPHM", "VIN" }, new string[] { "ID","JCZL","LTGG" ,"ZJLWZT" ,"SFJMPZ","OBDJYY","WQYCY" ,"OBDCommCL" ,"OBDCommCX","Standard","VehicleKind","IsEFI","IsAsm","OBDOutlookID" ,"OutlookID","GGMINNMD","GGMAXNMD" });
+                            bool succ = _mssqlHelper.InsertOrUpdate(dispatchInfo, null, new string[] { "HPHM", "VIN" }, new string[] { "ID", "JCZL", "LTGG", "ZJLWZT", "SFJMPZ", "OBDJYY", "WQYCY", "OBDCommCL", "OBDCommCX", "Standard", "VehicleKind", "IsEFI", "IsAsm", "OBDOutlookID", "OutlookID", "GGMINNMD", "GGMAXNMD" });
                             if (succ)
-                                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！检验项目:"+message.DetectItem , ContentAlignment.MiddleCenter, 3000);
+                                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！检验项目:" + message.DetectItem, ContentAlignment.MiddleCenter, 3000);
                             else
                                 FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
                         }
@@ -172,5 +183,40 @@ namespace VehicleManagerSys.Main.CustomForms
             }
         }
 
+
+        private void StartProcess(string testNo, string testTimes)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("JYLSH", testNo);
+            dic.Add("JYCS", testTimes);
+            dic.Add("JGBH", AppHelper.EnvironmentNetSetting.StationNo);
+            dic.Add("JCXBH", AppHelper.EnvironmentNetSetting.LineNo);
+            dic.Add("TIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+
+            WebClient webClient = new WebClient();
+            string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "write/";
+            var result = webClient.UploadValues(uploadUrl, new System.Collections.Specialized.NameValueCollection() {
+                   { "jkid","HWGCKS"},
+                   { "jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber},
+                   { "writejson", JsonConvert.SerializeObject(dic)},
+                });
+            string s = Encoding.UTF8.GetString(result);
+            //Hashtable hashtable = new Hashtable();
+            //hashtable.Add("jkid", "HWGCKS");
+            //hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
+            //hashtable.Add("writejson", JsonConvert.SerializeObject(dic));
+            //Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
+            //string s = httpRequest.HttpPost("url", JsonConvert.SerializeObject(hashtable));
+
+            AppMessage message = new AppMessage() { Succ = false, Msg = "程序异常" };
+            Hashtable hashtable = new Hashtable();
+            hashtable = JsonConvert.DeserializeObject<Hashtable>(s);
+            message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
+            message.Succ = hashtable["code"] == null ? false :
+                (hashtable["code"].ToString().Equals("success") ? true : false);
+
+            FrmTips.ShowTips(AppHelper.MainForm, message.Msg, 2000, true, System.Drawing.ContentAlignment.BottomRight, null, TipsSizeMode.None, new System.Drawing.Size(300, 100));
+        }
     }
 }

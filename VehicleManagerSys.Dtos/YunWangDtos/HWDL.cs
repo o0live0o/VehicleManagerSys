@@ -239,6 +239,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置使用性质
         /// </summary>
         [Mapper("UseType")]
+        [Define("SYXZ")]
         public string SYXZDM
         {
             get;

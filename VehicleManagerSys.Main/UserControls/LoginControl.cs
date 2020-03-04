@@ -198,13 +198,13 @@ namespace VehicleManagerSys.Main.UserControls
                     vehicle_dispatch.FJXM = "";
                     vehicle_dispatch.YJXM = "";
                     vehicle_dispatch.JCZT_STATUS = "0";
-                    vehicle_dispatch.JYXM = message.DetectItem + ","; 
-
+                    vehicle_dispatch.JYXM = message.DetectItem + ",";
+                    vehicle_dispatch.VEHICLEID = vehicle_dispatch.HPZLDH + vehicle_dispatch.HPHM;
                     vehicle_dispatch.JCLSH = "P" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                     //更新联网流水号
                     string sql = $"UPDATE VehicleInfo SET TestNoForNet = '{message.NetTestNo}' WHERE  PlateNo = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
                     m_mssqlHelper.ExcuteNonQuery(sql,null);
-                    sql = $"UPDATE LOGIN_VEHICLE_INFO SET PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
+                    sql = $"UPDATE LOGIN_VEHICLE_INFO SET  JYXM = '{ vehicle_dispatch.JYXM}' , PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
                     m_mssqlHelper.ExcuteNonQuery(sql, null);
 
                     //carIgnoreArr = (from p in vehicle_dispatch.GetType().GetProperties()
@@ -218,14 +218,14 @@ namespace VehicleManagerSys.Main.UserControls
                             + "检测方法:"+message.DetectItem+ "检测次数:" + message.Times + Environment.NewLine 
                             + "联网流水号:" + message.NetTestNo, ContentAlignment.MiddleCenter, 5000);
                     else
-                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！"+message.Msg, ContentAlignment.MiddleCenter, 1000);
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！"+message.Msg, ContentAlignment.MiddleCenter, 3000);
                 }
                 else
-                    FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
+                    FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 3000);
             }
             catch (Exception ex)
             {
-                FrmTips.ShowTipsError(AppHelper.MainForm, "报检异常！" + ex.Message, ContentAlignment.MiddleCenter, 1000);
+                FrmTips.ShowTipsError(AppHelper.MainForm, "报检异常！" + ex.Message, ContentAlignment.MiddleCenter, 3000);
             }
             return succ;
         }
@@ -257,6 +257,8 @@ namespace VehicleManagerSys.Main.UserControls
                 //保存LOGIN_VEHICLE_INFO表
                 LOGIN_VEHICLE_INFO login_vehicle_info = new LOGIN_VEHICLE_INFO();
                 loginFiller.FillEntity(login_vehicle_info);
+   
+                login_vehicle_info.VEHICLEID = login_vehicle_info.HPZLDH + login_vehicle_info.HPHM;
                 login_vehicle_info.PPXH = login_vehicle_info.PP + login_vehicle_info.XH;
                 carIgnoreArr = (from p in login_vehicle_info.GetType().GetProperties()
                                 where p.GetValue(login_vehicle_info, null) == null || string.IsNullOrEmpty(p.GetValue(login_vehicle_info, null).ToString())
@@ -348,5 +350,7 @@ namespace VehicleManagerSys.Main.UserControls
             loginFiller.DisplayEntity(null);
             vehicleFiller.DisplayEntity(null);
         }
+
+
     }
 }

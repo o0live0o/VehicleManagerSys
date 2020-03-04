@@ -33,6 +33,7 @@
             this.flatField3 = new CI.Controls.FlatField();
             this.settingFiller = new CI.UIComponents.Filler.EntityFiller();
             this.btnSave = new EASkins.Ami_Button_2();
+            this.flatField4 = new CI.Controls.FlatField();
             this.SuspendLayout();
             // 
             // flatField2
@@ -92,6 +93,20 @@
             this.btnSave.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // flatField4
+            // 
+            this.flatField4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flatField4.BackColor = System.Drawing.Color.Transparent;
+            this.flatField4.Caption = "线号:     ";
+            this.flatField4.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField4.CaptionWidth = 0;
+            this.settingFiller.SetEntityField(this.flatField4, new CI.UIComponents.Filler.TextEntry("LineNo", ""));
+            this.flatField4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.flatField4.Location = new System.Drawing.Point(211, 247);
+            this.flatField4.Name = "flatField4";
+            this.flatField4.Size = new System.Drawing.Size(382, 31);
+            this.flatField4.TabIndex = 11;
+            // 
             // NetSetting_YW_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -99,6 +114,7 @@
             this.CanMove = false;
             this.ClientSize = new System.Drawing.Size(784, 495);
             this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.flatField4);
             this.Controls.Add(this.flatField3);
             this.Controls.Add(this.flatField1);
             this.Controls.Add(this.flatField2);
@@ -109,6 +125,7 @@
             this.Controls.SetChildIndex(this.flatField2, 0);
             this.Controls.SetChildIndex(this.flatField1, 0);
             this.Controls.SetChildIndex(this.flatField3, 0);
+            this.Controls.SetChildIndex(this.flatField4, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.ResumeLayout(false);
 
@@ -121,5 +138,6 @@
         private CI.Controls.FlatField flatField3;
         private CI.UIComponents.Filler.EntityFiller settingFiller;
         private EASkins.Ami_Button_2 btnSave;
+        private CI.Controls.FlatField flatField4;
     }
 }
