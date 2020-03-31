@@ -1538,6 +1538,7 @@ namespace VehicleManagerSys.Core.Services
                         manualTestResult manualTest3 = new manualTestResult();
                         manualTest3.detectCls = "3";
                         manualTest3.evaluate = m_RESULT_CHASISS_MANUAL_ZJ.WGJC_PD.To_Net_ZJPD();
+                        if (manualTest3.evaluate.Equals("0")) manualTest3.evaluate = "1"; 
                         manualTest3.unqualifiedItem = m_RESULT_CHASISS_MANUAL_ZJ.WGJC_MS.ManualMsg();
                         listManualTest.Add(manualTest3);
 
@@ -1545,6 +1546,7 @@ namespace VehicleManagerSys.Core.Services
                         manualTestResult manualTest4 = new manualTestResult();
                         manualTest4.detectCls = "4";
                         manualTest4.evaluate = m_RESULT_CHASISS_MANUAL_ZJ.YXJC_PD.To_Net_ZJPD();
+                        if (manualTest4.evaluate.Equals("0")) manualTest4.evaluate = "1";
                         manualTest4.unqualifiedItem = m_RESULT_CHASISS_MANUAL_ZJ.YXJC_MS.ManualMsg();
                         listManualTest.Add(manualTest4);
 
@@ -2466,11 +2468,36 @@ namespace VehicleManagerSys.Core.Services
                         listPerforItem.Add(perforItem79);
                     }
                 }
-
+                //陕西增加悬架
                 if (DetectItem.Contains("U") && m_RESULT_SUSPENSION != null)
                 {
                     performanceItem perforItem80 = new performanceItem();
-                    //perforItem79.itemCode = "slip_second_wheel";
+                    perforItem80.itemCode = "front_axlelr_suspension_absorptivity";
+                    perforItem80.detectData = (m_RESULT_SUSPENSION.QZZLXSLV ?? "-").To_Double(1) +"/"+ (m_RESULT_SUSPENSION.QZYLXSLV ?? "-").To_Double(1);
+                    perforItem80.standardValue = "≥40";
+                    perforItem80.evaluate = m_RESULT_SUSPENSION.QZXSLVC_PD.To_Net_ZJPD();
+                    listPerforItem.Add(perforItem80);
+
+                    performanceItem perforItem81 = new performanceItem();
+                    perforItem81.itemCode = "front_axlelr_suspension_absorptivity_difference";
+                    perforItem81.detectData = m_RESULT_SUSPENSION.QZXSLVC.To_Double(1);
+                    perforItem81.standardValue = "≤15";
+                    perforItem81.evaluate = m_RESULT_SUSPENSION.QZXSLVC_PD.To_Net_ZJPD();
+                    listPerforItem.Add(perforItem81);
+
+                    performanceItem perforItem82 = new performanceItem();
+                    perforItem82.itemCode = "back_axlelr_suspension_absorptivity";
+                    perforItem82.detectData = (m_RESULT_SUSPENSION.HZZLXSLV?? "-").To_Double(1) + "/" + (m_RESULT_SUSPENSION.HZYLXSLV ??"-").To_Double(1);
+                    perforItem82.standardValue = "≥40";
+                    perforItem82.evaluate = m_RESULT_SUSPENSION.HZXSLVC_PD.To_Net_ZJPD();
+                    listPerforItem.Add(perforItem82);
+
+                    performanceItem perforItem83 = new performanceItem();
+                    perforItem83.itemCode = "back_axlelr_suspension_absorptivity_difference";
+                    perforItem83.detectData = m_RESULT_SUSPENSION.HZXSLVC.To_Double(1);
+                    perforItem83.standardValue = "≤15";
+                    perforItem83.evaluate = m_RESULT_SUSPENSION.HZXSLVC_PD.To_Net_ZJPD();
+                    listPerforItem.Add(perforItem83);
                 }
                 //}
                 if(!IsNew)

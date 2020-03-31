@@ -106,11 +106,12 @@ namespace VehicleManagerSys.Main.CustomForms
                         WebClient webClient = new WebClient();
                         string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "write/";
                         var result = webClient.UploadValues(uploadUrl, new System.Collections.Specialized.NameValueCollection() {
-                   { "jkid","HWGCKS"},
+                   { "jkid","HWFDL"},
                    { "jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber},
                    { "writejson", writejson},
                 });
                         string s = Encoding.UTF8.GetString(result);
+                        LogHelper.Trace("[复检申请]:"+s);
                         //hashtable.Clear();
                         //hashtable.Add("jkid", "HWFDL");
                         //hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
@@ -169,15 +170,16 @@ namespace VehicleManagerSys.Main.CustomForms
                             if (succ)
                                 FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！检验项目:" + message.DetectItem, ContentAlignment.MiddleCenter, 3000);
                             else
-                                FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
+                                FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 3000);
                         }
                         else
-                            FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 1000);
+                            FrmTips.ShowTips(AppHelper.MainForm, message.Msg, 3000, true, System.Drawing.ContentAlignment.MiddleCenter, null, TipsSizeMode.None, new System.Drawing.Size(400, 200));
+                        //FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 3000);
                     }
                     catch (Exception ex)
                     {
                         message.Msg = ex.Message;
-                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检异常！" + ex.Message, ContentAlignment.MiddleCenter, 1000);
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检异常！" + ex.Message, ContentAlignment.MiddleCenter, 3000);
                     }
                 }
             }
@@ -202,6 +204,7 @@ namespace VehicleManagerSys.Main.CustomForms
                    { "writejson", JsonConvert.SerializeObject(dic)},
                 });
             string s = Encoding.UTF8.GetString(result);
+            LogHelper.Trace("[复检开始]:" + s);
             //Hashtable hashtable = new Hashtable();
             //hashtable.Add("jkid", "HWGCKS");
             //hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);

@@ -11,6 +11,9 @@ using System.Globalization;
 using System.Timers;
 using System.IO;
 using VehicleManagerSys.Dtos.ComprehensiveDtos;
+using HZH_Controls.Forms;
+using VehicleManagerSys.Common;
+using System.Threading;
 
 namespace VehicleManagerSys.Main.Controls
 {
@@ -86,6 +89,24 @@ namespace VehicleManagerSys.Main.Controls
             {
 
             }
+        }
+
+        private void AddImg(string path)
+        {
+           int count =  eloamThumbnail.GetCount();
+            int j = 99;
+            for (int i = 0; i < count; i++)
+            {
+                if (eloamThumbnail.GetFileName(i).Equals(path))
+                {
+                    j = i;
+                }
+            }
+            if (j != 99)
+            {
+                eloamThumbnail.Remove(j, false);
+            }
+            eloamThumbnail.Add(path);
         }
 
         public void FormInit()
@@ -343,47 +364,64 @@ namespace VehicleManagerSys.Main.Controls
 
 
 
-
+        private static bool _onCapture = false;
 
 
 
         private void shoot_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(combImgList.Text))
+            if (!_onCapture)
             {
-                MessageBox.Show("请选择拍照类型！");
-                return;
-            }
-
-            if (null == m_pVideo)
-            {
-                return;
-            }
-
-            EloamView tempView = (EloamView)eloamView.GetView();
-            EloamImage tempImage = (EloamImage)m_pVideo.CreateImage(0, tempView);
-
-            if (null != tempImage)
-            {
-                if(!Directory.Exists(CapturePath))
+                shoot.Enabled = false;
+                try
                 {
-                    Directory.CreateDirectory(CapturePath);
+                    _onCapture = true;
+                    if (string.IsNullOrEmpty(combImgList.Text))
+                    {
+                        MessageBox.Show("请选择拍照类型！");
+                        return;
+                    }
+
+                    if (null == m_pVideo)
+                    {
+                        return;
+                    }
+
+                    EloamView tempView = (EloamView)eloamView.GetView();
+                    EloamImage tempImage = (EloamImage)m_pVideo.CreateImage(0, tempView);
+
+                    if (null != tempImage)
+                    {
+                        if (!Directory.Exists(CapturePath))
+                        {
+                            Directory.CreateDirectory(CapturePath);
+                        }
+
+                        string filename = Path.Combine(CapturePath, combImgList.Text + ".jpg");
+
+                        if (tempImage.Save(filename, 0))
+                        {
+                            eloamView.PlayCaptureEffect();
+                            //LoadImg();
+                            AddImg(filename);
+                            //  eloamThumbnail.Add(filename);
+                        }
+                        else
+                        {
+                            MessageBox.Show("保存失败，请检查保存路径设置是否正确!");
+                        }
+                    }
+
                 }
-
-                string filename = Path.Combine(CapturePath, combImgList.Text + ".jpg");
-
-                if (tempImage.Save(filename, 0))
+                catch (Exception ex)
                 {
-                    eloamView.PlayCaptureEffect();
-                    LoadImg();
-                  //  eloamThumbnail.Add(filename);
-                  
+                    FrmTips.ShowTipsSuccess(AppHelper.MainForm, "拍照失败！" + ex.Message, ContentAlignment.MiddleCenter, 3000);
                 }
-                else
+                finally
                 {
-                    MessageBox.Show("保存失败，请检查保存路径设置是否正确!");
+                    _onCapture = false;
+                    shoot.Enabled = true;
                 }
-
             }
         }
 
@@ -487,8 +525,22 @@ namespace VehicleManagerSys.Main.Controls
                         selectResolution.Items.Add(str);
                     }
                     selectResolution.SelectedIndex = 0;
+                    try
+                    {
+                        foreach (var item in selectResolution.Items)
+                        {
+                            if (item.ToString().Contains("1920"))
+                            {
+                                selectResolution.SelectedItem = item;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    { }
                 }
             }
+
+
         }
 
         private void CaptureEloam_Load(object sender, EventArgs e)

@@ -35,6 +35,7 @@ namespace VehicleManagerSys.Main.CustomForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
             settingFiller.FillEntity(AppHelper.DbSetting);
             File.WriteAllText(AppHelper.DbConfigFile, JsonConvert.SerializeObject(AppHelper.DbSetting, Formatting.Indented));
             FrmTips.ShowTips(AppHelper.MainForm, "保存成功", 1000, true, ContentAlignment.MiddleCenter, null, TipsSizeMode.Medium, new Size(300, 50), TipsState.Success);

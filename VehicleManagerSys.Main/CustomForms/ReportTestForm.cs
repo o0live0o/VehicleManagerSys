@@ -31,7 +31,8 @@ namespace VehicleManagerSys.Main.CustomForms
             Stopwatch stopwatch1 = new Stopwatch();
             stopwatch.Start();
            
-            Bitmap bitmap = safetyTechnologyReport.CreateReport();
+            Bitmap bitmap = safetyTechnologyReport.CreateDeviceReprot();
+            bitmap.Save("DeviceTest.png");
             stopwatch.Stop();
             long i = stopwatch.ElapsedMilliseconds;
             label3.Text = i.ToString();

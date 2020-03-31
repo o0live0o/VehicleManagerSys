@@ -32,9 +32,9 @@ namespace VehicleManagerSys.Main
         {
             ControlHelper.FreezeControl(this, true);
             TreeNode tnLogin = new TreeNode("车辆报检");
-            tnLogin.Nodes.Add("环保报检");
-            tnLogin.Nodes.Add("环保报检(云网)");
-            tnLogin.Nodes.Add("环保复检(云网)");
+            //tnLogin.Nodes.Add("环保报检");
+            //tnLogin.Nodes.Add("环保报检(云网)");
+            //tnLogin.Nodes.Add("环保复检(云网)");
             this.tvMenu.Nodes.Add(tnLogin);
 
             TreeNode tnDataManager = new TreeNode("数据管理");
@@ -45,8 +45,8 @@ namespace VehicleManagerSys.Main
             TreeNode tnSetting = new TreeNode("系统管理");
             tnSetting.Nodes.Add("系统设置");
             tnSetting.Nodes.Add("综检联网配置");
-            tnSetting.Nodes.Add("环保联网配置");
-            tnSetting.Nodes.Add("字段转换配置");
+            //tnSetting.Nodes.Add("环保联网配置");
+            //tnSetting.Nodes.Add("字段转换配置");
             this.tvMenu.Nodes.Add(tnSetting);
         }
 
@@ -123,6 +123,7 @@ namespace VehicleManagerSys.Main
         //窗体最大化
         private void FullScreen()
         {
+            return;
             this.Width = SystemInformation.WorkingArea.Width;
             this.Height = SystemInformation.WorkingArea.Height;
             this.Location = new Point(0,0);

@@ -150,7 +150,6 @@
             this.Controls.Add(this.emi_Separator1);
             this.Controls.Add(this.tvMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Shown += new System.EventHandler(this.MainForm_Shown);

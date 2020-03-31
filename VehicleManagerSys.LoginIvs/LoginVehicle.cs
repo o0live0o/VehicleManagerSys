@@ -18,7 +18,9 @@ namespace VehicleManagerSys.LoginIvs
                 string[] carIgnoreArr = (from p in vehicleInfo.GetType().GetProperties()
                                          where p.GetValue(vehicleInfo, null) == null || string.IsNullOrEmpty(p.GetValue(vehicleInfo, null).ToString())
                                          select p.Name).ToArray();
-                result.Succ = m_mssqlHelper.InsertOrUpdate(vehicleInfo, null, new string[] { "HPHM","VIN" }, carIgnoreArr);
+                result.Succ = m_mssqlHelper.InsertOrUpdate(vehicleInfo, null, new string[] { "HPHM" }, carIgnoreArr);
+
+
             }
             catch (Exception ex)
             {

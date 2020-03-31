@@ -109,6 +109,12 @@
     <Compile Include="Controls\CaptureElo.Designer.cs">
       <DependentUpon>CaptureElo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UCCheckBoxContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UCCheckBoxContainer.Designer.cs">
+      <DependentUpon>UCCheckBoxContainer.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomCache\CheckItemCache.cs" />
     <Compile Include="CustomForms\AreaCodeForm.cs">
       <SubType>Form</SubType>
@@ -139,6 +145,12 @@
     </Compile>
     <Compile Include="CustomForms\ValChangeForm.Designer.cs">
       <DependentUpon>ValChangeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForms\VehicleSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\VehicleSelectForm.Designer.cs">
+      <DependentUpon>VehicleSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomForms\YunWangReCheckOptForm.cs">
       <SubType>Form</SubType>
@@ -240,6 +252,9 @@
     </Compile>
     <EmbeddedResource Include="Controls\CaptureElo.resx">
       <DependentUpon>CaptureElo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UCCheckBoxContainer.resx">
+      <DependentUpon>UCCheckBoxContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\AreaCodeForm.resx">
       <DependentUpon>AreaCodeForm.cs</DependentUpon>

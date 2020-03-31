@@ -34,6 +34,7 @@
             this.flatField4 = new CI.Controls.FlatField();
             this.settingFiller = new CI.UIComponents.Filler.EntityFiller();
             this.btnSave = new EASkins.Ami_Button_2();
+            this.ucCheckBoxContainer1 = new VehicleManagerSys.Main.Controls.UCCheckBoxContainer();
             this.SuspendLayout();
             // 
             // flatField2
@@ -107,12 +108,24 @@
             this.btnSave.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // ucCheckBoxContainer1
+            // 
+            this.ucCheckBoxContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucCheckBoxContainer1.Location = new System.Drawing.Point(32, 378);
+            this.ucCheckBoxContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ucCheckBoxContainer1.Name = "ucCheckBoxContainer1";
+            this.ucCheckBoxContainer1.Size = new System.Drawing.Size(740, 104);
+            this.ucCheckBoxContainer1.TabIndex = 14;
+            // 
             // DbSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CanMove = false;
             this.ClientSize = new System.Drawing.Size(784, 495);
+            this.Controls.Add(this.ucCheckBoxContainer1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.flatField4);
             this.Controls.Add(this.flatField3);
@@ -127,6 +140,7 @@
             this.Controls.SetChildIndex(this.flatField3, 0);
             this.Controls.SetChildIndex(this.flatField4, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
+            this.Controls.SetChildIndex(this.ucCheckBoxContainer1, 0);
             this.ResumeLayout(false);
 
         }
@@ -139,5 +153,6 @@
         private CI.Controls.FlatField flatField4;
         private CI.UIComponents.Filler.EntityFiller settingFiller;
         private EASkins.Ami_Button_2 btnSave;
+        private Controls.UCCheckBoxContainer ucCheckBoxContainer1;
     }
 }

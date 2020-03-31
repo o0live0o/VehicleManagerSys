@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Live0xUtils.DbUtils.SqlServer;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,7 +38,7 @@ namespace VehicleManagerSys.Common
 
         public static volatile object AppLocker = new object();
 
-
+        public static MssqlHelper Db = null;
 
         static AppHelper()
         {
@@ -85,6 +86,11 @@ namespace VehicleManagerSys.Common
             {
                 throw;
             }
+        }
+
+        public void InitDb()
+        {
+            Db = MssqlHelper.GetInstance();
         }
 
         public bool InitNetDefine()

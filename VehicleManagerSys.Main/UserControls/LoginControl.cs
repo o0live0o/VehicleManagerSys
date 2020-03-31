@@ -184,11 +184,12 @@ namespace VehicleManagerSys.Main.UserControls
             try
             {
                 m_vehicleInfo = new VehicleInfo();
+
                 FillEntity(m_vehicleInfo); //m_vehicleInfo.TestNoForNet
-
-              
-
                  AppMessage message = m_vehicleBusiness.SendCar(m_vehicleInfo);
+
+
+
                 if (message.Succ)
                 {
                     VEHICLE_DISPATCH vehicle_dispatch = new VEHICLE_DISPATCH();
@@ -202,16 +203,16 @@ namespace VehicleManagerSys.Main.UserControls
                     vehicle_dispatch.VEHICLEID = vehicle_dispatch.HPZLDH + vehicle_dispatch.HPHM;
                     vehicle_dispatch.JCLSH = "P" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                     //更新联网流水号
-                    string sql = $"UPDATE VehicleInfo SET TestNoForNet = '{message.NetTestNo}' WHERE  PlateNo = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
+                    string sql = $"UPDATE VehicleInfo SET TestNoForNet = '{message.NetTestNo}' WHERE  PlateNo = '{m_vehicleInfo.PlateNo}'";
                     m_mssqlHelper.ExcuteNonQuery(sql,null);
-                    sql = $"UPDATE LOGIN_VEHICLE_INFO SET  JYXM = '{ vehicle_dispatch.JYXM}' , PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}' AND  VIN = '{m_vehicleInfo.VIN}'";
+                    sql = $"UPDATE LOGIN_VEHICLE_INFO SET  JYXM = '{ vehicle_dispatch.JYXM}' , PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}'";
                     m_mssqlHelper.ExcuteNonQuery(sql, null);
 
                     //carIgnoreArr = (from p in vehicle_dispatch.GetType().GetProperties()
                     //                where p.GetValue(vehicle_dispatch, null) == null || string.IsNullOrEmpty(p.GetValue(vehicle_dispatch, null).ToString())
                     //                select p.Name).ToArray();
                     carIgnoreArr = new string[] { "ID", "JCZL", "LTGG", "ZJLWZT", "SFJMPZ", "OBDJYY", "WQYCY", "OBDCommCL", "OBDCommCX", "Standard", "VehicleKind", "IsEFI", "IsAsm", "OBDOutlookID", "OutlookID", "GGMINNMD", "GGMAXNMD" };
-                    succ = m_mssqlHelper.InsertOrUpdate(vehicle_dispatch, null, new string[] { "HPHM", "VIN" }, carIgnoreArr);
+                    succ = m_mssqlHelper.InsertOrUpdate(vehicle_dispatch, null, new string[] { "HPHM" }, carIgnoreArr);
 
                     if (succ)
                         FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！"
@@ -248,7 +249,7 @@ namespace VehicleManagerSys.Main.UserControls
                 carIgnoreArr = (from p in m_vehicleInfo.GetType().GetProperties()
                                 where p.GetValue(m_vehicleInfo, null) == null || string.IsNullOrEmpty(p.GetValue(m_vehicleInfo, null).ToString())
                                 select p.Name).ToArray();
-                succ = m_mssqlHelper.InsertOrUpdate(m_vehicleInfo, null, new string[] { "PlateNo", "VIN" }, carIgnoreArr);
+                succ = m_mssqlHelper.InsertOrUpdate(m_vehicleInfo, null, new string[] { "PlateNo" }, carIgnoreArr);
                 if (succ)
                     FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存VehicleInfo成功！", ContentAlignment.MiddleCenter, 1000);
                 else
@@ -263,7 +264,7 @@ namespace VehicleManagerSys.Main.UserControls
                 carIgnoreArr = (from p in login_vehicle_info.GetType().GetProperties()
                                 where p.GetValue(login_vehicle_info, null) == null || string.IsNullOrEmpty(p.GetValue(login_vehicle_info, null).ToString())
                                 select p.Name).ToArray();
-                succ = m_mssqlHelper.InsertOrUpdate(login_vehicle_info, null, new string[] { "HPHM", "VIN" }, carIgnoreArr);
+                succ = m_mssqlHelper.InsertOrUpdate(login_vehicle_info, null, new string[] { "HPHM" }, carIgnoreArr);
                 if (succ)
                     FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存LOGIN_VEHICLE_INFO成功！", ContentAlignment.MiddleCenter, 1000);
                 else

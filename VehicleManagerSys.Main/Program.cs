@@ -34,7 +34,7 @@ namespace VehicleManagerSys.Main
                         AppHelper.DbSetting.DataBaseUser,
                         AppHelper.DbSetting.DataBasePwd);
                 //Application.Run(new ReportTestForm());
-                //return;01065299445
+                //return;//01065299445
                 LoginForm loginForm = new LoginForm();
                 DialogResult dialogResult = loginForm.ShowDialog();
                 if (dialogResult == DialogResult.OK)
@@ -46,7 +46,10 @@ namespace VehicleManagerSys.Main
                         {
                             frmLoading.CurrentMsg = new KeyValuePair<int, string>(10, "正在加载常量...");
                             AppHelper.GetInstance().LoadContsatnt();
+                            frmLoading.CurrentMsg = new KeyValuePair<int, string>(30, "正在加载常量...");
                             AppHelper.GetInstance().InitNetDefine();
+                            frmLoading.CurrentMsg = new KeyValuePair<int, string>(50, "正在加载常量...");
+                            AppHelper.GetInstance().InitDb();
                             frmLoading.CurrentMsg = new KeyValuePair<int, string>(100, "加载完成！");
                         }
                         catch (Exception ex)
@@ -55,6 +58,7 @@ namespace VehicleManagerSys.Main
                         }
                     };
                     frmLoading.ShowDialog();
+                    
                         Application.Run(new MainForm());
                 }
                 else

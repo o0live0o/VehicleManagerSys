@@ -1,6 +1,7 @@
 ﻿using CI.UIComponents.Helper;
 using CI.UIComponents.Selector;
 using HZH_Controls.Forms;
+using Live0xUtils.DbUtils.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -210,17 +211,36 @@ namespace VehicleManagerSys.Main.CustomForms
               
                 ILoginVehicle loginVehicle = SimpleFactory.GetObjcet<ILoginVehicle>();
                 Result<string> result = loginVehicle.Login<LOGIN_VEHICLE_INFO>(info);
+
                 if (result.Succ)
                 {
-                    FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存成功！", ContentAlignment.MiddleCenter, 1000);
-                    ResetLogin();
+                    VEHICLE_DISPATCH vehicle_dispatch = new VEHICLE_DISPATCH();
+                    vehicleFiller.FillEntity(vehicle_dispatch);
+                    vehicle_dispatch.FJXM = "";
+                    vehicle_dispatch.YJXM = "";
+                    vehicle_dispatch.JCZT_STATUS = "0";
+                    vehicle_dispatch.JYXM = checkItem.ItemCode;
+                    vehicle_dispatch.VEHICLEID = vehicle_dispatch.HPZLDH + vehicle_dispatch.HPHM;
+                    vehicle_dispatch.JCLSH = "P" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    MssqlHelper m_mssqlHelper = MssqlHelper.GetInstance();
+                    string[] carIgnoreArr = new string[] { "ID", "JCZL", "LTGG", "ZJLWZT", "SFJMPZ", "OBDJYY", "WQYCY", "OBDCommCL", "OBDCommCX", "Standard", "VehicleKind", "IsEFI", "IsAsm", "OBDOutlookID", "OutlookID", "GGMINNMD", "GGMAXNMD" };
+                    bool succ = m_mssqlHelper.InsertOrUpdate(vehicle_dispatch, null, new string[] { "HPHM" }, carIgnoreArr);
+                    if (succ)
+                    {
+                        FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存成功！", ContentAlignment.MiddleCenter, 1000);
+                        ResetLogin();
+                    }
+                    else
+                    {
+                        FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！" + result.Msg, ContentAlignment.MiddleCenter, 3000);
+                    }
                 }
                 else
-                    FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！"+ result.Msg, ContentAlignment.MiddleCenter, 1000);
+                    FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！" + result.Msg, ContentAlignment.MiddleCenter, 3000);
             }
             catch (Exception ex)
             {
-                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！"+ex.Message, ContentAlignment.MiddleCenter, 1000);
+                FrmTips.ShowTipsSuccess(AppHelper.MainForm, "保存失败！"+ex.Message, ContentAlignment.MiddleCenter, 3000);
             }
         }
 

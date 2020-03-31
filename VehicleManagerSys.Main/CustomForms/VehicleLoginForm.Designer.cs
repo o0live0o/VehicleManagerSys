@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtHPHM = new CI.Controls.FlatField();
             this.txtHPZL = new CI.Controls.FlatField();
             this.selectorFiller = new CI.UIComponents.Filler.EntityFiller();
@@ -76,9 +76,9 @@
             this.flatField6 = new CI.Controls.FlatField();
             this.flatField8 = new CI.Controls.FlatField();
             this.flatField11 = new CI.Controls.FlatField();
+            this.flatField12 = new CI.Controls.FlatField();
             this.btnClear = new EASkins.Ami_Button_2();
             this.validator1 = new CI.UIComponents.Validate.Validator();
-            this.flatField12 = new CI.Controls.FlatField();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).BeginInit();
             this.SuspendLayout();
             // 
@@ -784,7 +784,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(74, 23);
             this.btnSave.TabIndex = 68;
-            this.btnSave.Text = "保 存";
+            this.btnSave.Text = "发 送";
             this.btnSave.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -798,14 +798,14 @@
             this.dgvCheckItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCheckItem.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvCheckItem.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCheckItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCheckItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCheckItem.ColumnHeadersHeight = 40;
             this.dgvCheckItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -817,8 +817,8 @@
             this.dgvCheckItem.Name = "dgvCheckItem";
             this.dgvCheckItem.RowHeadersVisible = false;
             this.dgvCheckItem.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvCheckItem.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dgvCheckItem.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCheckItem.RowTemplate.Height = 23;
             this.dgvCheckItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCheckItem.Size = new System.Drawing.Size(194, 371);
@@ -907,21 +907,6 @@
             this.validator1.SetTaget(this.flatField11, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
                 ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
             // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.btnClear.Image = null;
-            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClear.Location = new System.Drawing.Point(673, 77);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(74, 23);
-            this.btnClear.TabIndex = 72;
-            this.btnClear.Text = "清 空";
-            this.btnClear.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
             // flatField12
             // 
             this.flatField12.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -937,6 +922,21 @@
             this.flatField12.TabIndex = 73;
             this.validator1.SetTaget(this.flatField12, new CI.UIComponents.Validate.TextTaget(new CI.UIComponents.Validate.BaseValidator[] {
                 ((CI.UIComponents.Validate.BaseValidator)(new CI.UIComponents.Validate.RequiredFieldValidator("不能为空！", "")))}));
+            // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.btnClear.Image = null;
+            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClear.Location = new System.Drawing.Point(673, 77);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(74, 23);
+            this.btnClear.TabIndex = 72;
+            this.btnClear.Text = "清 空";
+            this.btnClear.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // VehicleLoginForm
             // 

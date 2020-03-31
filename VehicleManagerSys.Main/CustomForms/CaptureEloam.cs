@@ -11,6 +11,8 @@ using System.Globalization;
 using System.Timers;
 using System.IO;
 using VehicleManagerSys.Dtos.ComprehensiveDtos;
+using VehicleManagerSys.Common;
+using System.Threading;
 
 namespace VehicleManagerSys.Main.CustomForms
 {
@@ -349,41 +351,54 @@ namespace VehicleManagerSys.Main.CustomForms
 
         private void shoot_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(combImgList.Text))
+            try
             {
-                MessageBox.Show("请选择拍照类型！");
-                return;
+                shoot.Enabled = false;
+                if (string.IsNullOrEmpty(combImgList.Text))
+                {
+                    MessageBox.Show("请选择拍照类型！");
+                    return;
+                }
+
+                if (null == m_pVideo)
+                {
+                    return;
+                }
+
+                EloamView tempView = (EloamView)eloamView.GetView();
+                EloamImage tempImage = (EloamImage)m_pVideo.CreateImage(0, tempView);
+
+                if (null != tempImage)
+                {
+                    if (!Directory.Exists(CapturePath))
+                    {
+                        Directory.CreateDirectory(CapturePath);
+                    }
+
+                    string filename = Path.Combine(CapturePath, combImgList.Text + ".jpg");
+
+                    if (tempImage.Save(filename, 0))
+                    {
+                        eloamView.PlayCaptureEffect();
+                        LoadImg();
+                        //  eloamThumbnail.Add(filename);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("保存失败，请检查保存路径设置是否正确!");
+                    }
+
+                }
             }
-
-            if (null == m_pVideo)
+            catch (Exception ex)
             {
-                return;
+                LogHelper.Error("拍照失败："+ex.Message);
             }
-
-            EloamView tempView = (EloamView)eloamView.GetView();
-            EloamImage tempImage = (EloamImage)m_pVideo.CreateImage(0, tempView);
-
-            if (null != tempImage)
+            finally
             {
-                if(!Directory.Exists(CapturePath))
-                {
-                    Directory.CreateDirectory(CapturePath);
-                }
-
-                string filename = Path.Combine(CapturePath, combImgList.Text + ".jpg");
-
-                if (tempImage.Save(filename, 0))
-                {
-                    eloamView.PlayCaptureEffect();
-                    LoadImg();
-                  //  eloamThumbnail.Add(filename);
-                  
-                }
-                else
-                {
-                    MessageBox.Show("保存失败，请检查保存路径设置是否正确!");
-                }
-
+                Thread.Sleep(500);
+                shoot.Enabled = true;
             }
         }
 
