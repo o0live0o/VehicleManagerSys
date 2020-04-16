@@ -604,7 +604,6 @@
             this.checkBox4.TabIndex = 46;
             this.checkBox4.Text = "默认外检全合格";
             this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.Visible = false;
             // 
             // ComprehensiveUploadSettingForm
             // 

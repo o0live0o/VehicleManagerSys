@@ -60,12 +60,20 @@ namespace VehicleManagerSys.Core.Services
         private string R = "右";
 
         private string m_Base64 = "";
+        private string m_testNo = "";
 
         public ComprehensiveUploadService(RESULT_VEHICLE_INFO resultInfo)
         {
                m_RESULT_VEHICLE_INFO = CloneHelper.Clone(resultInfo) as RESULT_VEHICLE_INFO;
         }
 
+        //发完车就登录综检用
+        public ComprehensiveUploadService(string testNo)
+        {
+            if (string.IsNullOrEmpty(testNo.Trim()))
+                throw new Exception("检测流水号不能为空");
+            m_testNo = testNo;
+        }
 
         public void InitData(LogDelegate logDelegate)
         {
@@ -82,7 +90,7 @@ namespace VehicleManagerSys.Core.Services
                     logDelegate.BeginInvoke("获取基本信息失败！",Color.Red,null,null);
                     return;
                 }
-                if (!m_LOGIN_VEHICLE_INFO.CLZLDH.Contains("K") || m_LOGIN_VEHICLE_INFO.CLZLDH == "B2K")
+                if (m_LOGIN_VEHICLE_INFO.CLZLDH == null || !m_LOGIN_VEHICLE_INFO.CLZLDH.Contains("K") || m_LOGIN_VEHICLE_INFO.CLZLDH == "B2K")
                 {
                     IsHC = true;
                 }
@@ -333,9 +341,238 @@ namespace VehicleManagerSys.Core.Services
             }
         }
 
-        //上传信息
-        public void ShareDetectInfo(LogDelegate logDelegate, bool UseSafetyTechnologyResult)
+        private string CombineJson(object obj, string type)
         {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add("CompanyId", AppHelper.ComprehensiveSetting.CompanyId);
+            dic.Add("Source", AppHelper.ComprehensiveSetting.AdministrativeAera);
+            dic.Add("IPCType", type);
+            JsonSerializerSettings setting = new JsonSerializerSettings(); 
+            setting.NullValueHandling = NullValueHandling.Ignore;
+            string s = JsonConvert.SerializeObject(obj, Formatting.Indented, setting);
+            if (AppHelper.ComprehensiveSetting.WriteJson)
+            {
+                File.WriteAllText(Path.Combine(AppHelper.ComprehensiveSetting.ResultPath, type + ".json"), s);
+            }
+            if (AppHelper.ComprehensiveSetting.ReadJson)
+            {
+                s = File.ReadAllText(Path.Combine(AppHelper.ComprehensiveSetting.ResultPath, type + ".json"));
+            }
+            dic.Add("IPCType.value", s);
+            return JsonConvert.SerializeObject(dic);
+        }
+
+        private string SendInfo(string method, string content)
+        {
+            try
+            {
+                Uri uri = new Uri(AppHelper.ComprehensiveSetting.url);
+                Uri.TryCreate(uri, method, out uri);
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Accept = "application/json";
+                httpWebRequest.Method = "POST";
+                byte[] buf = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(content);
+                string strReqResult = "";
+                using (Stream stream = httpWebRequest.GetRequestStream())
+                {
+                    stream.Write(buf, 0, buf.Length);
+                    stream.Close();
+                  
+                    HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                    StreamReader reader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.UTF8);
+                    strReqResult = reader.ReadToEnd();
+                    reader.Close();
+                    httpWebResponse.Close();
+                }
+                return strReqResult;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private List<printImage> GetImgByType(string strType, int x, int y, bool bChange)
+        {
+            List<printImage> list = new List<printImage>();
+            if (Directory.Exists(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM)))
+            {
+                string[] files = Directory.GetFiles(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM), "*.jpg");
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    printImage info = new printImage();
+                    ImgTypeEntity entity = AppHelper.ComprehensiveSetting.ImgList.FirstOrDefault(t => files[i].Contains(t.ImgName) && t.ImgType.Equals(strType));
+                    if (entity != null)
+                    {
+                        info.imageType = entity.ImgKey;
+                        info.detectSn = m_RESULT_VEHICLE_INFO.ZJLSH;
+                        info.dsId = AppHelper.ComprehensiveSetting.CompanyId;
+                        info.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
+                        info.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
+                        info.vinNo = m_RESULT_VEHICLE_INFO.VIN;
+                        info.base64Image = m_Base64 + Convert.ToBase64String(Tools.GetImageByPath(files[i], x, y, bChange));
+                        list.Add(info);
+                    }
+                }
+            }
+            return list;
+        }
+
+        //判断是否新车
+        private bool GetIsNewVehicle(string strCCDJRQ, string strGXRQ)
+        {
+            if (!string.IsNullOrEmpty(strCCDJRQ) && !string.IsNullOrEmpty(strGXRQ))
+            {
+                return Convert.ToDateTime(strCCDJRQ).AddMonths(3) > Convert.ToDateTime(strGXRQ) ? true : false;
+            }
+
+            return false;
+        }
+
+        //获取所有检测流水号
+        private List<string> GetAllTestNo()
+        {
+            List<string> list = new List<string>();
+            if (m_RESULT_VEHICLE_INFO.JCLSH.Contains("-"))
+            {
+                string jclsh = m_RESULT_VEHICLE_INFO.JCLSH.Split('-')[0];
+                int jccs = 1;
+                int.TryParse(m_RESULT_VEHICLE_INFO.JCCS, out jccs);
+                for (int i = 1; i <= jccs; i++)
+                {
+                    list.Add(jclsh + '-' + i.ToString().PadLeft(2, '0'));
+                }
+            }
+            return list;
+        }
+
+        #region 上传逻辑
+        //获取Token
+        public void GetToken(LogDelegate logDelegate)
+        {
+            string result = "";
+            AccessTokenEntity entity = null;
+            try
+            {
+                var obj = new
+                {
+                    username = AppHelper.ComprehensiveSetting.UserCode,
+                    password = AppHelper.ComprehensiveSetting.Key
+                };
+                string content = CombineJson(obj, "getAccessToken");
+                result = SendInfo("get_access_token", content);
+                entity = JsonConvert.DeserializeObject<AccessTokenEntity>(result);
+                AppHelper.ComprehensiveSetting.Token = entity.access_token;
+                logDelegate.BeginInvoke("获取Token:" + AppHelper.ComprehensiveSetting.Token, Color.Blue, null, null);
+            }
+            catch
+            {
+                throw new Exception(result);
+            }
+        }
+
+        //获取流水
+        public  void ShareVehicleInfo(LogDelegate logDelegate)
+        {
+            ShareVehicleInfo para = new ShareVehicleInfo();
+            para.dsId = AppHelper.ComprehensiveSetting.CompanyId;
+            para.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
+            para.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
+            para.vinNo = m_RESULT_VEHICLE_INFO.VIN;
+            para.ownerName = m_RESULT_VEHICLE_INFO.SYR;
+            para.vehicleBodyColor = m_RESULT_VEHICLE_INFO.CSYS.To_Net_CSYS();
+            para.trailerVehicleNo = "";   //挂车牌照号
+            para.vehicleBrandModel = m_RESULT_VEHICLE_INFO.PPXH;
+            para.transCertificateCode = m_RESULT_VEHICLE_INFO.YYZH;
+            para.engineNo = m_RESULT_VEHICLE_INFO.FDJH;
+            para.engineModel = m_RESULT_VEHICLE_INFO.FDJXH;
+            para.chassisNo = m_RESULT_VEHICLE_INFO.DPXH;
+            para.productionDate = m_RESULT_VEHICLE_INFO.CCRQ.To_Net_Date();
+            para.registDate = m_RESULT_VEHICLE_INFO.CCDJRQ.To_Net_Date();
+            para.vehicleType = m_RESULT_VEHICLE_INFO.CLZLDH;
+            if (para.vehicleType.Contains("K"))
+            {
+                para.busTypeLevel = m_RESULT_VEHICLE_INFO.KCLXDJ.To_Net_KCLXDJ();
+            }
+            para.brakeModel = m_RESULT_VEHICLE_INFO.ZDFSDH;
+            para.parkType = "";
+            para.driveType = m_RESULT_VEHICLE_INFO.QDXS;
+            para.overallSize = string.Format("{0}×{1}×{2}", m_RESULT_VEHICLE_INFO.CSC, m_RESULT_VEHICLE_INFO.CSK, m_RESULT_VEHICLE_INFO.CSG);
+            para.axleAmount = m_RESULT_VEHICLE_INFO.ZZS;
+            para.steeringAxleAmount = m_RESULT_VEHICLE_INFO.ZXZLXDH;
+            para.driveAxleAmount = m_LOGIN_VEHICLE_INFO.QDZS;
+            para.fuelType = m_RESULT_VEHICLE_INFO.RLLBDH;
+            para.lampSystem = m_RESULT_VEHICLE_INFO.QZDZ;
+            para.vehicleSuspensionForm = m_RESULT_VEHICLE_INFO.ZXZXJXSDH;
+            para.vehicleWeight = m_RESULT_VEHICLE_INFO.ZBZL;
+            para.approveWeight = string.IsNullOrEmpty(m_RESULT_VEHICLE_INFO.HDZH) ? "0" : m_RESULT_VEHICLE_INFO.HDZH;
+            para.totalWeight = m_RESULT_VEHICLE_INFO.ZZL;
+            para.ratifiedLoadCapacity = m_RESULT_VEHICLE_INFO.CYS;
+            para.seatCount = m_RESULT_VEHICLE_INFO.CYS;
+            para.travelMileage = m_RESULT_VEHICLE_INFO.LJXSLC;
+            para.farLightCanAdjust = m_RESULT_VEHICLE_INFO.YGGSNFKT;
+            para.parkAxle = m_RESULT_VEHICLE_INFO.ZCZWZ;
+            para.maxDesignSpeed = "";
+            para.isTurbo = "";
+            para.isAbs = "";
+
+            string content = "";
+            string result = "";
+
+            content = CombineJson(para, "shareVehicleInfo");
+            result = SendInfo($"put_data;token={AppHelper.ComprehensiveSetting.Token}", content);
+
+            logDelegate.BeginInvoke($"[上传信息]:{result}", Color.Black, null, null);
+
+            GetVehicleInfoAndSn snEntity = new GetVehicleInfoAndSn();
+            snEntity.dsId = AppHelper.ComprehensiveSetting.CompanyId;
+            snEntity.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
+            snEntity.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
+            snEntity.vinNo = m_RESULT_VEHICLE_INFO.VIN;
+            content = CombineJson(snEntity, "getVehicleInfoAndDetectSn");
+            result = SendInfo($"get_data;token={AppHelper.ComprehensiveSetting.Token}", content);
+            try
+            {
+                ResultEntity resultEntity = JsonConvert.DeserializeObject<ResultEntity>(result);
+                if (resultEntity != null && resultEntity.code.Equals("1"))
+                {
+                    GetVehicleInfoAndSnResult shareVehiclInfoResult = JsonConvert.DeserializeObject<GetVehicleInfoAndSnResult>(resultEntity.data);
+                    if (!string.IsNullOrEmpty(shareVehiclInfoResult.detectSn))
+                    {
+                        m_RESULT_VEHICLE_INFO.ZJLSH = shareVehiclInfoResult.detectSn;
+                        Task.Factory.StartNew(() =>
+                        {
+                            Hashtable hashtable = new Hashtable();
+                            string sql = "UPDATE RESULT_VEHICLE_INFO SET ZJLSH = @ZJLSH WHERE JCLSH = @JCLSH";
+                            hashtable.Add("ZJLSH", shareVehiclInfoResult.detectSn);
+                            hashtable.Add("JCLSH", m_RESULT_VEHICLE_INFO.JCLSH);
+                            MssqlHelper.GetInstance().ExcuteNonQuery(sql, hashtable);
+                        });
+                        logDelegate.BeginInvoke($"{m_RESULT_VEHICLE_INFO.HPHM}登录成功,流水号：{shareVehiclInfoResult.detectSn}", Color.Black, null, null);
+                    }
+                    else
+                    {
+                        logDelegate.BeginInvoke($"{m_RESULT_VEHICLE_INFO.HPHM}登录失败", Color.Black, null, null);
+                    }
+                }
+                else
+                {
+                    logDelegate.BeginInvoke($"{m_RESULT_VEHICLE_INFO.HPHM}登录失败：{resultEntity.status}", Color.Black, null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"[{ex.Message}]:{result}");
+            }
+
+        }
+
+        //上传检测数据
+        public void ShareDetectInfo(LogDelegate logDelegate, bool UseSafetyTechnologyResult, bool JudgeNewVehicle)
+        {
+            if (!JudgeNewVehicle) IsNew = false;
             try
             {
                 if (m_RESULT_VEHICLE_INFO == null || string.IsNullOrEmpty(m_RESULT_VEHICLE_INFO.JCLSH))
@@ -348,7 +585,7 @@ namespace VehicleManagerSys.Core.Services
                 Dictionary<object, object> dic = new Dictionary<object, object>();
 
                 IsNew = GetIsNewVehicle(m_RESULT_VEHICLE_INFO.CCDJRQ, m_RESULT_VEHICLE_INFO.CLXXSJ);
-                if(!IsNew)
+                if (!IsNew)
                     logDelegate.BeginInvoke("在用车", Color.Blue, null, null);
                 else
                     logDelegate.BeginInvoke("新车", Color.Blue, null, null);
@@ -378,7 +615,7 @@ namespace VehicleManagerSys.Core.Services
                 record.vehicleBrandModel = m_LOGIN_VEHICLE_INFO.XH;
                 record.vehicleBodyColor = m_LOGIN_VEHICLE_INFO.CSYS.To_Net_CSYS();
                 record.driveType = m_LOGIN_VEHICLE_INFO.QDXS;
-                record.vehicleSuspensionForm = m_LOGIN_VEHICLE_INFO.ZXZXJXS.Replace("悬架","");
+                record.vehicleSuspensionForm = m_LOGIN_VEHICLE_INFO.ZXZXJXS.Replace("悬架", "");
                 //record.trailerVehicleAxleAmount = m_LOGIN_VEHICLE_INFO.GCZS;
 
                 if (!record.fuelType.Contains("B"))
@@ -825,7 +1062,7 @@ namespace VehicleManagerSys.Core.Services
                                 gasVegicle.lowCo = m_RESULT_SDS.DSCO;
                                 gasVegicle.lowHc = m_RESULT_SDS.DSHC;
                                 gasVegicle.evaluate = m_RESULT_SDS.SDS_PD.To_Net_ZJPD();
-                                gasVegicle.count = DetectItemList.Count(p=>p.Equals("X1")).ToString();
+                                gasVegicle.count = DetectItemList.Count(p => p.Equals("X1")).ToString();
                             }
 
                         }
@@ -1313,28 +1550,28 @@ namespace VehicleManagerSys.Core.Services
 
                 //if (!IsHC || !UseSafetyTechnologyResult)
                 //{
-                    if (m_RESULT_SIDESLIP_ZJ != null && DetectItem.Contains("A") /*&& (m_LOGIN_VEHICLE_INFO.ZXZLXDH.To_ZXZSL().Equals(2))*/)
+                if (m_RESULT_SIDESLIP_ZJ != null && DetectItem.Contains("A") /*&& (m_LOGIN_VEHICLE_INFO.ZXZLXDH.To_ZXZSL().Equals(2))*/)
+                {
+                    //侧滑量：第一转向轮
+                    singleItem singleItem34 = new singleItem();
+                    singleItem34.itemCode = "slip_first_wheel";
+                    singleItem34.detectResult = m_RESULT_SIDESLIP_ZJ.QQCHSCZ;
+                    singleItem34.evaluate = m_RESULT_SIDESLIP_ZJ.QQCH_PD.To_Net_ZJPD();
+                    singleItem34.count = DetectItemList.Count(p => p.Equals("A1")).ToString();
+                    listSingleItem.Add(singleItem34);
+
+
+                    //侧滑量：第二转向轮
+                    if (!string.IsNullOrEmpty(m_RESULT_SIDESLIP_ZJ.HQCHSCZ))
                     {
-                        //侧滑量：第一转向轮
-                        singleItem singleItem34 = new singleItem();
-                        singleItem34.itemCode = "slip_first_wheel";
-                        singleItem34.detectResult = m_RESULT_SIDESLIP_ZJ.QQCHSCZ;
-                        singleItem34.evaluate = m_RESULT_SIDESLIP_ZJ.QQCH_PD.To_Net_ZJPD();
-                        singleItem34.count = DetectItemList.Count(p => p.Equals("A1")).ToString();
-                        listSingleItem.Add(singleItem34);
-
-
-                        //侧滑量：第二转向轮
-                        if (!string.IsNullOrEmpty(m_RESULT_SIDESLIP_ZJ.HQCHSCZ))
-                        {
-                            singleItem singleItem35 = new singleItem();
-                            singleItem35.itemCode = "slip_second_wheel";
-                            singleItem35.detectResult = m_RESULT_SIDESLIP_ZJ.HQCHSCZ ?? "-";// ExtendMethod.GetDsYQMsg(dsYQ, "dtOthers", "HQCHSCZ").Replace("-", "").Replace("+", "");
-                            singleItem35.evaluate = m_RESULT_SIDESLIP_ZJ.HQCH_PD ?? "4";// ExtendMethod.GetDsYQMsg(dsYQ, "dtOthers", "HQCH_PD");
-                            singleItem35.count = string.IsNullOrEmpty(m_RESULT_SIDESLIP_ZJ.HQCHSCZ) ? "0" : DetectItemList.Count(p => p.Equals("A1")).ToString();
-                            listSingleItem.Add(singleItem35);
-                        }
+                        singleItem singleItem35 = new singleItem();
+                        singleItem35.itemCode = "slip_second_wheel";
+                        singleItem35.detectResult = m_RESULT_SIDESLIP_ZJ.HQCHSCZ ?? "-";// ExtendMethod.GetDsYQMsg(dsYQ, "dtOthers", "HQCHSCZ").Replace("-", "").Replace("+", "");
+                        singleItem35.evaluate = m_RESULT_SIDESLIP_ZJ.HQCH_PD ?? "4";// ExtendMethod.GetDsYQMsg(dsYQ, "dtOthers", "HQCH_PD");
+                        singleItem35.count = string.IsNullOrEmpty(m_RESULT_SIDESLIP_ZJ.HQCHSCZ) ? "0" : DetectItemList.Count(p => p.Equals("A1")).ToString();
+                        listSingleItem.Add(singleItem35);
                     }
+                }
                 //}
 
                 //不合格项汇总
@@ -1538,7 +1775,7 @@ namespace VehicleManagerSys.Core.Services
                         manualTestResult manualTest3 = new manualTestResult();
                         manualTest3.detectCls = "3";
                         manualTest3.evaluate = m_RESULT_CHASISS_MANUAL_ZJ.WGJC_PD.To_Net_ZJPD();
-                        if (manualTest3.evaluate.Equals("0")) manualTest3.evaluate = "1"; 
+                        if (manualTest3.evaluate.Equals("0")) manualTest3.evaluate = "1";
                         manualTest3.unqualifiedItem = m_RESULT_CHASISS_MANUAL_ZJ.WGJC_MS.ManualMsg();
                         listManualTest.Add(manualTest3);
 
@@ -1606,14 +1843,14 @@ namespace VehicleManagerSys.Core.Services
                     //3	外观检查
                     manualTestResult manualTest3 = new manualTestResult();
                     manualTest3.detectCls = "3";
-                    manualTest3.evaluate = "0";
+                    manualTest3.evaluate = "1";
                     manualTest3.unqualifiedItem = "无";
                     listManualTest.Add(manualTest3);
 
                     //4	运行检查
                     manualTestResult manualTest4 = new manualTestResult();
                     manualTest4.detectCls = "4";
-                    manualTest4.evaluate = "0";
+                    manualTest4.evaluate = "1";
                     manualTest4.unqualifiedItem = "无";
                     listManualTest.Add(manualTest4);
 
@@ -1702,7 +1939,7 @@ namespace VehicleManagerSys.Core.Services
                         listPerforItem.Add(perforItem2);
                     }
                 }
-            
+
 
                 if (!IsHC)
                 {
@@ -2473,7 +2710,7 @@ namespace VehicleManagerSys.Core.Services
                 {
                     performanceItem perforItem80 = new performanceItem();
                     perforItem80.itemCode = "front_axlelr_suspension_absorptivity";
-                    perforItem80.detectData = (m_RESULT_SUSPENSION.QZZLXSLV ?? "-").To_Double(1) +"/"+ (m_RESULT_SUSPENSION.QZYLXSLV ?? "-").To_Double(1);
+                    perforItem80.detectData = (m_RESULT_SUSPENSION.QZZLXSLV ?? "-").To_Double(1) + "/" + (m_RESULT_SUSPENSION.QZYLXSLV ?? "-").To_Double(1);
                     perforItem80.standardValue = "≥40";
                     perforItem80.evaluate = m_RESULT_SUSPENSION.QZXSLVC_PD.To_Net_ZJPD();
                     listPerforItem.Add(perforItem80);
@@ -2487,7 +2724,7 @@ namespace VehicleManagerSys.Core.Services
 
                     performanceItem perforItem82 = new performanceItem();
                     perforItem82.itemCode = "back_axlelr_suspension_absorptivity";
-                    perforItem82.detectData = (m_RESULT_SUSPENSION.HZZLXSLV?? "-").To_Double(1) + "/" + (m_RESULT_SUSPENSION.HZYLXSLV ??"-").To_Double(1);
+                    perforItem82.detectData = (m_RESULT_SUSPENSION.HZZLXSLV ?? "-").To_Double(1) + "/" + (m_RESULT_SUSPENSION.HZYLXSLV ?? "-").To_Double(1);
                     perforItem82.standardValue = "≥40";
                     perforItem82.evaluate = m_RESULT_SUSPENSION.HZXSLVC_PD.To_Net_ZJPD();
                     listPerforItem.Add(perforItem82);
@@ -2500,10 +2737,10 @@ namespace VehicleManagerSys.Core.Services
                     listPerforItem.Add(perforItem83);
                 }
                 //}
-                if(!IsNew)
-                    listPerforItem.RemoveAll(x =>x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals(""));
+                if (!IsNew)
+                    listPerforItem.RemoveAll(x => x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals(""));
                 else
-                    listPerforItem.RemoveAll(x => (!x.itemCode.Equals("economy") && !x.itemCode.Equals("power")) &&  (x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals("")));
+                    listPerforItem.RemoveAll(x => (!x.itemCode.Equals("economy") && !x.itemCode.Equals("power")) && (x.detectData == null || x.standardValue == null || x.standardValue.Replace("左", "").Replace("~右", "").Replace(egt, "").Replace(elt, "").Equals("") || x.evaluate.Equals("") || x.detectData.Replace("左", "").Replace("右", "").Equals("-") || x.detectData.Replace("左", "").Replace("右", "").Equals("")));
                 #endregion
                 detectRpt.performanceItem = listPerforItem;
                 #endregion
@@ -2531,7 +2768,7 @@ namespace VehicleManagerSys.Core.Services
 
                 dic.Add("detectReport", detectRpt);
                 string content = CombineJson(dic, "shareDetectInfo");
-                File.WriteAllText("shareDetectInfo.txt", JsonConvert.SerializeObject(dic,Formatting.Indented));
+                File.WriteAllText("shareDetectInfo.txt", JsonConvert.SerializeObject(dic, Formatting.Indented));
                 string result = SendInfo($"put_data;token={AppHelper.ComprehensiveSetting.Token}", content);
                 logDelegate.BeginInvoke(result, Color.Blue, null, null);
                 //string strResult = zjNet.SendInfo(string.Format("put_data;token={0}", AppHelper.ComprehensiveSetting.Token), dic, "shareDetectInfo");
@@ -2540,199 +2777,12 @@ namespace VehicleManagerSys.Core.Services
             {
                 logDelegate.BeginInvoke($"[上传异常]:{ex.Message}", Color.Blue, null, null);
             }
-
         }
 
-        //获取Token
-        public void GetToken(LogDelegate logDelegate)
+        //上传工位照片
+        public void SharePrintImage(LogDelegate logDelegate, bool UseSafetyTechnologyResult,bool JudgeNewVehicle)
         {
-            string result = "";
-            AccessTokenEntity entity = null;
-            try
-            {
-                var obj = new
-                {
-                    username = AppHelper.ComprehensiveSetting.UserCode,
-                    password = AppHelper.ComprehensiveSetting.Key
-                };
-                string content =  CombineJson(obj, "getAccessToken");
-                result = SendInfo("get_access_token", content);
-                entity = JsonConvert.DeserializeObject<AccessTokenEntity>(result);
-                AppHelper.ComprehensiveSetting.Token = entity.access_token;
-                logDelegate.BeginInvoke("获取Token:"+AppHelper.ComprehensiveSetting.Token, Color.Blue, null, null);
-            }
-            catch 
-            {
-                throw new Exception(result);
-            }
-        }
-        
-        //获取所有检测流水号
-        private List<string> GetAllTestNo()
-        {
-            List<string> list = new List<string>();
-            if (m_RESULT_VEHICLE_INFO.JCLSH.Contains("-"))
-            {
-                string jclsh = m_RESULT_VEHICLE_INFO.JCLSH.Split('-')[0];
-                int jccs = 1;
-                int.TryParse(m_RESULT_VEHICLE_INFO.JCCS, out jccs);
-                for (int i = 1; i <= jccs; i++)
-                {
-                    list.Add(jclsh + '-' + i.ToString().PadLeft(2, '0'));
-                }
-            }
-            return list;
-        }
-
-        private string CombineJson(object obj, string type)
-        {
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            dic.Add("CompanyId", AppHelper.ComprehensiveSetting.CompanyId);
-            dic.Add("Source", AppHelper.ComprehensiveSetting.AdministrativeAera);
-            dic.Add("IPCType", type);
-            JsonSerializerSettings setting = new JsonSerializerSettings(); 
-            setting.NullValueHandling = NullValueHandling.Ignore;
-            string s = JsonConvert.SerializeObject(obj, Formatting.Indented, setting);
-            if (AppHelper.ComprehensiveSetting.WriteJson)
-            {
-                File.WriteAllText(Path.Combine(AppHelper.ComprehensiveSetting.ResultPath, type + ".json"), s);
-            }
-            if (AppHelper.ComprehensiveSetting.ReadJson)
-            {
-                s = File.ReadAllText(Path.Combine(AppHelper.ComprehensiveSetting.ResultPath, type + ".json"));
-            }
-            dic.Add("IPCType.value", s);
-            return JsonConvert.SerializeObject(dic);
-        }
-
-        private string SendInfo(string method, string content)
-        {
-            try
-            {
-                Uri uri = new Uri(AppHelper.ComprehensiveSetting.url);
-                Uri.TryCreate(uri, method, out uri);
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
-                httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Accept = "application/json";
-                httpWebRequest.Method = "POST";
-                byte[] buf = System.Text.Encoding.GetEncoding("UTF-8").GetBytes(content);
-                string strReqResult = "";
-                using (Stream stream = httpWebRequest.GetRequestStream())
-                {
-                    stream.Write(buf, 0, buf.Length);
-                    stream.Close();
-                  
-                    HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                    StreamReader reader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.UTF8);
-                    strReqResult = reader.ReadToEnd();
-                    reader.Close();
-                    httpWebResponse.Close();
-                }
-                return strReqResult;
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        public  void ShareVehicleInfo(LogDelegate logDelegate)
-        {
-            ShareVehicleInfo para = new ShareVehicleInfo();
-            para.dsId = AppHelper.ComprehensiveSetting.CompanyId;
-            para.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
-            para.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
-            para.vinNo = m_RESULT_VEHICLE_INFO.VIN;
-            para.ownerName = m_RESULT_VEHICLE_INFO.SYR;
-            para.vehicleBodyColor = m_RESULT_VEHICLE_INFO.CSYS.To_Net_CSYS();
-            para.trailerVehicleNo = "";   //挂车牌照号
-            para.vehicleBrandModel = m_RESULT_VEHICLE_INFO.PPXH;
-            para.transCertificateCode = m_RESULT_VEHICLE_INFO.YYZH;
-            para.engineNo = m_RESULT_VEHICLE_INFO.FDJH;
-            para.engineModel = m_RESULT_VEHICLE_INFO.FDJXH;
-            para.chassisNo = m_RESULT_VEHICLE_INFO.DPXH;
-            para.productionDate = m_RESULT_VEHICLE_INFO.CCRQ.To_Net_Date();
-            para.registDate = m_RESULT_VEHICLE_INFO.CCDJRQ.To_Net_Date();
-            para.vehicleType = m_RESULT_VEHICLE_INFO.CLZLDH;
-            if (para.vehicleType.Contains("K"))
-            {
-                para.busTypeLevel = m_RESULT_VEHICLE_INFO.KCLXDJ.To_Net_KCLXDJ();
-            }
-            para.brakeModel = m_RESULT_VEHICLE_INFO.ZDFSDH;
-            para.parkType = "";
-            para.driveType = m_RESULT_VEHICLE_INFO.QDXS;
-            para.overallSize = string.Format("{0}×{1}×{2}", m_RESULT_VEHICLE_INFO.CSC, m_RESULT_VEHICLE_INFO.CSK, m_RESULT_VEHICLE_INFO.CSG);
-            para.axleAmount = m_RESULT_VEHICLE_INFO.ZZS;
-            para.steeringAxleAmount = m_RESULT_VEHICLE_INFO.ZXZLXDH;
-            para.driveAxleAmount = m_LOGIN_VEHICLE_INFO.QDZS;
-            para.fuelType = m_RESULT_VEHICLE_INFO.RLLBDH;
-            para.lampSystem = m_RESULT_VEHICLE_INFO.QZDZ;
-            para.vehicleSuspensionForm = m_RESULT_VEHICLE_INFO.ZXZXJXSDH;
-            para.vehicleWeight = m_RESULT_VEHICLE_INFO.ZBZL;
-            para.approveWeight = string.IsNullOrEmpty(m_RESULT_VEHICLE_INFO.HDZH) ? "0" : m_RESULT_VEHICLE_INFO.HDZH;
-            para.totalWeight = m_RESULT_VEHICLE_INFO.ZZL;
-            para.ratifiedLoadCapacity = m_RESULT_VEHICLE_INFO.CYS;
-            para.seatCount = m_RESULT_VEHICLE_INFO.CYS;
-            para.travelMileage = m_RESULT_VEHICLE_INFO.LJXSLC;
-            para.farLightCanAdjust = m_RESULT_VEHICLE_INFO.YGGSNFKT;
-            para.parkAxle = m_RESULT_VEHICLE_INFO.ZCZWZ;
-            para.maxDesignSpeed = "";
-            para.isTurbo = "";
-            para.isAbs = "";
-
-            string content = "";
-            string result = "";
-
-            content = CombineJson(para, "shareVehicleInfo");
-            result = SendInfo($"put_data;token={AppHelper.ComprehensiveSetting.Token}", content);
-
-            logDelegate.BeginInvoke($"[上传信息]:{result}", Color.Black, null, null);
-
-            GetVehicleInfoAndSn snEntity = new GetVehicleInfoAndSn();
-            snEntity.dsId = AppHelper.ComprehensiveSetting.CompanyId;
-            snEntity.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
-            snEntity.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
-            snEntity.vinNo = m_RESULT_VEHICLE_INFO.VIN;
-            content = CombineJson(snEntity, "getVehicleInfoAndDetectSn");
-            result = SendInfo($"get_data;token={AppHelper.ComprehensiveSetting.Token}", content);
-            try
-            {
-                ResultEntity resultEntity = JsonConvert.DeserializeObject<ResultEntity>(result);
-                if (resultEntity != null && resultEntity.code.Equals("1"))
-                {
-                    GetVehicleInfoAndSnResult shareVehiclInfoResult = JsonConvert.DeserializeObject<GetVehicleInfoAndSnResult>(resultEntity.data);
-                    if (!string.IsNullOrEmpty(shareVehiclInfoResult.detectSn))
-                    {
-                        m_RESULT_VEHICLE_INFO.ZJLSH = shareVehiclInfoResult.detectSn;
-                        Task.Factory.StartNew(() =>
-                        {
-                            Hashtable hashtable = new Hashtable();
-                            string sql = "UPDATE RESULT_VEHICLE_INFO SET ZJLSH = @ZJLSH WHERE JCLSH = @JCLSH";
-                            hashtable.Add("ZJLSH", shareVehiclInfoResult.detectSn);
-                            hashtable.Add("JCLSH", m_RESULT_VEHICLE_INFO.JCLSH);
-                            MssqlHelper.GetInstance().ExcuteNonQuery(sql, hashtable);
-                        });
-                        logDelegate.BeginInvoke($"{m_RESULT_VEHICLE_INFO.HPHM}登录成功,流水号：{shareVehiclInfoResult.detectSn}", Color.Black, null, null);
-                    }
-                    else
-                    {
-                        logDelegate.BeginInvoke($"{m_RESULT_VEHICLE_INFO.HPHM}登录失败", Color.Black, null, null);
-                    }
-                }
-                else
-                {
-                    logDelegate.BeginInvoke($"{m_RESULT_VEHICLE_INFO.HPHM}登录失败：{resultEntity.status}", Color.Black, null, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"[{ex.Message}]:{result}");
-            }
-
-        }
-
-        public void SharePrintImage(LogDelegate logDelegate, bool UseSafetyTechnologyResult)
-        {
+            if (!JudgeNewVehicle) IsNew = false;
             try
             {
                 if (m_RESULT_IMAGE != null && !string.IsNullOrEmpty(m_RESULT_IMAGE.JCLSH))
@@ -2820,6 +2870,7 @@ namespace VehicleManagerSys.Core.Services
             }
         }
 
+        //上传报告单照片
         public void ShareReportImage(LogDelegate logDelegate)
         {
             try
@@ -2857,6 +2908,7 @@ namespace VehicleManagerSys.Core.Services
             }
         }
 
+        //上传签字人照片 (宝鸡)
         public void ShareSignatureImage(LogDelegate logDelegate,string author)
         {
             try
@@ -2951,43 +3003,27 @@ namespace VehicleManagerSys.Core.Services
                 throw;
             }
         }
+        #endregion
 
-        private List<printImage> GetImgByType(string strType, int x, int y, bool bChange)
+        #region  下线前从调度表获取流水号
+        public void GetTestNo()
         {
-            List<printImage> list = new List<printImage>();
-            if (Directory.Exists(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM)))
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("JCLSH",m_testNo);
+            var sql = "SELECT * FROM VEHICLE_DISPATCH WHERE JCLSH = @JCLSH";
+            var dispatch = _mssqlHelper.Query<VEHICLE_DISPATCH>(sql,hashtable);
+            hashtable.Clear();
+
+            if (dispatch != null && string.IsNullOrEmpty(dispatch.JCLSH))
             {
-                string[] files = Directory.GetFiles(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM), "*.jpg");
-
-                for (int i = 0; i < files.Length; i++)
-                {
-                    printImage info = new printImage();
-                    ImgTypeEntity entity = AppHelper.ComprehensiveSetting.ImgList.FirstOrDefault(t => files[i].Contains(t.ImgName) && t.ImgType.Equals(strType));
-                    if (entity != null)
-                    {
-                        info.imageType = entity.ImgKey;
-                        info.detectSn = m_RESULT_VEHICLE_INFO.ZJLSH;
-                        info.dsId = AppHelper.ComprehensiveSetting.CompanyId;
-                        info.plateColorCode = m_RESULT_VEHICLE_INFO.HPYS.To_Net_HPYS();
-                        info.vehicleNo = m_RESULT_VEHICLE_INFO.HPHM;
-                        info.vinNo = m_RESULT_VEHICLE_INFO.VIN;
-                        info.base64Image = m_Base64 + Convert.ToBase64String(Tools.GetImageByPath(files[i], x, y, bChange));
-                        list.Add(info);
-                    }
-                }
-            }
-            return list;
+                sql = "SELECT * FROM LOGIN_VEHICLE_INFO WHERE HPHM = @HPHM,HPZLDH = @HPZLDH,VIN = @VIN";
+                hashtable.Add("HPHM",dispatch.HPHM);
+                hashtable.Add("HPZLDH", dispatch.HPZLDH);
+                hashtable.Add("VIN", dispatch.VIN);
+                var vehicle = _mssqlHelper.Query<LOGIN_VEHICLE_INFO>(sql, hashtable);
+                hashtable.Clear();
+            }           
         }
-
-         private bool GetIsNewVehicle(string strCCDJRQ, string strGXRQ)
-        {
-            if (!string.IsNullOrEmpty(strCCDJRQ) && !string.IsNullOrEmpty(strGXRQ))
-            {
-                return Convert.ToDateTime(strCCDJRQ).AddMonths(3) > Convert.ToDateTime(strGXRQ) ? true : false;
-            }
-
-            return false;
-        }
-
+        #endregion
     }
 }

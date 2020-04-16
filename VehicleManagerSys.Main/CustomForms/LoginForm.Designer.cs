@@ -263,6 +263,7 @@
             this.ShowInTaskbar = true;
             this.Text = "LoginForm";
             this.Title = "用户登录";
+            this.HotKeyDown += new HZH_Controls.Forms.FrmBase.HotKeyEventHandler(this.LoginForm_HotKeyDown);
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.Controls.SetChildIndex(this.panel3, 0);
             this.panel3.ResumeLayout(false);

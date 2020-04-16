@@ -37,7 +37,8 @@
             this.txtUploadLog = new System.Windows.Forms.RichTextBox();
             this.combAuthor = new EASkins.Ami_ComboBox();
             this.labOperator = new EASkins.Ami_HeaderLabel();
-            this.captureElo1 = new VehicleManagerSys.Main.Controls.CaptureElo();
+            this.captureElo = new VehicleManagerSys.Main.Controls.CaptureElo();
+            this.chkJudgeNewVehicle = new EASkins.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // ami_HeaderLabel1
@@ -95,7 +96,7 @@
             this.chkTrust.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTrust.Depth = 0;
             this.chkTrust.Font = new System.Drawing.Font("Roboto", 10F);
-            this.chkTrust.Location = new System.Drawing.Point(28, 204);
+            this.chkTrust.Location = new System.Drawing.Point(24, 201);
             this.chkTrust.Margin = new System.Windows.Forms.Padding(0);
             this.chkTrust.MouseLocation = new System.Drawing.Point(-1, -1);
             this.chkTrust.MouseState = EASkins.MouseState.HOVER;
@@ -113,7 +114,7 @@
             this.btnUpload.ForeColor = System.Drawing.Color.White;
             this.btnUpload.Image = null;
             this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpload.Location = new System.Drawing.Point(24, 339);
+            this.btnUpload.Location = new System.Drawing.Point(24, 347);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(207, 40);
             this.btnUpload.TabIndex = 14;
@@ -143,7 +144,7 @@
             this.combAuthor.HoverSelectionColor = System.Drawing.Color.Empty;
             this.combAuthor.IntegralHeight = false;
             this.combAuthor.ItemHeight = 25;
-            this.combAuthor.Location = new System.Drawing.Point(24, 291);
+            this.combAuthor.Location = new System.Drawing.Point(24, 302);
             this.combAuthor.Name = "combAuthor";
             this.combAuthor.Size = new System.Drawing.Size(207, 31);
             this.combAuthor.StartIndex = 0;
@@ -155,21 +156,40 @@
             this.labOperator.BackColor = System.Drawing.Color.Transparent;
             this.labOperator.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.labOperator.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(77)))));
-            this.labOperator.Location = new System.Drawing.Point(24, 258);
+            this.labOperator.Location = new System.Drawing.Point(24, 272);
             this.labOperator.Name = "labOperator";
             this.labOperator.Size = new System.Drawing.Size(111, 20);
             this.labOperator.TabIndex = 18;
             this.labOperator.Text = "授权签字员：";
             // 
-            // captureElo1
+            // captureElo
             // 
-            this.captureElo1.CapturePath = null;
-            this.captureElo1.Location = new System.Drawing.Point(369, 60);
-            this.captureElo1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.captureElo1.Name = "captureElo1";
-            this.captureElo1.Size = new System.Drawing.Size(886, 736);
-            this.captureElo1.TabIndex = 19;
-            this.captureElo1.VehicleNo = null;
+            this.captureElo.CapturePath = null;
+            this.captureElo.Location = new System.Drawing.Point(369, 60);
+            this.captureElo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.captureElo.Name = "captureElo";
+            this.captureElo.Size = new System.Drawing.Size(886, 736);
+            this.captureElo.TabIndex = 19;
+            this.captureElo.VehicleNo = null;
+            // 
+            // chkJudgeNewVehicle
+            // 
+            this.chkJudgeNewVehicle.AutoSize = true;
+            this.chkJudgeNewVehicle.Checked = true;
+            this.chkJudgeNewVehicle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkJudgeNewVehicle.Depth = 0;
+            this.chkJudgeNewVehicle.Font = new System.Drawing.Font("Roboto", 10F);
+            this.chkJudgeNewVehicle.ForeColor = System.Drawing.Color.Red;
+            this.chkJudgeNewVehicle.Location = new System.Drawing.Point(24, 235);
+            this.chkJudgeNewVehicle.Margin = new System.Windows.Forms.Padding(0);
+            this.chkJudgeNewVehicle.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.chkJudgeNewVehicle.MouseState = EASkins.MouseState.HOVER;
+            this.chkJudgeNewVehicle.Name = "chkJudgeNewVehicle";
+            this.chkJudgeNewVehicle.Ripple = true;
+            this.chkJudgeNewVehicle.Size = new System.Drawing.Size(136, 30);
+            this.chkJudgeNewVehicle.TabIndex = 20;
+            this.chkJudgeNewVehicle.Text = "新车免检动力性";
+            this.chkJudgeNewVehicle.UseVisualStyleBackColor = true;
             // 
             // ComprehensiveUploadForm
             // 
@@ -177,7 +197,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CanMove = false;
             this.ClientSize = new System.Drawing.Size(1265, 801);
-            this.Controls.Add(this.captureElo1);
+            this.Controls.Add(this.chkJudgeNewVehicle);
+            this.Controls.Add(this.captureElo);
             this.Controls.Add(this.labOperator);
             this.Controls.Add(this.combAuthor);
             this.Controls.Add(this.txtUploadLog);
@@ -203,7 +224,8 @@
             this.Controls.SetChildIndex(this.txtUploadLog, 0);
             this.Controls.SetChildIndex(this.combAuthor, 0);
             this.Controls.SetChildIndex(this.labOperator, 0);
-            this.Controls.SetChildIndex(this.captureElo1, 0);
+            this.Controls.SetChildIndex(this.captureElo, 0);
+            this.Controls.SetChildIndex(this.chkJudgeNewVehicle, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,7 +241,8 @@
         private System.Windows.Forms.RichTextBox txtUploadLog;
         private EASkins.Ami_ComboBox combAuthor;
         private EASkins.Ami_HeaderLabel labOperator;
-        private Controls.CaptureElo captureElo1;
+        private Controls.CaptureElo captureElo;
+        private EASkins.Controls.MaterialCheckBox chkJudgeNewVehicle;
         //private Controls.CaptureElo captureElo1;
     }
 }

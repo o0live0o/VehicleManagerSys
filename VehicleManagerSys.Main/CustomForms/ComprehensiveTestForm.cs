@@ -70,7 +70,9 @@ namespace VehicleManagerSys.Main.CustomForms
             RESULT_VEHICLE_INFO info = CGridHelper.GetCurrentData<RESULT_VEHICLE_INFO>(dgv);
             if(info != null)
             {
-                ((MainForm)AppHelper.MainForm).AddForm(new ComprehensiveUploadForm(info));
+               Form form =   new ComprehensiveUploadForm(info);
+                form.ShowDialog(this); 
+                //((MainForm)AppHelper.MainForm).AddForm(new ComprehensiveUploadForm(info));
             }
         }
     }

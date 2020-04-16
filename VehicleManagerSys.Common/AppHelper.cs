@@ -82,8 +82,9 @@ namespace VehicleManagerSys.Common
                     Directory.CreateDirectory(ComprehensiveSetting.ImagePath);
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                File.WriteAllText("1111.txt", ex.Message);
                 throw;
             }
         }

@@ -40,11 +40,6 @@ namespace VehicleManagerSys.Main.CustomForms
                 combAuthor.DataSource = AppHelper.ComprehensiveSetting.Operators;
         }
 
-        private void UploadReport()
-        {
-            _comprehensiveUploadService.ShareDetectInfo(new ComprehensiveUploadService.LogDelegate(AddLog),chkTrust.Checked);
-        }
-
         private void AddLog(string msg)
         {
             AddLog(msg, Color.Black);
@@ -84,8 +79,8 @@ namespace VehicleManagerSys.Main.CustomForms
                         this.Title = m_RESULT_VEHICLE_INFO.HPHM;
                         this.labTestNo.Text = m_RESULT_VEHICLE_INFO.JCLSH;
                         this.labTestNoNet.Text = m_RESULT_VEHICLE_INFO.ZJLSH;
-                        captureElo1.InitImgType(AppHelper.ComprehensiveSetting.ImgList);
-                        captureElo1.InitCapturePath(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM));
+                        captureElo.InitImgType(AppHelper.ComprehensiveSetting.ImgList);
+                        captureElo.InitCapturePath(Path.Combine(AppHelper.ComprehensiveSetting.ImagePath, m_RESULT_VEHICLE_INFO.HPHM));
                     }));
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(20, "加载数据...");
                     this.Invoke(new MethodInvoker(() => {
@@ -95,7 +90,7 @@ namespace VehicleManagerSys.Main.CustomForms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("加载资源时出现错误");
+                    MessageBox.Show("加载资源时出现错误" + ex.Message);
                 }
             };
             frmLoading.ShowDialog();
@@ -123,9 +118,9 @@ namespace VehicleManagerSys.Main.CustomForms
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(20, "获取流水...");
                     _comprehensiveUploadService.ShareVehicleInfo(new ComprehensiveUploadService.LogDelegate(AddLog));
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(30, "上传报告单数据...");
-                    UploadReport();
+                    _comprehensiveUploadService.ShareDetectInfo(new ComprehensiveUploadService.LogDelegate(AddLog), chkTrust.Checked,chkJudgeNewVehicle.Checked);
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(40, "上传工位照片...");
-                    _comprehensiveUploadService.SharePrintImage(new ComprehensiveUploadService.LogDelegate(AddLog),chkTrust.Checked);
+                    _comprehensiveUploadService.SharePrintImage(new ComprehensiveUploadService.LogDelegate(AddLog),chkTrust.Checked,chkJudgeNewVehicle.Checked);
                     frmLoading.CurrentMsg = new KeyValuePair<int, string>(60, "上传安检结论照片...");
                     _comprehensiveUploadService.ShareReportImage(new ComprehensiveUploadService.LogDelegate(AddLog));
                     if (AppHelper.ComprehensiveSetting.UploadSign)
@@ -147,7 +142,7 @@ namespace VehicleManagerSys.Main.CustomForms
         {
             try
             {
-                captureElo1.DisposeContorl();
+                captureElo.DisposeContorl();
             }
             catch
             {

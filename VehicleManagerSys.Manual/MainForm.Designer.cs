@@ -1,16 +1,16 @@
-﻿namespace VehicleManagerSys.Main.CustomForms
+﻿namespace VehicleManagerSys.Manual
 {
-    partial class YunWangReCheckForm
+    partial class MainForm
     {
         /// <summary>
-        /// Required designer variable.
+        /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// 清理所有正在使用的资源。
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,88 +20,80 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Windows 窗体设计器生成的代码
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// 设计器支持所需的方法 - 不要修改
+        /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnReCheck = new EASkins.Ami_Button_2();
-            this.txtSeachPlateNo = new EASkins.Ami_TextBox();
-            this.btnSearch = new EASkins.Ami_Button_2();
+            this.txtPlateNo = new EASkins.Ami_TextBox();
+            this.ami_Label1 = new EASkins.Ami_Label();
+            this.btnRefresh = new EASkins.Ami_Button_2();
+            this.ami_Separator1 = new EASkins.Ami_Separator();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // txtPlateNo
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPlateNo.BackColor = System.Drawing.Color.Transparent;
+            this.txtPlateNo.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.txtPlateNo.ForeColor = System.Drawing.Color.DimGray;
+            this.txtPlateNo.Location = new System.Drawing.Point(107, 79);
+            this.txtPlateNo.MaxLength = 32767;
+            this.txtPlateNo.Multiline = false;
+            this.txtPlateNo.Name = "txtPlateNo";
+            this.txtPlateNo.ReadOnly = false;
+            this.txtPlateNo.Size = new System.Drawing.Size(156, 28);
+            this.txtPlateNo.TabIndex = 0;
+            this.txtPlateNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtPlateNo.UseSystemPasswordChar = false;
+            // 
+            // ami_Label1
+            // 
+            this.ami_Label1.AutoSize = true;
+            this.ami_Label1.BackColor = System.Drawing.Color.Transparent;
+            this.ami_Label1.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.ami_Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(76)))), ((int)(((byte)(77)))));
+            this.ami_Label1.Location = new System.Drawing.Point(17, 84);
+            this.ami_Label1.Name = "ami_Label1";
+            this.ami_Label1.Size = new System.Drawing.Size(89, 20);
+            this.ami_Label1.TabIndex = 1;
+            this.ami_Label1.Text = "号牌号码：";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnRefresh.Image = null;
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRefresh.Location = new System.Drawing.Point(291, 77);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(76, 30);
+            this.btnRefresh.TabIndex = 2;
+            this.btnRefresh.Text = "查 询";
+            this.btnRefresh.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // ami_Separator1
+            // 
+            this.ami_Separator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btnReCheck);
-            this.panel1.Controls.Add(this.txtSeachPlateNo);
-            this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Location = new System.Drawing.Point(0, 60);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(919, 49);
-            this.panel1.TabIndex = 7;
-            // 
-            // btnReCheck
-            // 
-            this.btnReCheck.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnReCheck.BackColor = System.Drawing.Color.Transparent;
-            this.btnReCheck.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnReCheck.Image = null;
-            this.btnReCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReCheck.Location = new System.Drawing.Point(829, 10);
-            this.btnReCheck.Name = "btnReCheck";
-            this.btnReCheck.Size = new System.Drawing.Size(85, 30);
-            this.btnReCheck.TabIndex = 2;
-            this.btnReCheck.Text = "复 检";
-            this.btnReCheck.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.btnReCheck.Click += new System.EventHandler(this.btnReCheck_Click);
-            // 
-            // txtSeachPlateNo
-            // 
-            this.txtSeachPlateNo.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.txtSeachPlateNo.BackColor = System.Drawing.Color.Transparent;
-            this.txtSeachPlateNo.Font = new System.Drawing.Font("Tahoma", 11F);
-            this.txtSeachPlateNo.ForeColor = System.Drawing.Color.DimGray;
-            this.txtSeachPlateNo.Location = new System.Drawing.Point(578, 12);
-            this.txtSeachPlateNo.MaxLength = 32767;
-            this.txtSeachPlateNo.Multiline = false;
-            this.txtSeachPlateNo.Name = "txtSeachPlateNo";
-            this.txtSeachPlateNo.ReadOnly = false;
-            this.txtSeachPlateNo.Size = new System.Drawing.Size(154, 28);
-            this.txtSeachPlateNo.TabIndex = 1;
-            this.txtSeachPlateNo.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtSeachPlateNo.UseSystemPasswordChar = false;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.btnSearch.Image = null;
-            this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearch.Location = new System.Drawing.Point(738, 10);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(85, 30);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "查  询";
-            this.btnSearch.TextAlignment = System.Drawing.StringAlignment.Center;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.ami_Separator1.Location = new System.Drawing.Point(0, 113);
+            this.ami_Separator1.Name = "ami_Separator1";
+            this.ami_Separator1.Size = new System.Drawing.Size(762, 10);
+            this.ami_Separator1.TabIndex = 3;
+            this.ami_Separator1.Text = "ami_Separator1";
             // 
             // dgv
             // 
@@ -130,7 +122,7 @@
             this.Column2,
             this.Column5,
             this.Column4});
-            this.dgv.Location = new System.Drawing.Point(0, 109);
+            this.dgv.Location = new System.Drawing.Point(0, 129);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
             this.dgv.ReadOnly = true;
@@ -140,8 +132,8 @@
             this.dgv.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv.RowTemplate.Height = 30;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv.Size = new System.Drawing.Size(919, 488);
-            this.dgv.TabIndex = 8;
+            this.dgv.Size = new System.Drawing.Size(762, 409);
+            this.dgv.TabIndex = 9;
             this.dgv.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             // 
             // Column3
@@ -174,41 +166,42 @@
             // 
             // Column4
             // 
-            this.Column4.DataPropertyName = "ZJLSH";
-            this.Column4.HeaderText = "综检流水号";
+            this.Column4.DataPropertyName = "JYXM";
+            this.Column4.HeaderText = "检验项目";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
-            // YunWangReCheckForm
+            // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CanMove = false;
-            this.ClientSize = new System.Drawing.Size(919, 599);
+            this.ClientSize = new System.Drawing.Size(763, 538);
             this.Controls.Add(this.dgv);
-            this.Controls.Add(this.panel1);
-            this.Name = "YunWangReCheckForm";
-            this.Text = "ComprehensiveTestForm";
-            this.Title = "环保复检(云网)";
-            this.Controls.SetChildIndex(this.panel1, 0);
-            this.Controls.SetChildIndex(this.dgv, 0);
-            this.panel1.ResumeLayout(false);
+            this.Controls.Add(this.ami_Separator1);
+            this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.ami_Label1);
+            this.Controls.Add(this.txtPlateNo);
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "动态底盘检查";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private EASkins.Ami_TextBox txtPlateNo;
+        private EASkins.Ami_Label ami_Label1;
+        private EASkins.Ami_Button_2 btnRefresh;
+        private EASkins.Ami_Separator ami_Separator1;
         private System.Windows.Forms.DataGridView dgv;
-        private EASkins.Ami_Button_2 btnSearch;
-        private EASkins.Ami_TextBox txtSeachPlateNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private EASkins.Ami_Button_2 btnReCheck;
     }
 }
+

@@ -22,6 +22,10 @@ namespace VehicleManagerSys.Main.CustomForms
         public LoginForm()
         {
             InitializeComponent();
+            //Dictionary<int, string> keyDic = new Dictionary<int, string>();
+            //keyDic.Add(13, "Enter");
+            //keyDic.Add(65, "A");
+            //this.HotKeys = keyDic;
         }
 
         private void btnCancel_BtnClick(object sender, EventArgs e)
@@ -82,6 +86,11 @@ namespace VehicleManagerSys.Main.CustomForms
             DbSettingForm dbSettingForm = new DbSettingForm();
             dbSettingForm.IsShowCloseBtn = true;
             dbSettingForm.ShowDialog(this); 
+        }
+
+        private bool LoginForm_HotKeyDown(string strHotKey)
+        {
+            return true;
         }
     }
 }
