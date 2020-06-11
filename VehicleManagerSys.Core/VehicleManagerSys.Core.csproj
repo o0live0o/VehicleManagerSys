@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtendMethods\ExtendMethod.cs" />
+    <Compile Include="Interfaces\IComprehensiveLoginService.cs" />
     <Compile Include="Interfaces\IComprehensiveUploadService.cs" />
     <Compile Include="Interfaces\IVehicleBusiness.cs" />
     <Compile Include="PDFHelper.cs" />
