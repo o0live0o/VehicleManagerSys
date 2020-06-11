@@ -57,12 +57,12 @@ namespace VehicleManagerSys.Core.Report
         public SafetyTechnologyReport(string testNo)
         {
             m_testNo = testNo;
-             BoldFont = new iTextSharp.text.Font(baseFont, 15, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
+            BoldFont = new iTextSharp.text.Font(baseFont, 15, iTextSharp.text.Font.BOLD, new BaseColor(System.Drawing.Color.Black));
             NormalFont = new iTextSharp.text.Font(baseFont, 11, iTextSharp.text.Font.NORMAL, new BaseColor(System.Drawing.Color.Black));
 
-    }
+        }
 
-    private void InitData()
+        private void InitData()
         {
             List<string> testNos = GetAllTestNo();
             if (m_testNo.Contains("-") && m_testNo.Split('-').Length > 1 && testNos != null && testNos.Count > 0)
@@ -519,13 +519,13 @@ namespace VehicleManagerSys.Core.Report
         }
 
         private void CreateReport_Manual(PdfPTable table)
-        {         
+        {
             for (int i = 0; i < 7; i++)
             {
-                table.AddCell(pdfHelper.CreateCell((i+1).ToString(), NormalFont, Element.ALIGN_CENTER));
+                table.AddCell(pdfHelper.CreateCell((i + 1).ToString(), NormalFont, Element.ALIGN_CENTER));
                 table.AddCell(pdfHelper.CreateCell("-", NormalFont, Element.ALIGN_CENTER));
                 table.AddCell(pdfHelper.CreateCell("-", NormalFont, Element.ALIGN_CENTER));
-                table.AddCell(pdfHelper.CreateCell("-", NormalFont, Element.ALIGN_CENTER,2, 1));
+                table.AddCell(pdfHelper.CreateCell("-", NormalFont, Element.ALIGN_CENTER, 2, 1));
                 table.AddCell(pdfHelper.CreateCell("-", NormalFont, Element.ALIGN_CENTER));
             }
         }
@@ -549,7 +549,7 @@ namespace VehicleManagerSys.Core.Report
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-             doc = pdfHelper.CreateDocumentA4(10, 10, 10, 100);
+            doc = pdfHelper.CreateDocumentA4(10, 10, 10, 100);
             MemoryStream memoryStream = new MemoryStream();
             PdfWriter writer = PdfWriter.GetInstance(doc, memoryStream);
             stopwatch.Stop();
@@ -561,7 +561,7 @@ namespace VehicleManagerSys.Core.Report
             PdfPTable table = pdfHelper.CreateTable(new float[] { 1, 1, 1, 1, 1, 1 }, doc);
             table.AddCell(pdfHelper.CreateCell("一、基本信息", NormalFont, Element.ALIGN_LEFT, 6, 1));
 
-            table.AddCell(pdfHelper.CreateCell("检验流水号",NormalFont,Element.ALIGN_CENTER));
+            table.AddCell(pdfHelper.CreateCell("检验流水号", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
 
             table.AddCell(pdfHelper.CreateCell("引车员", NormalFont, Element.ALIGN_CENTER));
@@ -775,7 +775,7 @@ namespace VehicleManagerSys.Core.Report
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
             doc.Add(table);
 
-            table = pdfHelper.CreateTable(new float[] {5, 14, 14, 14, 14, 14, 14, 14, 14, 7, 7 }, doc);
+            table = pdfHelper.CreateTable(new float[] { 5, 14, 14, 14, 14, 14, 14, 14, 14, 7, 7 }, doc);
             table.AddCell(pdfHelper.CreateCell("前照灯H", NormalFont, Element.ALIGN_CENTER, 1, 7));
             table.AddCell(pdfHelper.CreateCell("项目", NormalFont, Element.ALIGN_CENTER, 1, 3));
             table.AddCell(pdfHelper.CreateCell("远光发光强度", NormalFont, Element.ALIGN_CENTER, 1, 3));
@@ -800,14 +800,14 @@ namespace VehicleManagerSys.Core.Report
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
 
             table.AddCell(pdfHelper.CreateCell("左内灯", NormalFont, Element.ALIGN_CENTER, 1, 1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1,1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
 
             table.AddCell(pdfHelper.CreateCell("右内灯", NormalFont, Element.ALIGN_CENTER, 1, 1));
@@ -833,7 +833,7 @@ namespace VehicleManagerSys.Core.Report
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER, 1, 1));
 
             doc.Add(table);
-            table = pdfHelper.CreateTable(new float[] { 14, 89,14, 7, 7 }, doc);
+            table = pdfHelper.CreateTable(new float[] { 14, 89, 14, 7, 7 }, doc);
             table.AddCell(pdfHelper.CreateCell("车速表S", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("km/h", NormalFont, Element.ALIGN_CENTER));
@@ -851,7 +851,7 @@ namespace VehicleManagerSys.Core.Report
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("路试检验员", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
-            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));      
+            table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
             doc.Add(table);
 
@@ -871,7 +871,7 @@ namespace VehicleManagerSys.Core.Report
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("总检次数", NormalFont, Element.ALIGN_CENTER));
             table.AddCell(pdfHelper.CreateCell("", NormalFont, Element.ALIGN_CENTER));
-            table.AddCell(pdfHelper.CreateCell("备注", NormalFont, Element.ALIGN_LEFT,4,1));;
+            table.AddCell(pdfHelper.CreateCell("备注", NormalFont, Element.ALIGN_LEFT, 4, 1)); ;
 
             doc.Add(table);
             doc.Close();
@@ -921,4 +921,4 @@ public class ReportEntity
     public string Illustrate { get => _illustrate; set => _illustrate = value; }
     public string Remark { get => _remark; set => _remark = value; }
 }
-    
+

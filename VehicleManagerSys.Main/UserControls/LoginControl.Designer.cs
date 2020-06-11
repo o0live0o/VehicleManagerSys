@@ -105,6 +105,8 @@
             this.selectorFiller = new CI.UIComponents.Filler.EntityFiller();
             this.btnSend = new EASkins.Emi_Button_2();
             this.validator1 = new CI.UIComponents.Validate.Validator();
+            this.chkNetCheck = new CCWin.SkinControl.SkinCheckBox();
+            this.txtQueryVin = new EASkins.Controls.MaterialSingleLineTextField();
             this.SuspendLayout();
             // 
             // flatField12
@@ -130,7 +132,7 @@
             this.btnClear.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.btnClear.Image = null;
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClear.Location = new System.Drawing.Point(690, 52);
+            this.btnClear.Location = new System.Drawing.Point(1033, 52);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 23);
             this.btnClear.TabIndex = 116;
@@ -146,7 +148,7 @@
             this.btnSave.ForeColor = System.Drawing.Color.White;
             this.btnSave.Image = null;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(866, 52);
+            this.btnSave.Location = new System.Drawing.Point(863, 52);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(74, 23);
@@ -210,21 +212,20 @@
             "试验摩托车",
             "临时入境摩托车",
             "警用摩托"});
-            this.combQueryPlateType.Location = new System.Drawing.Point(455, 49);
+            this.combQueryPlateType.Location = new System.Drawing.Point(429, 27);
             this.combQueryPlateType.Margin = new System.Windows.Forms.Padding(2);
             this.combQueryPlateType.MaxDropDownItems = 10;
             this.combQueryPlateType.Name = "combQueryPlateType";
             this.combQueryPlateType.Size = new System.Drawing.Size(129, 26);
             this.combQueryPlateType.StartIndex = 0;
             this.combQueryPlateType.TabIndex = 112;
-            this.combQueryPlateType.Visible = false;
             // 
             // txtQueryPlateNo
             // 
             this.txtQueryPlateNo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtQueryPlateNo.Depth = 0;
             this.txtQueryPlateNo.Hint = "号牌号码";
-            this.txtQueryPlateNo.Location = new System.Drawing.Point(233, 52);
+            this.txtQueryPlateNo.Location = new System.Drawing.Point(174, 30);
             this.txtQueryPlateNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtQueryPlateNo.MaxLength = 32767;
             this.txtQueryPlateNo.MouseState = EASkins.MouseState.HOVER;
@@ -290,12 +291,13 @@
             "澳",
             "鲁",
             "内"});
-            this.combQueryAera.Location = new System.Drawing.Point(154, 49);
+            this.combQueryAera.Location = new System.Drawing.Point(95, 27);
             this.combQueryAera.Margin = new System.Windows.Forms.Padding(2);
             this.combQueryAera.Name = "combQueryAera";
             this.combQueryAera.Size = new System.Drawing.Size(71, 26);
             this.combQueryAera.StartIndex = 0;
             this.combQueryAera.TabIndex = 111;
+            this.combQueryAera.SelectedIndexChanged += new System.EventHandler(this.combQueryAera_SelectedIndexChanged);
             // 
             // ami_Separator1
             // 
@@ -1387,7 +1389,7 @@
             this.btnSend.ForeColor = System.Drawing.Color.White;
             this.btnSend.Image = null;
             this.btnSend.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSend.Location = new System.Drawing.Point(954, 52);
+            this.btnSend.Location = new System.Drawing.Point(948, 52);
             this.btnSend.Margin = new System.Windows.Forms.Padding(2);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(74, 23);
@@ -1396,11 +1398,52 @@
             this.btnSend.TextAlignment = System.Drawing.StringAlignment.Center;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
+            // chkNetCheck
+            // 
+            this.chkNetCheck.AutoSize = true;
+            this.chkNetCheck.BackColor = System.Drawing.Color.Transparent;
+            this.chkNetCheck.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.chkNetCheck.DownBack = null;
+            this.chkNetCheck.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkNetCheck.Location = new System.Drawing.Point(679, 54);
+            this.chkNetCheck.MouseBack = null;
+            this.chkNetCheck.Name = "chkNetCheck";
+            this.chkNetCheck.NormlBack = null;
+            this.chkNetCheck.SelectedDownBack = null;
+            this.chkNetCheck.SelectedMouseBack = null;
+            this.chkNetCheck.SelectedNormlBack = null;
+            this.chkNetCheck.Size = new System.Drawing.Size(75, 21);
+            this.chkNetCheck.TabIndex = 117;
+            this.chkNetCheck.Text = "联网查询";
+            this.chkNetCheck.UseVisualStyleBackColor = false;
+            this.chkNetCheck.CheckStateChanged += new System.EventHandler(this.chkNetCheck_CheckStateChanged);
+            // 
+            // txtQueryVin
+            // 
+            this.txtQueryVin.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtQueryVin.Depth = 0;
+            this.txtQueryVin.Hint = "VIN";
+            this.txtQueryVin.Location = new System.Drawing.Point(174, 58);
+            this.txtQueryVin.Margin = new System.Windows.Forms.Padding(2);
+            this.txtQueryVin.MaxLength = 32767;
+            this.txtQueryVin.MouseState = EASkins.MouseState.HOVER;
+            this.txtQueryVin.Name = "txtQueryVin";
+            this.txtQueryVin.PasswordChar = '\0';
+            this.txtQueryVin.SelectedText = "";
+            this.txtQueryVin.SelectionLength = 0;
+            this.txtQueryVin.SelectionStart = 0;
+            this.txtQueryVin.Size = new System.Drawing.Size(198, 23);
+            this.txtQueryVin.TabIndex = 118;
+            this.txtQueryVin.TabStop = false;
+            this.txtQueryVin.UseSystemPasswordChar = false;
+            // 
             // LoginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.txtQueryVin);
+            this.Controls.Add(this.chkNetCheck);
             this.Controls.Add(this.txtEmissionStandard);
             this.Controls.Add(this.flatField38);
             this.Controls.Add(this.flatField30);
@@ -1476,6 +1519,7 @@
             this.Name = "LoginControl";
             this.Size = new System.Drawing.Size(1127, 721);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1558,5 +1602,7 @@
         private CI.UIComponents.Validate.Validator validator1;
         private CI.Controls.FlatField txtTreatmentDeviceType;
         private CI.Controls.FlatField txtFuleModel;
+        private CCWin.SkinControl.SkinCheckBox chkNetCheck;
+        private EASkins.Controls.MaterialSingleLineTextField txtQueryVin;
     }
 }

@@ -18,6 +18,9 @@ using VehicleManagerSys.Core.Interfaces;
 using VehicleManagerSys.Core.Services;
 using VehicleManagerSys.Entity.IVS;
 using System.Collections;
+using Live0xUtils.FileUtils;
+using VehicleManagerSys.Core.Services.SafetyTestServices;
+using System.Web;
 
 namespace VehicleManagerSys.Main.UserControls
 {
@@ -151,20 +154,24 @@ namespace VehicleManagerSys.Main.UserControls
             //_checkItemSelector = new ConstSelector(txtCheckItem,false,false,"CheckItem",txtCheckItem.Width);
             //_checkItemSelector.EntityFiller = selectorFiller;
 
-            _fuelModelSelector = new ConstSelector(txtFuleModel,false,false, "FuleModel",txtFuleModel.Width);
+            _fuelModelSelector = new ConstSelector(txtFuleModel, false, false, "FuleModel", txtFuleModel.Width);
             _fuelModelSelector.EntityFiller = selectorFiller;
 
             _emissionStandardSelector = new ConstSelector(txtEmissionStandard, false, false, "EmissionStandard", txtEmissionStandard.Width);
             _emissionStandardSelector.EntityFiller = selectorFiller;
 
-            _treatmentDeviceType = new ConstSelector(txtTreatmentDeviceType,false,false, "DealDeviceType", txtTreatmentDeviceType.Width);
+            _treatmentDeviceType = new ConstSelector(txtTreatmentDeviceType, false, false, "DealDeviceType", txtTreatmentDeviceType.Width);
             _treatmentDeviceType.EntityFiller = selectorFiller;
 
             _isDK = new ConstSelector(txtDK, false, false, "SysYesOrNo", txtDK.Width);
             _isDK.EntityFiller = selectorFiller;
 
-            txtHPHM.Text = "川";
-            combQueryAera.SelectedItem = "川";
+            //txtHPHM.Text = "川";
+            //combQueryAera.SelectedItem = "川";
+
+            chkNetCheck.Checked = "1".Equals(IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.IsNetSearch, AppHelper.IniFilePath));
+            txtHPHM.Text = IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, AppHelper.IniFilePath);
+            combQueryAera.SelectedItem = IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, AppHelper.IniFilePath);
         }
 
         /// <summary>
@@ -186,7 +193,7 @@ namespace VehicleManagerSys.Main.UserControls
                 m_vehicleInfo = new VehicleInfo();
 
                 FillEntity(m_vehicleInfo); //m_vehicleInfo.TestNoForNet
-                 AppMessage message = m_vehicleBusiness.SendCar(m_vehicleInfo);
+                AppMessage message = m_vehicleBusiness.SendCar(m_vehicleInfo);
 
 
 
@@ -204,7 +211,7 @@ namespace VehicleManagerSys.Main.UserControls
                     vehicle_dispatch.JCLSH = "P" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                     //更新联网流水号
                     string sql = $"UPDATE VehicleInfo SET TestNoForNet = '{message.NetTestNo}' WHERE  PlateNo = '{m_vehicleInfo.PlateNo}'";
-                    m_mssqlHelper.ExcuteNonQuery(sql,null);
+                    m_mssqlHelper.ExcuteNonQuery(sql, null);
                     sql = $"UPDATE LOGIN_VEHICLE_INFO SET  JYXM = '{ vehicle_dispatch.JYXM}' , PFLSH = '{message.NetTestNo}' WHERE  HPHM = '{m_vehicleInfo.PlateNo}'";
                     m_mssqlHelper.ExcuteNonQuery(sql, null);
 
@@ -216,10 +223,10 @@ namespace VehicleManagerSys.Main.UserControls
 
                     if (succ)
                         FrmTips.ShowTipsSuccess(AppHelper.MainForm, "报检成功！"
-                            + "检测方法:"+message.DetectItem+ "检测次数:" + message.Times + Environment.NewLine 
+                            + "检测方法:" + message.DetectItem + "检测次数:" + message.Times + Environment.NewLine
                             + "联网流水号:" + message.NetTestNo, ContentAlignment.MiddleCenter, 5000);
                     else
-                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！"+message.Msg, ContentAlignment.MiddleCenter, 3000);
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 3000);
                 }
                 else
                     FrmTips.ShowTipsError(AppHelper.MainForm, "报检失败！" + message.Msg, ContentAlignment.MiddleCenter, 3000);
@@ -258,7 +265,7 @@ namespace VehicleManagerSys.Main.UserControls
                 //保存LOGIN_VEHICLE_INFO表
                 LOGIN_VEHICLE_INFO login_vehicle_info = new LOGIN_VEHICLE_INFO();
                 loginFiller.FillEntity(login_vehicle_info);
-   
+
                 login_vehicle_info.VEHICLEID = login_vehicle_info.HPZLDH + login_vehicle_info.HPHM;
                 login_vehicle_info.PPXH = login_vehicle_info.PP + login_vehicle_info.XH;
                 carIgnoreArr = (from p in login_vehicle_info.GetType().GetProperties()
@@ -302,43 +309,52 @@ namespace VehicleManagerSys.Main.UserControls
         {
             try
             {
-                string plateNo = txtQueryPlateNo .Text.Trim();
-                if (string.IsNullOrEmpty(plateNo))
+                if (chkNetCheck.Checked)
                 {
-                    FrmTips.ShowTipsError(AppHelper.MainForm, "号牌号码不能为空");
-                    return;
+                    NetSearch();
                 }
-
-                plateNo = combQueryAera.Text + plateNo;
-
-                LOGIN_VEHICLE_INFO loginInfo = new LOGIN_VEHICLE_INFO();
-                Hashtable hashtable = new Hashtable();
-                string sql = "SELECT * FROM LOGIN_VEHICLE_INFO WHERE HPHM = @HPHM";
-                hashtable.Add("HPHM", plateNo);
-                loginInfo = m_mssqlHelper.Query<LOGIN_VEHICLE_INFO>(sql, hashtable);
-
-                VehicleInfo vehicleInfo = new VehicleInfo();
-                hashtable.Clear();
-                sql = "SELECT * FROM VehicleInfo WHERE PlateNo = @PlateNo";
-                hashtable.Add("PlateNo", plateNo);
-                vehicleInfo = m_mssqlHelper.Query<VehicleInfo>(sql, hashtable);
-
-                bool hasVal = false;
-
-                if (loginInfo != null &&  !string.IsNullOrEmpty(loginInfo.HPHM))              
+                else
                 {
-                    hasVal = true;
-                    loginFiller.DisplayEntity(loginInfo);
-                }
+                    string plateNo = txtQueryPlateNo.Text.Trim();
+                    if (string.IsNullOrEmpty(plateNo))
+                    {
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "号牌号码不能为空");
+                        return;
+                    }
 
-                if (vehicleInfo != null && !string.IsNullOrEmpty(vehicleInfo.PlateNo))
-                {
-                    hasVal = true;
-                    vehicleFiller.DisplayEntity(vehicleInfo);
+                    plateNo = combQueryAera.Text + plateNo;
+
+                    LOGIN_VEHICLE_INFO loginInfo = new LOGIN_VEHICLE_INFO();
+                    Hashtable hashtable = new Hashtable();
+                    string sql = "SELECT * FROM LOGIN_VEHICLE_INFO WHERE HPHM = @HPHM";
+                    hashtable.Add("HPHM", plateNo);
+                    loginInfo = m_mssqlHelper.Query<LOGIN_VEHICLE_INFO>(sql, hashtable);
+
+                    VehicleInfo vehicleInfo = new VehicleInfo();
+                    hashtable.Clear();
+                    sql = "SELECT * FROM VehicleInfo WHERE PlateNo = @PlateNo";
+                    hashtable.Add("PlateNo", plateNo);
+                    vehicleInfo = m_mssqlHelper.Query<VehicleInfo>(sql, hashtable);
+
+                    bool hasVal = false;
+
+                    if (loginInfo != null && !string.IsNullOrEmpty(loginInfo.HPHM))
+                    {
+                        hasVal = true;
+                        loginFiller.DisplayEntity(loginInfo);
+                    }
+
+                    if (vehicleInfo != null && !string.IsNullOrEmpty(vehicleInfo.PlateNo))
+                    {
+                        hasVal = true;
+                        vehicleFiller.DisplayEntity(vehicleInfo);
+                    }
+
+                    if (!hasVal)
+                        FrmTips.ShowTipsError(AppHelper.MainForm, "没有查询到车辆信息");
+
+                    
                 }
-                   
-                if(!hasVal)
-                    FrmTips.ShowTipsError(AppHelper.MainForm, "没有查询到车辆信息");
             }
             catch (Exception ex)
             {
@@ -350,8 +366,34 @@ namespace VehicleManagerSys.Main.UserControls
         {
             loginFiller.DisplayEntity(null);
             vehicleFiller.DisplayEntity(null);
+            
         }
 
+        private void chkNetCheck_CheckStateChanged(object sender, EventArgs e)
+        {
+            Live0xUtils.FileUtils.IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.IsNetSearch, chkNetCheck.Checked ? "1" : "0", AppHelper.IniFilePath);
+        }
 
+        private void combQueryAera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Live0xUtils.FileUtils.IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, combQueryAera.Text, AppHelper.IniFilePath);
+        }
+
+        private void NetSearch()
+        {
+            var hphm = combQueryAera.Text.Trim() + txtQueryPlateNo.Text.Trim();
+            hphm = HttpUtility.UrlEncode(hphm);
+            var vin = txtQueryVin.Text.Trim();
+            var hpzl=    AppHelper.GetDefineCode("HPZL", combQueryPlateType.Text);
+            SafetyTestService safetyTestService = new SafetyTestService();
+            var message = safetyTestService.Request18C49(hphm, vin, hpzl);
+            if (message.Succ)
+            {
+                vehicleFiller.DisplayEntity(message.VehicleInfo);
+            }
+            else
+                FrmTips.ShowTipsError(AppHelper.MainForm, "查询失败:" + message?.Msg);
+
+        }
     }
 }

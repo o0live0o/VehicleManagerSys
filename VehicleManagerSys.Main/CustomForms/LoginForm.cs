@@ -14,6 +14,7 @@ using VehicleManagerSys.Common;
 using HZH_Controls;
 using System.Threading;
 using VehicleManagerSys.Entity.IVS;
+using VehicleManagerSys.Dtos.SafetyTest;
 
 namespace VehicleManagerSys.Main.CustomForms
 {
@@ -22,11 +23,8 @@ namespace VehicleManagerSys.Main.CustomForms
         public LoginForm()
         {
             InitializeComponent();
-            //Dictionary<int, string> keyDic = new Dictionary<int, string>();
-            //keyDic.Add(13, "Enter");
-            //keyDic.Add(65, "A");
-            //this.HotKeys = keyDic;
         }
+
 
         private void btnCancel_BtnClick(object sender, EventArgs e)
         {
@@ -50,25 +48,34 @@ namespace VehicleManagerSys.Main.CustomForms
             {
                 try
                 {
-                    string sql = "SELECT * FROM EMPLOYEE_USER WHERE EMPLOYEE_ID = @EMPLOYEE_ID AND EMPLOYEE_PWD = @EMPLOYEE_PWD";
-                    Hashtable hashtable = new Hashtable();
-                    hashtable.Add("EMPLOYEE_ID", user);
-                    hashtable.Add("EMPLOYEE_PWD", pwd);
-                    emplpyee = MssqlHelper.GetInstance().Query<EMPLOYEE_USER>(sql, hashtable);
-                    ControlHelper.ThreadInvokerControl(this, () =>
+                    if (true)
                     {
+                        string sql = "SELECT * FROM EMPLOYEE_USER WHERE EMPLOYEE_ID = @EMPLOYEE_ID AND EMPLOYEE_PWD = @EMPLOYEE_PWD";
+                        Hashtable hashtable = new Hashtable();
+                        hashtable.Add("EMPLOYEE_ID", user);
+                        hashtable.Add("EMPLOYEE_PWD", pwd);
+                        emplpyee = MssqlHelper.GetInstance().Query<EMPLOYEE_USER>(sql, hashtable);
+                        ControlHelper.ThreadInvokerControl(this, () =>
+                        {
 
-                        if (emplpyee != null && !string.IsNullOrEmpty(emplpyee.EMPLOYEE_NAME) && !string.IsNullOrEmpty(emplpyee.ID))
-                        {
-                            AppHelper.UserInfo.UserName = emplpyee.EMPLOYEE_NAME;
-                            AppHelper.UserInfo.Power = emplpyee.LICENSE_NAME;
-                            this.DialogResult = DialogResult.OK;
-                        }
-                        else
-                        {
-                            labWarn.Text = "*登录失败，用户名或密码错误！";
-                        }
-                    });
+                            if (emplpyee != null && !string.IsNullOrEmpty(emplpyee.EMPLOYEE_NAME) && !string.IsNullOrEmpty(emplpyee.ID))
+                            {
+                                AppHelper.UserInfo.UserName = emplpyee.EMPLOYEE_NAME;
+                                AppHelper.UserInfo.Power = emplpyee.LICENSE_NAME;
+                                this.DialogResult = DialogResult.OK;
+                            }
+                            else
+                            {
+                                labWarn.Text = "*登录失败，用户名或密码错误！";
+                            }
+                        });
+                    }
+                    else
+                    {
+                        AppHelper.UserInfo.UserName ="管理员";
+                        AppHelper.UserInfo.Power ="99";
+                        this.DialogResult = DialogResult.OK;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -88,9 +95,10 @@ namespace VehicleManagerSys.Main.CustomForms
             dbSettingForm.ShowDialog(this); 
         }
 
-        private bool LoginForm_HotKeyDown(string strHotKey)
+
+        protected override void DoEnter()
         {
-            return true;
+            btnOK_BtnClick(null,null);
         }
     }
 }

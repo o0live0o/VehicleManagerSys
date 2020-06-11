@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BB\ENV_TESTINFO.cs" />
     <Compile Include="CheckItem.cs" />
     <Compile Include="ComprehensiveDtos\AccessTokenEntity.cs" />
     <Compile Include="ComprehensiveDtos\brake.cs" />
@@ -98,8 +99,10 @@
     <Compile Include="ComprehensiveDtos\wholeVehicle.cs" />
     <Compile Include="Emuns\FuelEnum.cs" />
     <Compile Include="Emuns\YesOrNo.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="AppMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SafetyTest\Request_18C49.cs" />
+    <Compile Include="SafetyTest\Response_18C49.cs" />
     <Compile Include="SysMenu.cs" />
     <Compile Include="VehicleInfo.cs" />
     <Compile Include="YunWangDtos\HWDL.cs" />

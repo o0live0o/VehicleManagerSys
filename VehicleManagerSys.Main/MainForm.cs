@@ -100,7 +100,15 @@ namespace VehicleManagerSys.Main
                     //panControl.Controls.Clear();
                     Control control = (Control)o;
                     if (control is Form)
+                    {
                         ((Form)control).TopLevel = false;
+                        ((Form)control).AutoScroll = true;
+                        ((Form)control).FormClosed += (s, t) =>
+                        {
+                            m_dicControl.Remove(strKey);
+                            m_currentControl = null;
+                        };
+                    }
                     control.Dock = DockStyle.Fill;
                     control.AllowDrop = false;
                     panControl.Controls.Add(control);
@@ -150,7 +158,6 @@ namespace VehicleManagerSys.Main
             //        break;
             //}
         }
-
 
         public void AddForm(Form form)
         {

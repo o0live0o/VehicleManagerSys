@@ -1,4 +1,6 @@
-﻿using NLog;
+﻿using HZH_Controls;
+using HZH_Controls.Forms;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,13 @@ namespace VehicleManagerSys.Common
         public static void Error(string msg)
         {
             logger.Error(msg);
+            if (AppHelper.MainForm != null)
+            {
+                ControlHelper.ThreadInvokerControl(AppHelper.MainForm, () =>
+                {
+                        FrmTips.ShowTips(AppHelper.MainForm, msg, 5000, true, System.Drawing.ContentAlignment.BottomRight, null, TipsSizeMode.None, new System.Drawing.Size(300, 123), TipsState.Error);
+                });
+            }
         }
 
         public static void Debug(string msg)

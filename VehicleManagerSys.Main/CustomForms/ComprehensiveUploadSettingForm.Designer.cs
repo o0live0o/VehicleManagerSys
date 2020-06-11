@@ -73,6 +73,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDeleteAuthor = new EASkins.Ami_Button_2();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.chkAutoLogin = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImgType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetectLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperator)).BeginInit();
@@ -605,12 +606,25 @@
             this.checkBox4.Text = "默认外检全合格";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
+            // chkAutoLogin
+            // 
+            this.chkAutoLogin.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.chkAutoLogin.AutoSize = true;
+            this.chkAutoLogin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.chkAutoLogin.Location = new System.Drawing.Point(311, 610);
+            this.chkAutoLogin.Name = "chkAutoLogin";
+            this.chkAutoLogin.Size = new System.Drawing.Size(189, 25);
+            this.chkAutoLogin.TabIndex = 46;
+            this.chkAutoLogin.Text = "综检发车后自动取流水";
+            this.chkAutoLogin.UseVisualStyleBackColor = true;
+            // 
             // ComprehensiveUploadSettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CanMove = false;
             this.ClientSize = new System.Drawing.Size(979, 647);
+            this.Controls.Add(this.chkAutoLogin);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.btnSave);
@@ -632,6 +646,7 @@
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.groupBox5, 0);
             this.Controls.SetChildIndex(this.checkBox4, 0);
+            this.Controls.SetChildIndex(this.chkAutoLogin, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvImgType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetectLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperator)).EndInit();
@@ -697,5 +712,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox chkAutoLogin;
     }
 }

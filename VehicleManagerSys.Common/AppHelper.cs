@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,14 +25,19 @@ namespace VehicleManagerSys.Common
         public static string ComprehensiveConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "ComprehensiveConfig.json");
         //环保联网信息配置文件
         public static string EnvironmentConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "EnvironmentConfig.json");
+        //安检联网信息配置文件
+        public static string SafetyTestConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "SafetyTestConfig.json");
         //用户信息
         public static UserInfo UserInfo = new UserInfo() { UserName = "(未登录)" };
         //数据库常量
         public static List<Constant> Constants = new List<Constant>();
-        
+
+        public static string IniFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "AppSetting.ini");
+
         public static DbInfo DbSetting = null;
         public static ComprehensiveInfo ComprehensiveSetting = null;
         public static EnvironmentNetSetting EnvironmentNetSetting = null;
+        public static SafetyTestConfig SafetyTestConfigs = null;
 
         public static List<NetTypeDefine> NetDefine = new List<NetTypeDefine>();
         public static Form MainForm = null;
@@ -57,6 +63,9 @@ namespace VehicleManagerSys.Common
             if (!File.Exists(EnvironmentConfigFile))
                 File.WriteAllText(EnvironmentConfigFile, JsonConvert.SerializeObject(new EnvironmentNetSetting(), Formatting.Indented));
             
+            if(!File.Exists(SafetyTestConfigFile))
+                File.WriteAllText(SafetyTestConfigFile, JsonConvert.SerializeObject(new SafetyTestConfig(), Formatting.Indented));
+
             _appHelper = new AppHelper();
         }
 
@@ -77,10 +86,10 @@ namespace VehicleManagerSys.Common
                 DbSetting = JsonConvert.DeserializeObject<DbInfo>(File.ReadAllText(DbConfigFile));
                 ComprehensiveSetting = JsonConvert.DeserializeObject<ComprehensiveInfo>(File.ReadAllText(ComprehensiveConfigFile));
                 EnvironmentNetSetting = JsonConvert.DeserializeObject<EnvironmentNetSetting>(File.ReadAllText(EnvironmentConfigFile));
+                SafetyTestConfigs = JsonConvert.DeserializeObject<SafetyTestConfig>(File.ReadAllText(SafetyTestConfigFile));
+
                 if (!string.IsNullOrEmpty(ComprehensiveSetting.ImagePath) && !Directory.Exists(ComprehensiveSetting.ImagePath))
-                {
-                    Directory.CreateDirectory(ComprehensiveSetting.ImagePath);
-                }
+                    Directory.CreateDirectory(ComprehensiveSetting.ImagePath);               
             }
             catch(Exception ex)
             {
@@ -220,6 +229,12 @@ namespace VehicleManagerSys.Common
         public static void CreatePrivateKey()
         { 
         }
-       
+
+        public static string GetLocalIP()
+        {
+            IPAddress ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault<IPAddress>(a => a.AddressFamily.ToString().Equals("InterNetwork"));
+            return ip.ToString();
+        }
+
     }
 }

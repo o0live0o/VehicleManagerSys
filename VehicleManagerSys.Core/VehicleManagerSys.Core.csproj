@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,6 +71,7 @@
     <Compile Include="Report\SafetyTechnologyReport.cs" />
     <Compile Include="Services\ComprehensiveUploadService.cs" />
     <Compile Include="Services\ComprehensiveUploadService_SC.cs" />
+    <Compile Include="Services\SafetyTestServices\SafetyTestService.cs" />
     <Compile Include="Services\VehicleBusinessYW.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
