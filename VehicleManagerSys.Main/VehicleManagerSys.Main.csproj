@@ -150,12 +150,6 @@
     <Compile Include="CustomForms\CaptureEloam.Designer.cs">
       <DependentUpon>CaptureEloam.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomForms\BTBB_StatisticsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomForms\BTBB_StatisticsForm.Designer.cs">
-      <DependentUpon>BTBB_StatisticsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="CustomForms\SafeTestSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +179,12 @@
     </Compile>
     <Compile Include="CustomForms\VehicleSelectForm.Designer.cs">
       <DependentUpon>VehicleSelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForms\DispatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\DispatchForm.Designer.cs">
+      <DependentUpon>DispatchForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomForms\YunWangReCheckOptForm.cs">
       <SubType>Form</SubType>
@@ -300,9 +300,6 @@
     <EmbeddedResource Include="CustomForms\CaptureEloam.resx">
       <DependentUpon>CaptureEloam.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomForms\BTBB_StatisticsForm.resx">
-      <DependentUpon>BTBB_StatisticsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\SafeTestSettingForm.resx">
       <DependentUpon>SafeTestSettingForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\ValChangeForm.resx">
       <DependentUpon>ValChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomForms\DispatchForm.resx">
+      <DependentUpon>DispatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForms\YunWangReCheckOptForm.resx">
       <DependentUpon>YunWangReCheckOptForm.cs</DependentUpon>

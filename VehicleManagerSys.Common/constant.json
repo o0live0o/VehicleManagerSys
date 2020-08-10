@@ -313,5 +313,55 @@
     "Code": "10",
     "Name": "测试检验",
     "ConstantType": "DetectType"
+  },
+  {
+    "Code": "1",
+    "Name": "化油器",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "2",
+    "Name": "化油器改造",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "3",
+    "Name": "开环电喷",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "4",
+    "Name": "闭环电喷",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "5",
+    "Name": "高压共轨",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "6",
+    "Name": "泵油嘴",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "7",
+    "Name": "单体泵",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "8",
+    "Name": "直列泵",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "9",
+    "Name": "机械泵",
+    "ConstantType": "SupplyType"
+  },
+  {
+    "Code": "10",
+    "Name": "其它",
+    "ConstantType": "SupplyType"
   }
 ]

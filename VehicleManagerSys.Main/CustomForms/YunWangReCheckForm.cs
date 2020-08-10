@@ -85,7 +85,7 @@ namespace VehicleManagerSys.Main.CustomForms
 
         private void ReCheck()
         {
-            VEHICLE_DISPATCH dispatchInfo = new VEHICLE_DISPATCH();
+            VEHICLE_DISPATCH dispatchInfo = new VEHICLE_DISPATCH(); 
             if (dgv.CurrentRow.Index < 0) return;
             RESULT_VEHICLE_INFO info = CGridHelper.GetCurrentData<RESULT_VEHICLE_INFO>(dgv);
             if (info != null)

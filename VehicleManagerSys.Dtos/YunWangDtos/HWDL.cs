@@ -352,7 +352,6 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// 获取或设置供油方式代码
         /// </summary>
         [Mapper("FuelSupplyType")]
-        [Define("GYFS")]
         public string GYFSDM
         {
             get;

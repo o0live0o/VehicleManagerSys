@@ -83,7 +83,7 @@ namespace VehicleManagerSys.Main.UserControls
             _hpzlSelector = new ConstSelector(txtHPZL, false, false, "HPZL", txtHPZL.Width);
             _hpzlSelector.EntityFiller = selectorFiller;
 
-            _gyfsSelector = new ConstSelector(txtGYFS, false, false, "GYFS", txtGYFS.Width);
+            _gyfsSelector = new ConstSelector(txtGYFS, false, false, "SupplyType", txtGYFS.Width);
             _gyfsSelector.EntityFiller = selectorFiller;
 
             _qdxsSelector = new ConstSelector(txtQDXS, false, false, "QDXS", txtQDXS.Width);
