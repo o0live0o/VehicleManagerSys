@@ -47,7 +47,8 @@ namespace VehicleManagerSys.Core.Services
                 //TODO 特殊处理
                 hwdl.DLY = AppHelper.UserInfo.UserName;
                 hwdl.DLSJ = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
+                if ("51".Equals(hwdl.HPZLDM) || "52".Equals(hwdl.HPZLDM))
+                    hwdl.HPZLDM = "99";
                 //if (info.DetectItem.Contains("X1"))
                 //{
                 //    hwdl.λup = "1.05";
@@ -83,7 +84,7 @@ namespace VehicleManagerSys.Core.Services
                     data = JsonConvert.DeserializeObject<Hashtable>(hashtable["data"].ToString());
                     message.NetTestNo = data["JYLSH"].ToString();
                     message.Times = data["JYCS"].ToString();
-                    message.DetectItem = data["JCFFDM"].ToString();
+                    message.DetectItem = data["JCFFDM"] == null ? "2" : data["JCFFDM"].ToString();
                     message.DetectItem = AppHelper.GetLocalType("JYXM", message.DetectItem);
                     StartProcess(message.NetTestNo, message.Times);
                 }
@@ -97,37 +98,45 @@ namespace VehicleManagerSys.Core.Services
 
         private void StartProcess(string testNo, string testTimes)
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("JYLSH", testNo);
-            dic.Add("JYCS", testTimes);
-            dic.Add("JGBH", AppHelper.EnvironmentNetSetting.StationNo);
-            dic.Add("JCXBH", AppHelper.EnvironmentNetSetting.LineNo);
-            dic.Add("TIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            try
+            {
+                Dictionary<string, string> dic = new Dictionary<string, string>();
+                dic.Add("JYLSH", testNo);
+                dic.Add("JYCS", testTimes);
+                dic.Add("JGBH", AppHelper.EnvironmentNetSetting.StationNo);
+                dic.Add("JCXBH", AppHelper.EnvironmentNetSetting.LineNo);
+                dic.Add("TIME", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
-
-            WebClient webClient = new WebClient();
-            string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "write/";
-            var result = webClient.UploadValues(uploadUrl, new System.Collections.Specialized.NameValueCollection() {
+                WebClient webClient = new WebClient();
+                string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "write/";
+                var result = webClient.UploadValues(uploadUrl, new System.Collections.Specialized.NameValueCollection() {
                    { "jkid","HWGCKS"},
                    { "jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber},
                    { "writejson", JsonConvert.SerializeObject(dic)},
                 });
-            string s = Encoding.UTF8.GetString(result);
-            //Hashtable hashtable = new Hashtable();
-            //hashtable.Add("jkid", "HWGCKS");
-            //hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
-            //hashtable.Add("writejson", JsonConvert.SerializeObject(dic));
-            //Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
-            //string s = httpRequest.HttpPost("url", JsonConvert.SerializeObject(hashtable));
+                LogHelper.Trace("请求过程开始" + JsonConvert.SerializeObject(dic));
+                string s = Encoding.UTF8.GetString(result);
+                LogHelper.Trace("过程开始响应" + s);
+                //Hashtable hashtable = new Hashtable();
+                //hashtable.Add("jkid", "HWGCKS");
+                //hashtable.Add("jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber);
+                //hashtable.Add("writejson", JsonConvert.SerializeObject(dic));
+                //Live0xUtils.HttpUtils.HttpRequest httpRequest = new Live0xUtils.HttpUtils.HttpRequest();
+                //string s = httpRequest.HttpPost("url", JsonConvert.SerializeObject(hashtable));
 
-            AppMessage message = new AppMessage() { Succ = false, Msg = "程序异常" };
-            Hashtable hashtable = new Hashtable();
-            hashtable = JsonConvert.DeserializeObject<Hashtable>(s);
-            message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
-            message.Succ = hashtable["code"] == null ? false :
-                (hashtable["code"].ToString().Equals("success") ? true : false);
+                AppMessage message = new AppMessage() { Succ = false, Msg = "程序异常" };
+                Hashtable hashtable = new Hashtable();
+                hashtable = JsonConvert.DeserializeObject<Hashtable>(s);
+                message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
+                message.Succ = hashtable["code"] == null ? false :
+                    (hashtable["code"].ToString().Equals("success") ? true : false);
 
-            FrmTips.ShowTips(AppHelper.MainForm, message.Msg, 2000, true, System.Drawing.ContentAlignment.BottomRight, null, TipsSizeMode.None, new System.Drawing.Size(300, 100));
+                FrmTips.ShowTips(AppHelper.MainForm, message.Msg, 2000, true, System.Drawing.ContentAlignment.BottomRight, null, TipsSizeMode.None, new System.Drawing.Size(300, 100));
+            }
+            catch (Exception ex)
+            {
+                FrmTips.ShowTips(AppHelper.MainForm,"过程开始异常，不能进行检测！" + ex.Message, 2000, true, System.Drawing.ContentAlignment.BottomRight,null, TipsSizeMode.None, new System.Drawing.Size(300, 100));
+            }
         }
     }
 }

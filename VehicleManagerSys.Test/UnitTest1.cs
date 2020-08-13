@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using VehicleManagerSys.Dtos;
 
 namespace VehicleManagerSys.Test
@@ -52,5 +56,48 @@ namespace VehicleManagerSys.Test
             File.WriteAllText("val.txt", sb1.ToString()); ;
         }
 
+        [TestMethod]
+        public void JsonTest()
+        {
+            string s = "{\"success\":true,\"code\":\"success\",\"msg\":\"【平台提示】注册成功!\",\"status\":\"0\",\"TotalCount\":0,\"data\":{\"JYLSH\":\"500112C92008111441241282\",\"JYCS\":1,\"JCFFDM\":null}}";
+        
+            Hashtable hashtable = new Hashtable();
+            Hashtable hashtable1 = new Hashtable();
+        hashtable =  JsonConvert.DeserializeObject<Hashtable>(s);
+
+            hashtable1 =  JsonConvert.DeserializeObject<Hashtable>(hashtable["data"].ToString());
+
+            string t = hashtable1["JCFFDM"] == null ? "2" : hashtable1["JCFFDM"].ToString();
+        }
+
+        [TestMethod]
+        public void NetTest()
+        {
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in nics)
+            {
+                
+                //判断是否为以太网卡
+                //Wireless80211         无线网卡    Ppp     宽带连接
+                //Ethernet              以太网卡   
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    //获取以太网卡网络接口信息
+                    IPInterfaceProperties ip = adapter.GetIPProperties();
+                    //获取单播地址集
+                    UnicastIPAddressInformationCollection ipCollection = ip.UnicastAddresses;
+                    foreach (UnicastIPAddressInformation ipadd in ipCollection)
+                    {
+                        //InterNetwork    IPV4地址      InterNetworkV6        IPV6地址
+                        //Max            MAX 位址
+                        if (ipadd.Address.AddressFamily == AddressFamily.InterNetwork)
+                        { 
+                        }
+                            //判断是否为ipv4
+                            //label1.Text = ipadd.Address.ToString();//获取ip
+                    }
+                }
+            }
+        }
     }
 }

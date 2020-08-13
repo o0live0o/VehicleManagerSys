@@ -211,7 +211,9 @@
             "教练摩托车",
             "试验摩托车",
             "临时入境摩托车",
-            "警用摩托"});
+            "警用摩托",
+            "小型新能源汽车",
+            "大型新能源汽车"});
             this.combQueryPlateType.Location = new System.Drawing.Point(429, 27);
             this.combQueryPlateType.Margin = new System.Windows.Forms.Padding(2);
             this.combQueryPlateType.MaxDropDownItems = 10;
