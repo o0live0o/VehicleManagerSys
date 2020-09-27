@@ -50,6 +50,10 @@ namespace VehicleManagerSys.Core.Services.SafetyTestServices
                             vehicleInfo.PlateTypeTxt = AppHelper.GetDefineName("HPZL",vehicleInfo.PlateType);
                             if (DateTime.TryParse(vehicleInfo.RegisterDate ?? "", out DateTime d))
                                 vehicleInfo.RegisterDate = d.ToString("yyyy-MM-dd");
+                            if (decimal.TryParse(vehicleInfo.Displacement, out decimal displacement))
+                            {
+                                vehicleInfo.Displacement = (displacement / 1000).ToString();
+                            }
                             appMessage.VehicleInfo = vehicleInfo;
                         }
                     }

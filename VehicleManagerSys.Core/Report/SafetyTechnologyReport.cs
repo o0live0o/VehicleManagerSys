@@ -875,9 +875,14 @@ namespace VehicleManagerSys.Core.Report
 
             doc.Add(table);
             doc.Close();
-
+            
             MemoryStream memoryStream1 = new MemoryStream(memoryStream.ToArray());
             O2S.Components.PDFRender4NET.PDFFile pdfFile = O2S.Components.PDFRender4NET.PDFFile.Open(memoryStream1);
+            PrinterSettings settings = new PrinterSettings();
+            PDFPrintSettings printSettings = new PDFPrintSettings(settings);
+            printSettings.PageScaling = O2S.Components.PDFRender4NET.Printing.PageScaling.FitToPrinterMarginsProportional;
+            printSettings.PrinterSettings.Copies = 1;
+            pdfFile.Print(printSettings);
             System.Drawing.Bitmap pageImage = pdfFile.GetPageImage(0, 56 * (int)PdfHelper.Definition.Six);
 
 

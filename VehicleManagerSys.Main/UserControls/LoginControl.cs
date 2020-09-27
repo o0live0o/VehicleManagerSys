@@ -387,7 +387,7 @@ namespace VehicleManagerSys.Main.UserControls
             var hpzl=    AppHelper.GetDefineCode("HPZL", combQueryPlateType.Text);
             SafetyTestService safetyTestService = new SafetyTestService();
             var message = safetyTestService.Request18C49(hphm, vin, hpzl);
-            if (message.Succ)
+            if (message.Succ && message.VehicleInfo != null )
             {
                 vehicleFiller.DisplayEntity(message.VehicleInfo);
             }
