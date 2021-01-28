@@ -26,6 +26,11 @@ namespace VehicleManagerSys.Core.Services
             AppMessage appMessage = new AppMessage() { Succ = false, Msg = "没有查询到相关信息！" };
             try
             {
+                var obj = new {
+                    License = "",
+                    LicenseType = "",
+                    VIN = ""
+                };
 
             }
             catch (Exception ex)

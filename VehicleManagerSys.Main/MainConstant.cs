@@ -14,6 +14,8 @@ namespace VehicleManagerSys.Main
         //ini文件键名
         public const string IsNetSearch = "IsNetSearch";   //是否联网查询
 
+        public const string IsNetPFSearch = "IsNetPFSearch";   //是否排放联网查询
+
         public const string PlateNoArea = "PlateNoArea";  //号牌所属区域
 
         public const string DetectTypeTxt = "DetectTypeTxt"; //检验类别

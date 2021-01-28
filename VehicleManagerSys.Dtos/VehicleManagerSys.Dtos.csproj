@@ -105,6 +105,7 @@
     <Compile Include="SafetyTest\Response_18C49.cs" />
     <Compile Include="SysMenu.cs" />
     <Compile Include="VehicleInfo.cs" />
+    <Compile Include="YunWangDtos\HQCarInfo.cs" />
     <Compile Include="YunWangDtos\HWDL.cs" />
   </ItemGroup>
   <ItemGroup>

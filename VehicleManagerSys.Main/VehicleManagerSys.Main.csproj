@@ -258,6 +258,7 @@
     <Compile Include="CustomForms\VehicleLoginForm.Designer.cs">
       <DependentUpon>VehicleLoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enums\NetType.cs" />
     <Compile Include="MainConstant.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

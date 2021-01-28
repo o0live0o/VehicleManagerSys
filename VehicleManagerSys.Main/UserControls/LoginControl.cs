@@ -21,6 +21,7 @@ using System.Collections;
 using Live0xUtils.FileUtils;
 using VehicleManagerSys.Core.Services.SafetyTestServices;
 using System.Web;
+using VehicleManagerSys.Main.Enums;
 
 namespace VehicleManagerSys.Main.UserControls
 {
@@ -170,6 +171,7 @@ namespace VehicleManagerSys.Main.UserControls
             //combQueryAera.SelectedItem = "川";
 
             chkNetCheck.Checked = "1".Equals(IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.IsNetSearch, AppHelper.IniFilePath));
+            chkNetPF.Checked = "1".Equals(IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.IsNetPFSearch, AppHelper.IniFilePath));
             txtHPHM.Text = IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, AppHelper.IniFilePath);
             combQueryAera.SelectedItem = IniHelper.ReadIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, AppHelper.IniFilePath);
         }
@@ -353,7 +355,7 @@ namespace VehicleManagerSys.Main.UserControls
                     if (!hasVal)
                         FrmTips.ShowTipsError(AppHelper.MainForm, "没有查询到车辆信息");
 
-                    
+
                 }
             }
             catch (Exception ex)
@@ -366,34 +368,60 @@ namespace VehicleManagerSys.Main.UserControls
         {
             loginFiller.DisplayEntity(null);
             vehicleFiller.DisplayEntity(null);
-            
+
         }
 
         private void chkNetCheck_CheckStateChanged(object sender, EventArgs e)
         {
-            Live0xUtils.FileUtils.IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.IsNetSearch, chkNetCheck.Checked ? "1" : "0", AppHelper.IniFilePath);
+            if (chkNetCheck.Checked && chkNetPF.Checked)
+            {
+                chkNetPF.Checked = false;
+                IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.IsNetPFSearch, chkNetPF.Checked ? "1" : "0", AppHelper.IniFilePath);
+            }
+
+            IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.IsNetSearch, chkNetCheck.Checked ? "1" : "0", AppHelper.IniFilePath);
+        }
+
+        private void chkNetPF_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (chkNetPF.Checked && chkNetCheck.Checked)
+            {
+                chkNetCheck.Checked = false;
+                IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.IsNetSearch, chkNetCheck.Checked ? "1" : "0", AppHelper.IniFilePath);
+            }
+
+            IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.IsNetPFSearch, chkNetCheck.Checked ? "1" : "0", AppHelper.IniFilePath);
         }
 
         private void combQueryAera_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Live0xUtils.FileUtils.IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, combQueryAera.Text, AppHelper.IniFilePath);
+            IniHelper.WriteIni(MainConstant.SignalConfig, MainConstant.PlateNoArea, combQueryAera.Text, AppHelper.IniFilePath);
         }
 
-        private void NetSearch()
+        private void NetSearch(NetType netType = NetType.AJ)
         {
             var hphm = combQueryAera.Text.Trim() + txtQueryPlateNo.Text.Trim();
             hphm = HttpUtility.UrlEncode(hphm);
             var vin = txtQueryVin.Text.Trim();
-            var hpzl=    AppHelper.GetDefineCode("HPZL", combQueryPlateType.Text);
-            SafetyTestService safetyTestService = new SafetyTestService();
-            var message = safetyTestService.Request18C49(hphm, vin, hpzl);
-            if (message.Succ && message.VehicleInfo != null )
+            var hpzl = AppHelper.GetDefineCode("HPZL", combQueryPlateType.Text);
+            if (netType == NetType.AJ)
             {
-                vehicleFiller.DisplayEntity(message.VehicleInfo);
+                SafetyTestService safetyTestService = new SafetyTestService();
+                var message = safetyTestService.Request18C49(hphm, vin, hpzl);
+                if (message.Succ && message.VehicleInfo != null)
+                {
+                    vehicleFiller.DisplayEntity(message.VehicleInfo);
+                }
+                else
+                    FrmTips.ShowTipsError(AppHelper.MainForm, "查询失败:" + message?.Msg);
             }
             else
-                FrmTips.ShowTipsError(AppHelper.MainForm, "查询失败:" + message?.Msg);
+            {
+
+            }
 
         }
+
+
     }
 }

@@ -107,6 +107,8 @@
             this.validator1 = new CI.UIComponents.Validate.Validator();
             this.chkNetCheck = new CCWin.SkinControl.SkinCheckBox();
             this.txtQueryVin = new EASkins.Controls.MaterialSingleLineTextField();
+            this.emi_ComboBox1 = new EASkins.Emi_ComboBox();
+            this.chkNetPF = new CCWin.SkinControl.SkinCheckBox();
             this.SuspendLayout();
             // 
             // flatField12
@@ -1407,16 +1409,16 @@
             this.chkNetCheck.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.chkNetCheck.DownBack = null;
             this.chkNetCheck.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkNetCheck.Location = new System.Drawing.Point(679, 54);
+            this.chkNetCheck.Location = new System.Drawing.Point(635, 32);
             this.chkNetCheck.MouseBack = null;
             this.chkNetCheck.Name = "chkNetCheck";
             this.chkNetCheck.NormlBack = null;
             this.chkNetCheck.SelectedDownBack = null;
             this.chkNetCheck.SelectedMouseBack = null;
             this.chkNetCheck.SelectedNormlBack = null;
-            this.chkNetCheck.Size = new System.Drawing.Size(75, 21);
+            this.chkNetCheck.Size = new System.Drawing.Size(99, 21);
             this.chkNetCheck.TabIndex = 117;
-            this.chkNetCheck.Text = "联网查询";
+            this.chkNetCheck.Text = "安检联网查询";
             this.chkNetCheck.UseVisualStyleBackColor = false;
             this.chkNetCheck.CheckStateChanged += new System.EventHandler(this.chkNetCheck_CheckStateChanged);
             // 
@@ -1439,11 +1441,61 @@
             this.txtQueryVin.TabStop = false;
             this.txtQueryVin.UseSystemPasswordChar = false;
             // 
+            // emi_ComboBox1
+            // 
+            this.emi_ComboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.emi_ComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.emi_ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.emi_ComboBox1.DropDownHeight = 170;
+            this.emi_ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.emi_ComboBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.emi_ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
+            this.emi_ComboBox1.FormattingEnabled = true;
+            this.emi_ComboBox1.HoverSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.emi_ComboBox1.IntegralHeight = false;
+            this.emi_ComboBox1.ItemHeight = 20;
+            this.emi_ComboBox1.Items.AddRange(new object[] {
+            "蓝牌",
+            "黄牌",
+            "白牌",
+            "黑牌",
+            "绿牌",
+            "黄绿"});
+            this.emi_ComboBox1.Location = new System.Drawing.Point(429, 57);
+            this.emi_ComboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.emi_ComboBox1.MaxDropDownItems = 10;
+            this.emi_ComboBox1.Name = "emi_ComboBox1";
+            this.emi_ComboBox1.Size = new System.Drawing.Size(129, 26);
+            this.emi_ComboBox1.StartIndex = 0;
+            this.emi_ComboBox1.TabIndex = 119;
+            // 
+            // chkNetPF
+            // 
+            this.chkNetPF.AutoSize = true;
+            this.chkNetPF.BackColor = System.Drawing.Color.Transparent;
+            this.chkNetPF.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.chkNetPF.DownBack = null;
+            this.chkNetPF.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkNetPF.Location = new System.Drawing.Point(635, 57);
+            this.chkNetPF.MouseBack = null;
+            this.chkNetPF.Name = "chkNetPF";
+            this.chkNetPF.NormlBack = null;
+            this.chkNetPF.SelectedDownBack = null;
+            this.chkNetPF.SelectedMouseBack = null;
+            this.chkNetPF.SelectedNormlBack = null;
+            this.chkNetPF.Size = new System.Drawing.Size(99, 21);
+            this.chkNetPF.TabIndex = 120;
+            this.chkNetPF.Text = "环保联网查询";
+            this.chkNetPF.UseVisualStyleBackColor = false;
+            this.chkNetPF.CheckStateChanged += new System.EventHandler(this.chkNetPF_CheckStateChanged);
+            // 
             // LoginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.chkNetPF);
+            this.Controls.Add(this.emi_ComboBox1);
             this.Controls.Add(this.txtQueryVin);
             this.Controls.Add(this.chkNetCheck);
             this.Controls.Add(this.txtEmissionStandard);
@@ -1606,5 +1658,7 @@
         private CI.Controls.FlatField txtFuleModel;
         private CCWin.SkinControl.SkinCheckBox chkNetCheck;
         private EASkins.Controls.MaterialSingleLineTextField txtQueryVin;
+        private EASkins.Emi_ComboBox emi_ComboBox1;
+        private CCWin.SkinControl.SkinCheckBox chkNetPF;
     }
 }
