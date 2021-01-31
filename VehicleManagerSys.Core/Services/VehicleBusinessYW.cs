@@ -5,9 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using VehicleManagerSys.Common;
+using VehicleManagerSys.Common.Attributes;
 using VehicleManagerSys.Core.Interfaces;
 using VehicleManagerSys.Dtos;
 using VehicleManagerSys.Dtos.YunWangDtos;
@@ -23,7 +25,8 @@ namespace VehicleManagerSys.Core.Services
 
         public AppMessage SearchCar(VehicleInfo info)
         {
-            AppMessage appMessage = new AppMessage() { Succ = false, Msg = "没有查询到相关信息！" };
+            AppMessage message = new AppMessage() { Succ = false, Msg = "没有查询到相关信息！" };
+            VehicleInfo vehicleInfo = new VehicleInfo();
             try
             {
                 var obj = new {
@@ -32,13 +35,36 @@ namespace VehicleManagerSys.Core.Services
                     VIN = ""
                 };
 
+                var content = JsonConvert.SerializeObject(obj);
+
+                WebClient webClient = new WebClient();
+                string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "Query/";
+                var result = webClient.UploadValues(uploadUrl, new System.Collections.Specialized.NameValueCollection() {
+                   { "jkid","HQCarInfo"},
+                   { "jkxlh", AppHelper.EnvironmentNetSetting.SerialNumber},
+                   { "queryjson", content},
+                });
+                string s = Encoding.UTF8.GetString(result);
+                LogHelper.Trace("[接收]：" + s);
+
+                Hashtable hashtable = new Hashtable();
+                hashtable = JsonConvert.DeserializeObject<Hashtable>(s);
+                message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
+                message.Succ = hashtable["code"] == null ? false :
+                    (hashtable["code"].ToString().Equals("success") ? true : false);
+                if (message.Succ)
+                {
+                    var data = JsonConvert.DeserializeObject<HQCarInfo>(hashtable["data"].ToString());
+                    FillEntity(data, vehicleInfo);
+                }
+
             }
             catch (Exception ex)
             {
-                appMessage.Succ = false;
-                appMessage.Msg = ex.Message;
+                message.Succ = false;
+                message.Msg = ex.Message;
             }
-            return appMessage;
+            return message;
         }
 
         public AppMessage SendCar(VehicleInfo info)
@@ -141,6 +167,33 @@ namespace VehicleManagerSys.Core.Services
             catch (Exception ex)
             {
                 FrmTips.ShowTips(AppHelper.MainForm,"过程开始异常，不能进行检测！" + ex.Message, 2000, true, System.Drawing.ContentAlignment.BottomRight,null, TipsSizeMode.None, new System.Drawing.Size(300, 100));
+            }
+        }
+
+        private void FillEntity<Src, Target>(Src src, Target target)
+        {
+            PropertyInfo[] srcInfos = src.GetType().GetProperties();
+            PropertyInfo[] targetInfos = target.GetType().GetProperties();
+            foreach (var item in srcInfos)
+            {
+                MapperAttribute attribute = item.GetCustomAttributes(typeof(MapperAttribute)).FirstOrDefault() as MapperAttribute;
+                if (attribute != null && !string.IsNullOrEmpty(attribute.TagName))
+                {
+                    foreach (var targetItem in targetInfos)
+                    {
+                        if (targetItem.Name.ToLower().Equals(attribute.TagName.ToLower()))
+                        {
+                            try
+                            {
+                                targetItem.SetValue(target, item.GetValue(src), null);
+                            }
+                            catch (Exception ex)
+                            {
+                                LogHelper.Debug("转换对象异常:" + ex.Message);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
