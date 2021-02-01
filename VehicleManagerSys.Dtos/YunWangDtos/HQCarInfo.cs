@@ -66,7 +66,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         [Mapper("Owner")]
         public string CZ { get; set; }
 
-        [Mapper("EmissionStandard")]
+        //[Mapper("EmissionStandard")]
         public string Standard { get; set; }
 
         [Mapper("FuelType")]
@@ -93,7 +93,7 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         [Mapper("Jurisdiction")]
         public string SSXQ { get; set; }
 
-        [Mapper("FuelModel")]
+        //[Mapper("FuelModel")]
         public string RLLBDM { get; set; }
 
         [Mapper("ElectricMotorsModel")]

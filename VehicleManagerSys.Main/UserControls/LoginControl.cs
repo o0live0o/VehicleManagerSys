@@ -31,6 +31,7 @@ namespace VehicleManagerSys.Main.UserControls
         private ConstSelector _hpzlSelector;
         private ConstSelector _qdxsSelector;
         private ConstSelector _rllbSelector;
+        private ConstSelector _rllb2Selector;
         private ConstSelector _gyfsSelector;
 
 
@@ -92,6 +93,9 @@ namespace VehicleManagerSys.Main.UserControls
 
             _rllbSelector = new ConstSelector(txtRLLB, false, false, "RLLB", txtRLLB.Width);
             _rllbSelector.EntityFiller = selectorFiller;
+
+            _rllb2Selector = new ConstSelector(txtRLLB2, false, false, "RLLB", txtRLLB2.Width);
+            _rllb2Selector.EntityFiller = selectorFiller;
             //_rllbSelector.SubjectChanged += _rllbSelector_SubjectChanged;
 
             _hpysSelector = new ConstSelector(txtHPYS, false, false, "HPYS", txtGYFS.Width);
@@ -313,7 +317,11 @@ namespace VehicleManagerSys.Main.UserControls
             {
                 if (chkNetCheck.Checked)
                 {
-                    NetSearch();
+                    NetSearch(NetType.AJ);
+                }
+                else if (chkNetPF.Checked)
+                {
+                    NetSearch(NetType.PF);
                 }
                 else
                 {
@@ -401,11 +409,14 @@ namespace VehicleManagerSys.Main.UserControls
         private void NetSearch(NetType netType = NetType.AJ)
         {
             var hphm = combQueryAera.Text.Trim() + txtQueryPlateNo.Text.Trim();
-            hphm = HttpUtility.UrlEncode(hphm);
             var vin = txtQueryVin.Text.Trim();
             var hpzl = AppHelper.GetDefineCode("HPZL", combQueryPlateType.Text);
+            var hpys = AppHelper.GetNetType("HPYS",AppHelper.GetDefineCode("HPYS", combPlateColor.Text.Replace("牌", "")));
+
             if (netType == NetType.AJ)
             {
+                hphm = HttpUtility.UrlEncode(hphm);
+
                 SafetyTestService safetyTestService = new SafetyTestService();
                 var message = safetyTestService.Request18C49(hphm, vin, hpzl);
                 if (message.Succ && message.VehicleInfo != null)
@@ -417,7 +428,18 @@ namespace VehicleManagerSys.Main.UserControls
             }
             else
             {
-
+                VehicleInfo info = new VehicleInfo();
+                info.PlateNo = hphm;
+                info.VIN = vin;
+                info.PlateColor = hpys;
+                VehicleBusinessYW yW = new VehicleBusinessYW();
+                var pfMsg = yW.SearchCar(info);
+                if (pfMsg.Succ && pfMsg.VehicleInfo != null)
+                {
+                    vehicleFiller.DisplayEntity(pfMsg.VehicleInfo);
+                }
+                else
+                    FrmTips.ShowTipsError(AppHelper.MainForm, "查询失败:" + pfMsg?.Msg);
             }
 
         }

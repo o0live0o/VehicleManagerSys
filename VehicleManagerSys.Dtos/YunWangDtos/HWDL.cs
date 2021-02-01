@@ -342,6 +342,8 @@ namespace VehicleManagerSys.Dtos.YunWangDtos
         /// <summary>
         /// 获取或设置燃料种类2代码
         /// </summary>
+        [Mapper("FuelType2")]
+        [Define("RLLB")]
         public string RLZLDM2
         {
             get;

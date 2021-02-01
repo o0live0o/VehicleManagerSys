@@ -12,15 +12,15 @@ using VehicleManagerSys.Common.Dtos;
 
 namespace VehicleManagerSys.Common
 {
-    public  class AppHelper
+    public class AppHelper
     {
         private static AppHelper _appHelper = null;
         //配置文件夹路径
-        public static string ConfigFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs");  
+        public static string ConfigFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs");
         //字段转换文件夹路径
         public static string AutoMapperConfigs = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AutoMapperConfig");
         //数据库配置文件
-        public static string DbConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "DbConfig.json"); 
+        public static string DbConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "DbConfig.json");
         //综检联网信息配置文件
         public static string ComprehensiveConfigFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configs", "ComprehensiveConfig.json");
         //环保联网信息配置文件
@@ -62,8 +62,8 @@ namespace VehicleManagerSys.Common
 
             if (!File.Exists(EnvironmentConfigFile))
                 File.WriteAllText(EnvironmentConfigFile, JsonConvert.SerializeObject(new EnvironmentNetSetting(), Formatting.Indented));
-            
-            if(!File.Exists(SafetyTestConfigFile))
+
+            if (!File.Exists(SafetyTestConfigFile))
                 File.WriteAllText(SafetyTestConfigFile, JsonConvert.SerializeObject(new SafetyTestConfig(), Formatting.Indented));
 
             _appHelper = new AppHelper();
@@ -89,9 +89,9 @@ namespace VehicleManagerSys.Common
                 SafetyTestConfigs = JsonConvert.DeserializeObject<SafetyTestConfig>(File.ReadAllText(SafetyTestConfigFile));
 
                 if (!string.IsNullOrEmpty(ComprehensiveSetting.ImagePath) && !Directory.Exists(ComprehensiveSetting.ImagePath))
-                    Directory.CreateDirectory(ComprehensiveSetting.ImagePath);               
+                    Directory.CreateDirectory(ComprehensiveSetting.ImagePath);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 File.WriteAllText("1111.txt", ex.Message);
                 throw;
@@ -109,7 +109,7 @@ namespace VehicleManagerSys.Common
             try
             {
                 NetDefine = Live0xUtils.DbUtils.SqlServer.MssqlHelper.GetInstance().QueryList<NetTypeDefine>("SELECT * FROM NetTypeDefine", null).ToList();
-     
+
                 if (NetDefine == null || NetDefine.Count == 0)
                 {
                     succ = false;
@@ -127,12 +127,12 @@ namespace VehicleManagerSys.Common
             return succ;
         }
 
-        public  void  LoadContsatnt()
+        public void LoadContsatnt()
         {
             try
             {
                 string sql = "SELECT CON_CHNAME AS ConstantType,CON_CODE AS Code,CON_CON AS Name  FROM CONST_DEFINE";
-                Constants = Live0xUtils.DbUtils.SqlServer.MssqlHelper.GetInstance().QueryList<Constant>(sql,null).ToList();
+                Constants = Live0xUtils.DbUtils.SqlServer.MssqlHelper.GetInstance().QueryList<Constant>(sql, null).ToList();
                 if (Constants != null)
                 {
                     Constants.Add(new Constant() { Code = "0", Name = "蓝牌", ConstantType = "HPYS_Ex" });
@@ -145,7 +145,7 @@ namespace VehicleManagerSys.Common
 
                 if (File.Exists("constant.json"))
                 {
-                    string constantJson = File.ReadAllText("constant.json",Encoding.GetEncoding("GB2312"));
+                    string constantJson = File.ReadAllText("constant.json", Encoding.GetEncoding("GB2312"));
                     List<Constant> fileConstants = JsonConvert.DeserializeObject<List<Constant>>(constantJson);
                     Constants.AddRange(fileConstants.ToArray());
                 }
@@ -195,7 +195,7 @@ namespace VehicleManagerSys.Common
             return "";
         }
 
-        public static string  GetFileContent(string filePath)
+        public static string GetFileContent(string filePath)
         {
             if (File.Exists(filePath))
                 return File.ReadAllText(filePath);
@@ -207,6 +207,8 @@ namespace VehicleManagerSys.Common
             NetTypeDefine define = NetDefine.Where(p => p.DefineType.Equals(type) && p.LocalCode.Equals(local.Replace(",", "").Replace("，", ""))).FirstOrDefault();
             if (define != null)
             {
+                if (string.IsNullOrEmpty(define.NetCode))
+                    return local;
                 return define.NetCode;
             }
             return local;
@@ -217,17 +219,19 @@ namespace VehicleManagerSys.Common
             NetTypeDefine define = NetDefine.Where(p => p.DefineType.Equals(type) && p.NetCode.Equals(net)).FirstOrDefault();
             if (define != null)
             {
+                if (string.IsNullOrEmpty(define.LocalCode))
+                    return net;
                 return define.LocalCode;
             }
             return net;
         }
 
         public static void CreatePblicKey()
-        { 
+        {
         }
 
         public static void CreatePrivateKey()
-        { 
+        {
         }
 
         public static string GetLocalIP()

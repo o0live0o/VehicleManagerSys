@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -30,12 +31,13 @@ namespace VehicleManagerSys.Core.Services
             try
             {
                 var obj = new {
-                    License = "",
-                    LicenseType = "",
-                    VIN = ""
+                    License = info.PlateNo,
+                    LicenseType = info.PlateColor,
+                    VIN = info.VIN
                 };
 
                 var content = JsonConvert.SerializeObject(obj);
+                LogHelper.Trace("[查询条件]：" + content);
 
                 WebClient webClient = new WebClient();
                 string uploadUrl = (AppHelper.EnvironmentNetSetting.Url.EndsWith("/") ? AppHelper.EnvironmentNetSetting.Url : AppHelper.EnvironmentNetSetting.Url + "/") + "Query/";
@@ -46,7 +48,7 @@ namespace VehicleManagerSys.Core.Services
                 });
                 string s = Encoding.UTF8.GetString(result);
                 LogHelper.Trace("[接收]：" + s);
-
+                //var s = File.ReadAllText("999.txt");
                 Hashtable hashtable = new Hashtable();
                 hashtable = JsonConvert.DeserializeObject<Hashtable>(s);
                 message.Msg = hashtable["msg"] == null ? "" : hashtable["msg"].ToString();
@@ -56,6 +58,110 @@ namespace VehicleManagerSys.Core.Services
                 {
                     var data = JsonConvert.DeserializeObject<HQCarInfo>(hashtable["data"].ToString());
                     FillEntity(data, vehicleInfo);
+
+                    vehicleInfo.PlateColor = AppHelper.GetLocalType("HPYS",vehicleInfo.PlateColor);
+                    vehicleInfo.PlateColorTxt = AppHelper.GetDefineName("HPYS",vehicleInfo.PlateColor);
+
+                    //vehicleInfo.PlateType = AppHelper.GetLocalType("HPZL", vehicleInfo.PlateType);
+                    vehicleInfo.PlateTypeTxt = AppHelper.GetDefineName("HPZL", vehicleInfo.PlateType);
+
+                    //vehicleInfo.VehicleType = AppHelper.GetLocalType("CLZL",vehicleInfo.VehicleType);
+                    vehicleInfo.VehicleTypeTxt = AppHelper.GetDefineName("CLZL", vehicleInfo.VehicleType);
+
+                    vehicleInfo.UseType = AppHelper.GetLocalType("SYXZ", vehicleInfo.UseType);
+                    vehicleInfo.UseTypeTxt = AppHelper.GetDefineName("SYXZ", vehicleInfo.UseType);
+
+                    //vehicleInfo.EmissionStandardTxt = AppHelper.GetDefineName("EmissionStandard", vehicleInfo.EmissionStandard);
+
+                    #region 燃料处理
+
+                    if (!string.IsNullOrEmpty(vehicleInfo.FuelType))
+                    {
+                        var fuelArr = vehicleInfo.FuelType.ToCharArray();
+                        if (fuelArr.Length > 0)
+                        {
+                            vehicleInfo.FuelType = fuelArr[0].ToString();
+                            vehicleInfo.FuelType = AppHelper.GetLocalType("RLLB", vehicleInfo.FuelType);
+                            vehicleInfo.FuelTypeTxt = AppHelper.GetDefineName("RLLB", vehicleInfo.FuelType);
+                        }
+
+                        if (fuelArr.Length > 1)
+                        {
+                            vehicleInfo.FuelType2 = fuelArr[1].ToString();
+                            vehicleInfo.FuelType2 = AppHelper.GetLocalType("RLLB", vehicleInfo.FuelType2);
+                            vehicleInfo.FuelTypeTxt2 = AppHelper.GetDefineName("RLLB", vehicleInfo.FuelType2);
+                        }
+                    }
+                    #endregion
+
+                    vehicleInfo.VehicleStatusTxt = AppHelper.GetDefineName("VehicleStatus",vehicleInfo.VehicleStatus);
+
+                    //vehicleInfo.FuelModelTxt = AppHelper.GetDefineName("FuleModel", vehicleInfo.FuelModel);
+
+                    vehicleInfo.IntakeType = AppHelper.GetLocalType("JQFS",vehicleInfo.IntakeType);
+                    vehicleInfo.IntakeTypeTxt = AppHelper.GetDefineName("JQFS",vehicleInfo.IntakeType);
+
+                    if ("Y".Equals(vehicleInfo.EVAPControl) || "是".Equals(vehicleInfo.EVAPControl))
+                    {
+                        vehicleInfo.EVAPControl = "1";
+                        vehicleInfo.EVAPControlTxt = AppHelper.GetDefineName("SysYesOrNo", vehicleInfo.EVAPControl);
+                    }
+                    else if ("N".Equals(vehicleInfo.EVAPControl) || "否".Equals(vehicleInfo.EVAPControl))
+                    {
+                        vehicleInfo.EVAPControl = "0";
+                        vehicleInfo.EVAPControlTxt = AppHelper.GetDefineName("SysYesOrNo", vehicleInfo.EVAPControl);
+                    }
+                    else
+                    {
+                        vehicleInfo.EVAPControl = "";
+                        vehicleInfo.EVAPControlTxt = "";
+                    }
+
+                    if ("Y".Equals(vehicleInfo.HasTreatmentDevice) || "是".Equals(vehicleInfo.HasTreatmentDevice))
+                    {
+                        vehicleInfo.HasTreatmentDevice = "1";
+                        vehicleInfo.HasTreatmentDeviceTxt = AppHelper.GetDefineName("SysYesOrNo", vehicleInfo.HasTreatmentDevice);
+                    }
+                    else if ("N".Equals(vehicleInfo.HasTreatmentDevice) || "否".Equals(vehicleInfo.HasTreatmentDevice))
+                    {
+                        vehicleInfo.HasTreatmentDevice = "0";
+                        vehicleInfo.HasTreatmentDeviceTxt = AppHelper.GetDefineName("SysYesOrNo", vehicleInfo.HasTreatmentDevice);
+                    }
+                    else
+                    {
+                        vehicleInfo.HasTreatmentDevice = "";
+                        vehicleInfo.HasTreatmentDeviceTxt = "";
+                    }
+
+                    vehicleInfo.TreatmentDeviceType = AppHelper.GetLocalType("HCLZZ", vehicleInfo.TreatmentDeviceType);
+                    vehicleInfo.TreatmentDeviceTypeTxt = AppHelper.GetDefineName("HCLZZ", vehicleInfo.TreatmentDeviceType);
+
+                    if ("Y".Equals(vehicleInfo.HasOBD) || "是".Equals(vehicleInfo.HasOBD))
+                    {
+                        vehicleInfo.HasOBD = "1";
+                        vehicleInfo.HasOBDTxt = AppHelper.GetDefineName("SysYesOrNo", vehicleInfo.HasOBD);
+                    }
+                    else if ("N".Equals(vehicleInfo.HasOBD) || "否".Equals(vehicleInfo.HasOBD))
+                    {
+                        vehicleInfo.HasOBD = "0";
+                        vehicleInfo.HasOBDTxt = AppHelper.GetDefineName("SysYesOrNo", vehicleInfo.HasOBD);
+                    }
+                    else
+                    {
+                        vehicleInfo.HasOBD = "";
+                        vehicleInfo.HasOBDTxt = "";
+                    }
+
+                    if (DateTime.TryParse(vehicleInfo.RegisterDate, out DateTime regDate))
+                    {
+                        vehicleInfo.RegisterDate = regDate.ToString("yyyy-MM-dd");
+                    }
+
+                    if (DateTime.TryParse(vehicleInfo.ManufactureDate, out DateTime mfDate))
+                    {
+                        vehicleInfo.ManufactureDate = mfDate.ToString("yyyy-MM-dd");
+                    }
+                    message.VehicleInfo = vehicleInfo;
                 }
 
             }

@@ -53,6 +53,8 @@ namespace VehicleManagerSys.Dtos
             DriveAxleAmount = "";
             FuelTypeTxt = "";
             FuelType = "";
+            FuelTypeTxt2 = "";
+            FuelType2 = "";
             MaxSpeed = "";
             Mileage = "";
             IsTrain = "";
@@ -504,6 +506,24 @@ namespace VehicleManagerSys.Dtos
         /// 获取或设置燃料类别代码
         /// </summary>
         public string FuelType
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 获取或设置燃料类别
+        /// </summary>
+        public string FuelTypeTxt2
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 获取或设置燃料类别代码
+        /// </summary>
+        public string FuelType2
         {
             get;
             set;

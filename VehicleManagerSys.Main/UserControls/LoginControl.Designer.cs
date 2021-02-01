@@ -107,8 +107,9 @@
             this.validator1 = new CI.UIComponents.Validate.Validator();
             this.chkNetCheck = new CCWin.SkinControl.SkinCheckBox();
             this.txtQueryVin = new EASkins.Controls.MaterialSingleLineTextField();
-            this.emi_ComboBox1 = new EASkins.Emi_ComboBox();
+            this.combPlateColor = new EASkins.Emi_ComboBox();
             this.chkNetPF = new CCWin.SkinControl.SkinCheckBox();
+            this.txtRLLB2 = new CI.Controls.FlatField();
             this.SuspendLayout();
             // 
             // flatField12
@@ -533,7 +534,7 @@
             this.vehicleFiller.SetEntityField(this.flatField9, new CI.UIComponents.Filler.TextEntry("RatedSpeed", ""));
             this.netFiller.SetEntityField(this.flatField9, new CI.UIComponents.Filler.TextEntry("FDJEDZS", ""));
             this.flatField9.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.flatField9.Location = new System.Drawing.Point(869, 253);
+            this.flatField9.Location = new System.Drawing.Point(869, 214);
             this.flatField9.Name = "flatField9";
             this.flatField9.Size = new System.Drawing.Size(237, 31);
             this.flatField9.TabIndex = 19;
@@ -1007,7 +1008,7 @@
             this.vehicleFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("IsElectricControlTxt", "IsElectricControl"));
             this.netFiller.SetEntityField(this.txtDK, new CI.UIComponents.Filler.TextEntry("", "SFDK"));
             this.txtDK.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtDK.Location = new System.Drawing.Point(869, 216);
+            this.txtDK.Location = new System.Drawing.Point(64, 687);
             this.txtDK.Name = "txtDK";
             this.txtDK.Size = new System.Drawing.Size(237, 31);
             this.txtDK.TabIndex = 15;
@@ -1378,7 +1379,7 @@
             this.selectorFiller.SetEntityField(this.txtFuleModel, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
             this.vehicleFiller.SetEntityField(this.txtFuleModel, new CI.UIComponents.Filler.TextEntry("FuelModelTxt", "FuelModel"));
             this.txtFuleModel.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txtFuleModel.Location = new System.Drawing.Point(618, 251);
+            this.txtFuleModel.Location = new System.Drawing.Point(870, 249);
             this.txtFuleModel.Name = "txtFuleModel";
             this.txtFuleModel.ReadOnly = true;
             this.txtFuleModel.Size = new System.Drawing.Size(237, 31);
@@ -1441,33 +1442,33 @@
             this.txtQueryVin.TabStop = false;
             this.txtQueryVin.UseSystemPasswordChar = false;
             // 
-            // emi_ComboBox1
+            // combPlateColor
             // 
-            this.emi_ComboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.emi_ComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
-            this.emi_ComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.emi_ComboBox1.DropDownHeight = 170;
-            this.emi_ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.emi_ComboBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.emi_ComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.emi_ComboBox1.FormattingEnabled = true;
-            this.emi_ComboBox1.HoverSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.emi_ComboBox1.IntegralHeight = false;
-            this.emi_ComboBox1.ItemHeight = 20;
-            this.emi_ComboBox1.Items.AddRange(new object[] {
+            this.combPlateColor.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.combPlateColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.combPlateColor.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.combPlateColor.DropDownHeight = 170;
+            this.combPlateColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.combPlateColor.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.combPlateColor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
+            this.combPlateColor.FormattingEnabled = true;
+            this.combPlateColor.HoverSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.combPlateColor.IntegralHeight = false;
+            this.combPlateColor.ItemHeight = 20;
+            this.combPlateColor.Items.AddRange(new object[] {
             "蓝牌",
             "黄牌",
             "白牌",
             "黑牌",
             "绿牌",
             "黄绿"});
-            this.emi_ComboBox1.Location = new System.Drawing.Point(429, 57);
-            this.emi_ComboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.emi_ComboBox1.MaxDropDownItems = 10;
-            this.emi_ComboBox1.Name = "emi_ComboBox1";
-            this.emi_ComboBox1.Size = new System.Drawing.Size(129, 26);
-            this.emi_ComboBox1.StartIndex = 0;
-            this.emi_ComboBox1.TabIndex = 119;
+            this.combPlateColor.Location = new System.Drawing.Point(429, 57);
+            this.combPlateColor.Margin = new System.Windows.Forms.Padding(2);
+            this.combPlateColor.MaxDropDownItems = 10;
+            this.combPlateColor.Name = "combPlateColor";
+            this.combPlateColor.Size = new System.Drawing.Size(129, 26);
+            this.combPlateColor.StartIndex = 0;
+            this.combPlateColor.TabIndex = 119;
             // 
             // chkNetPF
             // 
@@ -1489,13 +1490,34 @@
             this.chkNetPF.UseVisualStyleBackColor = false;
             this.chkNetPF.CheckStateChanged += new System.EventHandler(this.chkNetPF_CheckStateChanged);
             // 
+            // txtRLLB2
+            // 
+            this.txtRLLB2.AlwaysShowDropDownStyle = true;
+            this.txtRLLB2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtRLLB2.BackColor = System.Drawing.Color.Transparent;
+            this.txtRLLB2.Caption = "燃料类别 2 :";
+            this.txtRLLB2.CaptionFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtRLLB2.CaptionWidth = 0;
+            this.loginFiller.SetEntityField(this.txtRLLB2, new CI.UIComponents.Filler.TextEntry("", ""));
+            this.selectorFiller.SetEntityField(this.txtRLLB2, new CI.UIComponents.Filler.TextEntry("Name", "Code"));
+            this.vehicleFiller.SetEntityField(this.txtRLLB2, new CI.UIComponents.Filler.TextEntry("FuelTypeTxt2", "FuelType2"));
+            this.netFiller.SetEntityField(this.txtRLLB2, new CI.UIComponents.Filler.TextEntry("", "RLLBDM2"));
+            this.txtRLLB2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtRLLB2.Location = new System.Drawing.Point(618, 251);
+            this.txtRLLB2.Name = "txtRLLB2";
+            this.txtRLLB2.ReadOnly = true;
+            this.txtRLLB2.Size = new System.Drawing.Size(237, 31);
+            this.txtRLLB2.Style = CI.Controls.FieldStyle.DropDown;
+            this.txtRLLB2.TabIndex = 121;
+            // 
             // LoginControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.txtRLLB2);
             this.Controls.Add(this.chkNetPF);
-            this.Controls.Add(this.emi_ComboBox1);
+            this.Controls.Add(this.combPlateColor);
             this.Controls.Add(this.txtQueryVin);
             this.Controls.Add(this.chkNetCheck);
             this.Controls.Add(this.txtEmissionStandard);
@@ -1658,7 +1680,8 @@
         private CI.Controls.FlatField txtFuleModel;
         private CCWin.SkinControl.SkinCheckBox chkNetCheck;
         private EASkins.Controls.MaterialSingleLineTextField txtQueryVin;
-        private EASkins.Emi_ComboBox emi_ComboBox1;
+        private EASkins.Emi_ComboBox combPlateColor;
         private CCWin.SkinControl.SkinCheckBox chkNetPF;
+        private CI.Controls.FlatField txtRLLB2;
     }
 }

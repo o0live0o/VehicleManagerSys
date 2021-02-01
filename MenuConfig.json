@@ -1,0 +1,100 @@
+[
+  {
+    "MenuId": 1,
+    "MenuName": "车辆报检",
+    "ParentId": 0,
+    "ParentName": "",
+    "MenuPath": ""
+  },
+  {
+    "MenuId": 2,
+    "MenuName": "数据管理",
+    "ParentId": 0,
+    "ParentName": "",
+    "MenuPath": ""
+  },
+  {
+    "MenuId": 3,
+    "MenuName": "系统管理",
+    "ParentId": 0,
+    "ParentName": "",
+    "MenuPath": ""
+  },
+  {
+    "MenuId": 4,
+    "MenuName": "环保报检",
+    "ParentId": 1,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.VehicleLoginForm"
+  },
+  {
+    "MenuId": 5,
+    "MenuName": "环保报检(云网)",
+    "ParentId": 1,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.UserControls.LoginControl"
+  },
+  {
+    "MenuId": 6,
+    "MenuName": "环保复检(云网)",
+    "ParentId": 1,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.YunWangReCheckForm"
+  },
+  {
+    "MenuId": 7,
+    "MenuName": "综检上传",
+    "ParentId": 2,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.ComprehensiveTestForm"
+  },
+  {
+    "MenuId": 8,
+    "MenuName": "报告单",
+    "ParentId": 2,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.ReportTestForm"
+  },
+  {
+    "MenuId": 9,
+    "MenuName": "综检联网配置",
+    "ParentId": 3,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.ComprehensiveUploadSettingForm"
+  },
+  {
+    "MenuId": 10,
+    "MenuName": "环保联网配置",
+    "ParentId": 3,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.NetSetting_YW_Form"
+  },
+  {
+    "MenuId": 11,
+    "MenuName": "字段转换配置",
+    "ParentId": 3,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.ValChangeForm"
+  },
+  {
+    "MenuId": 11,
+    "MenuName": "数据库设置",
+    "ParentId": 3,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.DbSettingForm"
+  },
+  {
+    "MenuId": 12,
+    "MenuName": "OBD统计",
+    "ParentId": 2,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.BTBB_StatisticsForm"
+  },
+  {
+    "MenuId": 13,
+    "MenuName": "安检联网配置",
+    "ParentId": 3,
+    "ParentName": "",
+    "MenuPath": " VehicleManagerSys.Main.CustomForms.SafeTestSettingForm"
+  }
+]
