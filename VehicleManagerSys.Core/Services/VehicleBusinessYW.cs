@@ -161,6 +161,11 @@ namespace VehicleManagerSys.Core.Services
                     {
                         vehicleInfo.ManufactureDate = mfDate.ToString("yyyy-MM-dd");
                     }
+
+                    if (decimal.TryParse(vehicleInfo.Displacement, out decimal displacement))
+                    {
+                        vehicleInfo.Displacement = (displacement / 1000).ToString();
+                    }
                     message.VehicleInfo = vehicleInfo;
                 }
 
